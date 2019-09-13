@@ -1,0 +1,26 @@
+{
+  "name": "derive",
+  "version": "1.0.0",
+  "description": "Web-application for psychogeographic research.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MaxAlyokhin/derive.git"
+  },
+  "keywords": [
+    "derive",
+    "psychogeography",
+    "jquery",
+    "html",
+    "css"
+  ],
+  "author": "Max Alyokhin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MaxAlyokhin/derive/issues"
+  },
+  "homepage": "https://github.com/MaxAlyokhin/derive#readme"
+}
