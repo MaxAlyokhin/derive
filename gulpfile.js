@@ -62,13 +62,28 @@ function html_build() {
 }
 
 //Сборка css
-function style_build() {
+function style_min_build() {
     return src(path.src.sass) //Путь до исходных файлов в src
         .pipe(sourcemaps.init()) //Инициализируем sourcemaps
         .pipe(sass({ //Параметры gulp-sass
             sourceMap: true, //sourcemaps включены
             errLogToConsole: true, //Пишем логи
             outputStyle: 'compressed' //Минифицируем
+        }))
+        .pipe(autoprefixer()) //Добавляем вендорные префиксы, настраивается через package.json в browserlist
+        .pipe(sourcemaps.write()) //Прописываем sourcemaps
+        .pipe(dest(path.dist.css)) //Вывод готового в dist
+        .pipe(reload({stream: true})); //Обновляем сервер
+}
+
+//Сборка css без минификации
+function style_build() {
+    return src(path.src.sass) //Путь до исходных файлов в src
+        .pipe(sourcemaps.init()) //Инициализируем sourcemaps
+        .pipe(sass({ //Параметры gulp-sass
+            sourceMap: true, //sourcemaps включены
+            errLogToConsole: true, //Пишем логи
+            
         }))
         .pipe(autoprefixer()) //Добавляем вендорные префиксы, настраивается через package.json в browserlist
         .pipe(sourcemaps.write()) //Прописываем sourcemaps
@@ -112,24 +127,27 @@ function clean(cb) {
 //Удалить dist
 exports.clean = clean;
 
+//Собрать Sass без минификации
+exports.sass = style_build;
+
 //Собрать проект
-exports.build = series(clean, html_build, style_build, js_build, image_build, fonts_build);
+exports.build = series(clean, html_build, style_min_build, js_build, image_build, fonts_build);
 
 //Запуск сервера
 exports.dev = function() {
     browserSync(config)
     watch(path.src.html, html_build)
-    watch(path.src.sass, style_build)
+    watch(path.src.sass, style_min_build)
     watch(path.src.js, js_build)
     watch(path.src.img, image_build)
     watch(path.src.fonts, fonts_build)
 }
 
 //По дефолту всё собираем и запускаем сервер
-exports.default = parallel(html_build, style_build, js_build, image_build, fonts_build, function() {
+exports.default = parallel(html_build, style_min_build, js_build, image_build, fonts_build, function() {
     browserSync(config)
     watch(path.src.html, html_build)
-    watch(path.src.sass, style_build)
+    watch(path.src.sass, style_min_build)
     watch(path.src.js, js_build)
     watch(path.src.img, image_build)
     watch(path.src.fonts, fonts_build)

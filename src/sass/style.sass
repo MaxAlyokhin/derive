@@ -1,62 +1,64 @@
-﻿
-@font-face
- 	font-family: helvetica-cyr-light
- 	src: url(helvetica_neue_cyr_light.otf)
+@import "var"
+@import "hamburger"
+@import "menu"
+@import "screens"
 
-@font-face
- 	font-family: helvetica-cyr-bold  
- 	src: url(helvetica_neue_cyr_bold.otf) 
+*, *:before, *:after
+	margin: 0
+	box-sizing: border-box
+	outline: none
+	transform: translate3d(0, 0, 0)
 
-@font-face
- 	font-family: helvetica-latin-bold  
- 	src: url(HelveticaLTStd-Bold.otf) 
- 
-@font-face 
- 	font-family: helvetica-latin-light  
- 	src: url(HelveticaNeueLTStd-Lt.otf) 
-
-*, *:before, *:after  
-  margin: 0 
-  box-sizing: border-box 
-	outline: none 
-
-html
-	height:100% 
- 
 body
-	height:inherit 
-	margin:0 
-	font-family: helvetica-cyr-light, helvetica-latin-light 
-	background-color:#f3f3f3 
-	-webkit-font-smoothing: antialiased 
+	font-family: $light
+	background-color: $grey
+	-webkit-font-smoothing: antialiased
 
-a
-	text-decoration:none 
-	color:black 
-	font-weight: normal 
-	
-p
-	margin: 0 
-	font-family:helvetica-cyr-bold, helvetica-latin-light 
-	text-align:justify 
-	line-height: 20px 
-	transform: translate3d(0, 0, 0) 
- 
-.text-center
-	text-align:center 
+.cover
+	display: flex
+	justify-content: center
+	flex-direction: column
+	align-items: center
+	height: 100%
+	p
+		text-align: center
 
-table  
-	height:100% 
-	width:100% 
-	  	 
-.cover_page
-	display:table 
-	 
 .container
-	display:none 
-	
-.close
-	display:none 
-      
-.close_lang
-	display:none !important 
+	display: none
+
+@media (max-width: 1023px)
+	a
+		text-decoration: none
+		color: $black
+		font-weight: normal
+
+	p
+		text-align: justify
+
+	.cover
+		display: none
+
+	.lang
+		display: flex
+		justify-content: center
+		flex-direction: column
+		align-items: center
+		height: 100%
+		transition: all 0.5s
+		p
+			text-align: center
+		
+	.active
+		display: block
+
+	.disactive
+		display: none
+
+	.visible
+		opacity: 1
+
+	.hidden
+		opacity: 0
+
+	.center
+		text-align: center

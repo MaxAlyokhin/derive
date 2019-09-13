@@ -1,0 +1,59 @@
+@mixin action-button
+ 	position: fixed
+	z-index: 2
+	bottom: 25px
+
+@mixin text
+	padding: 25px
+  
+@mixin title-of-screen
+  position: absolute
+  width: 100%
+  margin-top: 27px
+  transition: all 600ms cubic-bezier(0.455, 0.03, 0.515, 0.955)
+
+@mixin command
+  display: flex
+	justify-content: center
+	flex-direction: column
+	align-items: center
+
+  .annotation-screen
+		&__text
+      @include text
+		&__action-button
+      @include action-button
+
+	.simple-derive-screen
+		&__title-of-screen
+      @include title-of-screen
+		&__command
+      @include command
+		&__action-button
+      @include action-button
+
+	.cycle-derive-screen
+		&__title-of-screen
+      @include title-of-screen
+		&__command
+      @include command
+
+	.deep-derive-screen
+		&__title-of-screen
+      @include title-of-screen
+		&__command
+      @include command
+		&__action-button
+      @include action-button
+
+	.generator-screen
+		&__title-of-screen
+      @include title-of-screen
+		&__command
+      @include command
+	
+	.manual-screen
+		&__title-of-screen
+      @include title-of-screen
+		&__text
+      @include text

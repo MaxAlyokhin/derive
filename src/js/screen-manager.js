@@ -12,13 +12,28 @@ click = 0;
 var intervalID;
 
 // Методы для смены языка
+// Изначально все элементы интерфейса скрыты (display: none). После нажатия на язык к соответствующим элементам добавляется соответствующий класс en или ru (display: block)
+
+$('.lang__en').on("click", function(){
+	RegimeLanguage = 1; // Устанавливаем режим
+	$('.en').addClass('active');
+	$('.lang').addClass("disactive");
+})
+
+$('.lang__ru').on("click", function(){
+	RegimeLanguage = 0; // Устанавливаем режим
+	$('.ru').addClass('active');
+	$('.lang').addClass("disactive");
+})
+
+
 function en() {
 
 	RegimeLanguage = 1; // Устанавливаем режим
 	$('.ru').addClass('close_lang').removeClass('table');
-	$('#language_select').transition({ opacity: 0 }, 400, 'cubic-bezier(0.175, 0.885, 0.32, 1.275)');
+	$('.lang').transition({ opacity: 0 }, 400, 'cubic-bezier(0.175, 0.885, 0.32, 1.275)');
 	setTimeout(function () {
-		$('#language_select').addClass('close');
+		$('.lang').addClass('close');
 	}, 400);
 
 }
@@ -27,10 +42,10 @@ function ru() {
 
 	RegimeLanguage = 0; // Устанавливаем режим
 	$('.en').addClass('close_lang').removeClass('table');
-	$('#language_select').transition({ opacity: 0 }, 400, 'cubic-bezier(0.175, 0.885, 0.32, 1.275)');
+	$('.lang').transition({ opacity: 0 }, 400, 'cubic-bezier(0.175, 0.885, 0.32, 1.275)');
 
 	setTimeout(function () {
-		$('#language_select').addClass('close');
+		$('.lang').addClass('close');
 	}, 400);
 
 }

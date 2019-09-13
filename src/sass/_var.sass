@@ -1,0 +1,48 @@
+﻿@font-face
+	font-family: helvetica-cyr-light
+	src: url(../fonts/helvetica_neue_cyr_light.otf)
+
+@font-face
+	font-family: helvetica-cyr-bold
+	src: url(../fonts/helvetica_neue_cyr_bold.otf)
+
+@font-face
+	font-family: helvetica-latin-light
+	src: url(../fonts/HelveticaNeueLTStd-Lt.otf)
+
+@font-face
+	font-family: helvetica-latin-bold
+	src: url(../fonts/HelveticaLTStd-Bold.otf)
+
+// Нежирный шрифт
+$light: helvetica-cyr-light, helvetica-latin-light
+
+// Жирный шрифт
+$bold: helvetica-cyr-bold, helvetica-latin-bold
+
+// Цвет фона
+$grey: #f3f3f3
+
+// Цвет шрифта и элементов интерфейса
+$black: #111111
+
+// Функция плавности
+$transition: all 600ms cubic-bezier(0.455, 0.03, 0.515, 0.955)
+
+@mixin button
+	user-select: none
+	outline: none
+	border: 1px solid
+	border-radius: 2px
+	transition: $transition
+	background: $grey
+	width: calc(100% - 50px)
+	color: $black
+	height: 55px
+	padding: 0
+	p
+		text-align: center
+		font-family: $bold
+	::-moz-focus-inner
+		border: none
+

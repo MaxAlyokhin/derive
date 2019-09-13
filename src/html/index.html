@@ -11,10 +11,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="images/favicons/favicon-16x16.png">
   <link rel="manifest" href="images/favicons/manifest.json">
   <link rel="mask-icon" href="images/favicons/safari-pinned-tab.svg" color="#000000">
-
   <link rel="stylesheet" href="css/style.css" type="text/css">
-  <link rel="stylesheet" href="css/breakpoints.css" type="text/css" media="only screen and (max-width:1024px)">
-  <link rel="stylesheet" href="css/hamburgers.css" type="text/css" media="only screen and (max-width:1024px)">
 
   <meta http-equiv="Content-Type" content="text/html;  charset=utf-8">
   <meta name="keywords" content="Max Alyokhin, Макс Алёхин, дрейф, психогеография, dérive, derive, drift, Ги Дебор, Guy Debord, Кюс, Kiuss, арт-группа Кюс, ситуационизм, леттризм, урбанизм, urbanism, flâneur">
@@ -33,384 +30,385 @@
   <meta property="og:image:width" content="968">
   <meta property="og:image:height" content="504">
 
-  <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
-  <script type="text/javascript" src="js/jquery.easing-1.3.pack.js"></script>
-  <script type="text/javascript" src="js/jquery.transit.min.js"></script>
-  <script type="text/javascript" src="js/screen-manager.js"></script>
+  <script src="js/jquery-1.9.1.js"></script>
+  <script src="js/screen-manager.js"></script>
 
 </head>
 
 <body>
 
   <!-- Заглушка для десктопов -->
-  <table class="cover_page">
-    <tbody>
-      <tr>
-        <td align="center">
-          <p class="text-center">This application is only available for mobile devices.</p>
-          <p class="text-center">Open this page on your smartphone.</p><br>
 
-          <p class="text-center">Данное приложение доступно только для мобильных устройств.</p>
-          <p class="text-center">Открой эту страницу на смартфоне.</p>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="cover">
+    <p>This application is only available for mobile devices.<br>
+    Open this page on your smartphone.</p><br>
+    <p>Данное приложение доступно только для мобильных устройств.<br>
+    Открой эту страницу на смартфоне.</p>
+  </div>
+
   <!-- /Заглушка для десктопов -->
 
   <!-- Экран выбора языка -->
-  <table id="language_select" style="position: fixed; z-index:10; background-color: white;">
-    <tbody>
-      <tr>
-        <td align="center">
-          <p class="text-center" onclick="en()">English</p>
-          <p class="text-center" onclick="ru()">Русский</p>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+
+  <div class="lang">
+    <p class="lang__en">English</p>
+    <p class="lang__ru">Русский</p>
+  </div>
+
   <!-- /Экран выбора языка -->
 
   <!-- Меню -->
+
   <header>
     <nav>
       
       <!-- Иконка гамбургер -->
-      <button id="HamburgerButton" onclick="MobileMenu();" class="close hamburger hamburger--collapse " type="button">
+
+      <button class="hamburger" type="button">
         <span class="hamburger-box">
           <span class="hamburger-inner"></span>
         </span>
       </button>
+
       <!-- /Иконка гамбургер -->
 
       <!-- Пункты меню -->
-      <div id="menu" class="table en">
-        <div class="table-cell">
-          <ul id="mobile" class="close">
-            <li id="mobile">
-              <button id="SimpleDeriveButton" class="blackbutton" onclick="SimpleDeriveScreenFunction();" type="button">
-                <p class="text-center">SIMPLE DÉRIVE</p>
-              </button>
-            </li>
-            <li id="mobile">
-              <button id="SycleDeriveButton" class="blackbutton" onclick="CycleDeriveScreenFunction();" type="button">
-                <p class="text-center">CYCLIC DÉRIVE</p>
-              </button>
-            </li>
-            <li id="mobile">
-              <button id="DeepDeriveButton" class="blackbutton" onclick="DeepDeriveScreenFunction();" type="button">
-                <p class="text-center">DEEP DÉRIVE</p>
-              </button>
-            </li>
-            <li id="mobile">
-              <button id="GeneratorButton" class="blackbutton" onclick="GeneratorScreenFunction();" type="button">
-                <p class="text-center">TIME GENERATOR</p>
-              </button>
-            </li>
-            <li id="mobile">
-              <button id="ManualButton" class="blackbutton" onclick="ManualScreenFunction();" type="button">
-                <p class="text-center">SHEETTINGS</p>
-              </button>
-            </li>
-          </ul>
-        </div>
+
+      <div class="menu en">
+        <ul class="menu__list">
+          <li class="list__item">
+            <button class="item__simple-derive-button" type="button">
+              <p>SIMPLE DÉRIVE</p>
+            </button>
+          </li>
+          <li class="list__item">
+            <button class="item__cyclic-derive-button" type="button">
+              <p>CYCLIC DÉRIVE</p>
+            </button>
+          </li>
+          <li class="list__item">
+            <button class="item__deep-derive-button" type="button">
+              <p>DEEP DÉRIVE</p>
+            </button>
+          </li>
+          <li class="list__item">
+            <button class="item__generator-button" type="button">
+              <p>TIME GENERATOR</p>
+            </button>
+          </li>
+          <li class="list__item">
+            <button class="item__manual-button" type="button">
+              <p>SHEETTINGS</p>
+            </button>
+          </li>
+        </ul>
       </div>
-      <div id="menu" class="table ru">
-        <div class="table-cell">
-          <ul id="mobile" class="close">
-            <li id="mobile">
-              <button id="SimpleDeriveButton" class="blackbutton" onclick="SimpleDeriveScreenFunction();" type="button">
-                <p class="text-center">ПРОСТОЙ ДРЕЙФ</p>
-              </button>
-            </li>
-            <li id="mobile">
-              <button id="SycleDeriveButton" class="blackbutton" onclick="CycleDeriveScreenFunction();" type="button">
-                <p class="text-center">ЦИКЛИЧЕСКИЙ ДРЕЙФ</p>
-              </button>
-            </li>
-            <li id="mobile">
-              <button id="DeepDeriveButton" class="blackbutton" onclick="DeepDeriveScreenFunction();" type="button">
-                <p class="text-center">УГЛУБЛЁННЫЙ ДРЕЙФ</p>
-              </button>
-            </li>
-            <li id="mobile">
-              <button id="GeneratorButton" class="blackbutton" onclick="GeneratorScreenFunction();" type="button">
-                <p class="text-center">ГЕНЕРАТОР НАЧАЛА ДРЕЙФА</p>
-              </button>
-            </li>
-            <li id="mobile">
-              <button id="ManualButton" class="blackbutton" onclick="ManualScreenFunction();" type="button">
-                <p class="text-center">СПРАВКА</p>
-              </button>
-            </li>
-          </ul>
-        </div>
+
+      <div class="menu ru">
+        <ul class="menu__list">
+          <li class="list__item">
+            <button class="item__simple-derive-button" type="button">
+              <p>ПРОСТОЙ ДРЕЙФ</p>
+            </button>
+          </li>
+          <li class="list__item">
+            <button class="item__cyclic-derive-button" type="button">
+              <p>ЦИКЛИЧЕСКИЙ ДРЕЙФ</p>
+            </button>
+          </li>
+          <li class="list__item">
+            <button class="item__deep-derive-button" type="button">
+              <p>УГЛУБЛЁННЫЙ ДРЕЙФ</p>
+            </button>
+          </li>
+          <li class="list__item">
+            <button class="item__generator-button" type="button">
+              <p>ГЕНЕРАТОР НАЧАЛА ДРЕЙФА</p>
+            </button>
+          </li>
+          <li class="list__item">
+            <button class="item__manual-button" type="button">
+              <p>СПРАВКА</p>
+            </button>
+          </li>
+        </ul>
       </div>
+
       <!-- /Пункты меню -->
       
       <!-- Заглушка основного контента -->
-      <div id="menu-hider"></div>
+
+      <div class="menu-hider"></div>
 
     </nav>
   </header>
+
   <!-- /Меню -->
 
   <!-- Экраны -->
-  <div class="container">
 
-    <!-- Заголовок экрана -->
-    <div id="TitleOfScreen" class="en" style="position: absolute">
-      <p id="SimpleDeriveScreenName" class="text-center close">SIMPLE DÉRIVE</p>
-      <p id="CycleDeriveScreenName" class="text-center close">CYCLIC DÉRIVE</p>
-      <p id="DeepDeriveScreenName" class="text-center close">DEEP DÉRIVE</p>
-      <p id="GeneratorScreenName" class="text-center close">TIME GENERATOR</p>
-      <p id="ManualScreenName" class="text-center close">SHEETTINGS</p>
-    </div>
-    <div id="TitleOfScreen" class="ru" style="position: absolute">
-      <p id="SimpleDeriveScreenName" class="text-center close">ПРОСТОЙ ДРЕЙФ</p>
-      <p id="CycleDeriveScreenName" class="text-center close">ЦИКЛИЧЕСКИЙ ДРЕЙФ</p>
-      <p id="DeepDeriveScreenName" class="text-center close">УГЛУБЛЁННЫЙ ДРЕЙФ</p>
-      <p id="GeneratorScreenName" class="text-center close">ГЕНЕРАТОР ВРЕМЕНИ</p>
-      <p id="ManualScreenName" class="text-center close">СПРАВКА</p>
-    </div>
-    <!-- /Заголовок экрана -->
+  <div class="container en">
 
-    <!-- Экран приветствия -->
-    <div id="AnnotationScreen" class="en" style="position: absolute">
-      <p class="text-center" style="padding-top:4px;">Attention!</p>
-      <br>
-      <p>This small application in no way claims to be a disclosure of such a concept as "drift", but rather a small
-        collection of methods and a source of external independent force that guides your traffic regardless of your
-        subjective ideas about specific parts of the city (area). The supreme task is disorientation in your own city.
-      </p>
-      <br>
-      <p>Please note that no matter how much you try, it is hardly possible to make a program that is universally
-        applicable to any turn of the urban landscape and all possible force majeure. Therefore, when the program comes
-        to an impasse, it will not be critical to interpret the tasks a little more freely.</p>
-      <br>
-      <p>The button at the bottom of the screen displays the next step of the algorithm. The commands "forward", "left"
-        and "right" are understood as a corresponding pass in one quarter, or movement until the next turn.</p>
-      <br>
-      <p>If you are stuck in a dead end, you turn 180 degrees and go to the next command.</p>
-      <br>
-      <p>In a cyclic drift the algorithm can give out "loops" - such sequence of commands when it is necessary to walk
-        in a circle. In this case, you can restart the drift.</p>
-      <br>
-      <br>
-      <br>
-      <br>
-    </div>
-    <div id="AnnotationScreen" class="ru" style="position: absolute">
-      <p class="text-center" style="padding-top:4px;">Внимание!</p>
-      <br>
-      <p>Это небольшое приложение ни в коем случае не претендует на раскрытие такого понятия как «дрейф», а является,
-        скорее, небольшим сборником методов и источником внешней независимой силы, направляющей твой трафик вне
-        зависимости от твоих субъективных представлений о конкретных частях города (местности). Сверхзадача —
-        дезориентировка в своём собственном городе.</p>
-      <br>
-      <p>Просьба отметить, что сколько не старайся, сделать программу, универсально подходящую к любому повороту
-        городского ландшафта и всем возможным форс-мажорам, вряд ли возможно. Поэтому, когда программа заходит в тупик,
-        не будет критичным трактовать задания несколько более вольно.</p>
-      <br>
-      <p>Кнопка внизу экрана выводит следующий шаг алгоритма. Команды «вперёд», «влево» и «вправо» понимаются как
-        соответствующий проход в один квартал, либо движение до следующего поворота.</p>
-      <br>
-      <p>Если упёрся в тупик, то поворачиваешься на 180 градусов и переходишь к следующей команде.</p>
-      <br>
-      <p>В циклическом дрейфе алгоритм может выдавать "петли" — такую последовательность команд, когда придётся ходить
-        по кругу. В таком случае можно перезапустить дрейф.</p>
-      <br>
-      <br>
-      <br>
-      <br>
-    </div>
-    <!-- /Экран приветствия -->
-
-    <!-- Экран "Простой дрейф" -->
-    <div id="SimpleDeriveScreen" class="close en" style="position: absolute">
-      <div class="table-cell">
-        <p id="forward" class="text-center close">FORWARD</p>
-        <p id="left" class="text-center close">LEFT</p>
-        <p id="right" class="text-center close">RIGHT</p>
-      </div>
-    </div>
-    <div id="SimpleDeriveScreen" class="close ru" style="position: absolute">
-      <div class=" table-cell">
-        <p id="forward" class="text-center close">ВПЕРЁД</p>
-        <p id="left" class="text-center close">ВЛЕВО</p>
-        <p id="right" class="text-center close">ВПРАВО</p>
-      </div>
-    </div>
-    <!-- /Экран "Простой дрейф" -->
+      <!-- Экран приветствия -->
+      <div class="annotation-screen">
+        <div class="annotation-screen__text">
+        <p class="center">Attention!</p>
+        <br>
+        <p>This small application in no way claims to be a disclosure of such a concept as "drift", but rather a small
+          collection of methods and a source of external independent force that guides your traffic regardless of your
+          subjective ideas about specific parts of the city (area). The supreme task is disorientation in your own city.
+        </p>
+        <br>
+        <p>Please note that no matter how much you try, it is hardly possible to make a program that is universally
+          applicable to any turn of the urban landscape and all possible force majeure. Therefore, when the program comes
+          to an impasse, it will not be critical to interpret the tasks a little more freely.</p>
+        <br>
+        <p>The button at the bottom of the screen displays the next step of the algorithm. The commands "forward", "left"
+          and "right" are understood as a corresponding pass in one quarter, or movement until the next turn.</p>
+        <br>
+        <p>If you are stuck in a dead end, you turn 180 degrees and go to the next command.</p>
+        <br>
+        <p>In a cyclic drift the algorithm can give out "loops" - such sequence of commands when it is necessary to walk
+          in a circle. In this case, you can restart the drift.</p>
+        <br>
+        <br>
+        <br>
+        <br>
+        </div>
+        <button class="annotation-screen__action-button" type="button">
+          <p>START</p>
+        </button>
+      </div> 
+      <!-- /Экран приветствия -->
   
-    <!-- Экран "Циклический дрейф" -->
-    <div id="CycleDeriveScreen" class="close en" style="position: absolute">
-      <div class="table-cell">
-        <p class="text-center">REPEAT THIS COMMANDS<br>IN A LOOP:</p>
+      <!-- Экран "Простой дрейф" -->
+      <div class="simple-derive-screen">
+        <div class="simple-derive-screen__title-of-screen">SIMPLE DÉRIVE</div>
+        <div class="simple-derive-screen__command">
+          <p id="forward">FORWARD</p>
+          <p id="left">LEFT</p>
+          <p id="right">RIGHT</p>
+        </div>
+        <button class="simple-derive-screen__action-button" type="button">
+          <p>NEXT</p>
+        </button>
+      </div> 
+      <!-- /Экран "Простой дрейф" -->
+    
+      <!-- Экран "Циклический дрейф" -->
+      <div class="cyclic-derive-screen">
+        <div class="cyclic-derive-screen__title-of-screen">CYCLIC DÉRIVE</div>
+        <div class=" cyclic-derive-screen__command">
+          <p class=" ">REPEAT THIS COMMANDS<br>IN A LOOP:</p>
+          <br>
+          <div id="en_ cyclic0" class=" "></div><br id="en_1" class="close">
+          <div id="en_ cyclic1" class=" "></div><br id="en_2" class="close">
+          <div id="en_ cyclic2" class=" "></div><br id="en_3" class="close">
+          <div id="en_ cyclic3" class=" "></div><br id="en_4" class="close">
+          <div id="en_ cyclic4" class=" "></div><br id="en_5" class="close">
+          <div id="en_ cyclic5" class=" "></div><br id="en_6" class="close">
+          <div id="en_ cyclic6" class=" "></div><br id="en_7" class="close">
+        </div>
+      </div>
+      <!-- /Экран "Циклический дрейф" -->
+  
+      <!-- Экран "Углублённый дрейф" -->
+      <div class="deep-derive-screen">
+        <div class="deep-derive-screen__title-of-screen">DEEP DÉRIVE</div>
+        <div class="deep-derive-screen__command">
+          <div id="forward" class=" "></div>
+          <div id="left" class=" "></div>
+          <div id="right" class=" "></div>
+          <div id="stop" class=" "></div>
+          <div id="transport" class=" "></div>
+          <div id="north" class=" "></div>
+          <div id="south" class=" "></div>
+          <div id="west" class=" "></div>
+          <div id="east" class=" "></div>
+          <div id="street" class=" "></div>
+        </div>
+        <button class="deep-derive-screen__action-button" type="button">
+          <p>NEXT</p>
+        </button>
+      </div>
+      <!-- /Экран "Углублённый дрейф" -->
+  
+      <!-- Экран "Генератор времени" -->
+      <div class="generator-screen">
+        <div class="generator-screen__title-of-screen">TIME GENERATOR</div>
+        <div class="generator-screen_command">
+          <p>START DÉRIVE IN</p>
+          <p id="display_en"></p>
+        </div>
+      </div>
+      <!-- Экран "Генератор времени" -->
+  
+      <!-- Экран "Справка" -->
+      <div class="manual-screen">
+          <div class="manual-screen__title-of-screen">SHEETTINGS</div>
+        <div class="manual-screen__text">
+          <br>
+          <br>
+          <p>Psychogeography refers to the study of the influence of the territorial environment, often urban, on a person's
+            behaviour, emotions and feelings, and
+            also the study of unfamiliar areas within urban space.</p>
+  
+          <br>
+          <p>A person, when leaving home on the street, always has a specific motive, which he
+            directs. If there is no motive, a person may never visit different parts of the city for
+            useless. Within the framework of modern perception, freedom is practiced as a vicious circle in which a person
+            turns around: every day, by one and the same theme
+            in the same way, a person moves from home to work (school), and then comes back
+            home. He doesn't usually realize that he can go out of the house
+            in any direction. Thus, wherever a person goes, the street appears to be a tunnel between two rooms, which is
+            desirable to overcome as soon as possible.
+          </p>
+  
+          <br>
+          <p>If street activity (graffiti, street art and other practices) is a direct <i>transformation</i> of the street,
+            then psychogeography is a change in its <i>perception</i> by a concrete subject.</p>
+  
+          <br>
+          <p>The main technique of study is dérive ("drift") — unmotivated movement around the city, in which a person
+            is perceiving the familiar and tired terrain anew.
+            The drift can be algorithmic and non-algorithmic. That is, drift can
+            to be performed according to a predetermined algorithm, which is
+            a set of actions (tasks) that need to be performed or repeated, or may be directed solely in terms of
+            their sensual sensations that determine the direction of movement (urban planning). Within the limits of this
+            program, it is possible to tell, the algorithmic drift is realised, it is possible to tell,
+            only the algorithm is defined not by a person at his discretion, but by a program which is an external independent
+            force in relation to him. That is, the transfer of one's own subjectivity to the program is realized.</p>
+        </div>
+      </div>
+      <!-- /Экран "Справка" -->
+  
+  </div>
+    
+  <div class="container ru">
+
+    <div class="annotation-screen">
+      <div class="annotation-screen__text">
+        <p class="center">Внимание!</p>
         <br>
-        <div id="en_cycle0" class="text-center"></div><br id="en_1" class="close">
-        <div id="en_cycle1" class="text-center"></div><br id="en_2" class="close">
-        <div id="en_cycle2" class="text-center"></div><br id="en_3" class="close">
-        <div id="en_cycle3" class="text-center"></div><br id="en_4" class="close">
-        <div id="en_cycle4" class="text-center"></div><br id="en_5" class="close">
-        <div id="en_cycle5" class="text-center"></div><br id="en_6" class="close">
-        <div id="en_cycle6" class="text-center"></div><br id="en_7" class="close">
-      </div>
-    </div>
-    <div id="CycleDeriveScreen" class="close ru" style="position: absolute">
-      <div class="table-cell">
-        <p class="text-center">ПОВТОРЯЙ ПО КРУГУ <br>СЛЕДУЮЩИЕ КОМАНДЫ:</p>
+        <p>Это небольшое приложение ни в коем случае не претендует на раскрытие такого понятия как «дрейф», а является,
+          скорее, небольшим сборником методов и источником внешней независимой силы, направляющей твой трафик вне
+          зависимости от твоих субъективных представлений о конкретных частях города (местности). Сверхзадача —
+          дезориентировка в своём собственном городе.</p>
         <br>
-        <div id="ru_cycle0" class="text-center"></div><br id="ru_1" class="close">
-        <div id="ru_cycle1" class="text-center"></div><br id="ru_2" class="close">
-        <div id="ru_cycle2" class="text-center"></div><br id="ru_3" class="close">
-        <div id="ru_cycle3" class="text-center"></div><br id="ru_4" class="close">
-        <div id="ru_cycle4" class="text-center"></div><br id="ru_5" class="close">
-        <div id="ru_cycle5" class="text-center"></div><br id="ru_6" class="close">
-        <div id="ru_cycle6" class="text-center"></div><br id="ru_7" class="close">
+        <p>Просьба отметить, что сколько не старайся, сделать программу, универсально подходящую к любому повороту
+          городского ландшафта и всем возможным форс-мажорам, вряд ли возможно. Поэтому, когда программа заходит в тупик,
+          не будет критичным трактовать задания несколько более вольно.</p>
+        <br>
+        <p>Кнопка внизу экрана выводит следующий шаг алгоритма. Команды «вперёд», «влево» и «вправо» понимаются как
+          соответствующий проход в один квартал, либо движение до следующего поворота.</p>
+        <br>
+        <p>Если упёрся в тупик, то поворачиваешься на 180 градусов и переходишь к следующей команде.</p>
+        <br>
+        <p>В циклическом дрейфе алгоритм может выдавать "петли" — такую последовательность команд, когда придётся ходить
+          по кругу. В таком случае можно перезапустить дрейф.</p>
+        <br>
+        <br>
+        <br>
+        <br>
+      </div>
+      <button class="annotation-screen__action-button" type="button">
+        <p>НАЧАТЬ ДРЕЙФ</p>
+      </button>
+    </div>
+
+    <div class="simple-derive-screen">
+      <div class="simple-derive-screen__title-of-screen">ПРОСТОЙ ДРЕЙФ</div>
+      <div class="simple-derive-screen__command">
+        <p id="forward">ВПЕРЁД</p>
+        <p id="left">ВЛЕВО</p>
+        <p id="right">ВПРАВО</p>
+      </div>
+      <button class="simple-derive-screen__action-button" type="button">
+        <p>ДАЛЬШЕ</p>
+      </button>
+    </div>
+
+    <div class=" cyclic-derive-screen">
+      <div class=" cyclic-derive-screen__title-of-screen">ЦИКЛИЧЕСКИЙ ДРЕЙФ</div>
+      <div class=" cyclic-derive-screen__command">
+        <p>ПОВТОРЯЙ ПО КРУГУ<br>СЛЕДУЮЩИЕ КОМАНДЫ:</p>
+        <br>
+        <div id="ru_ cyclic0"></div><br id="ru_1" class="close">
+        <div id="ru_ cyclic1"></div><br id="ru_2" class="close">
+        <div id="ru_ cyclic2"></div><br id="ru_3" class="close">
+        <div id="ru_ cyclic3"></div><br id="ru_4" class="close">
+        <div id="ru_ cyclic4"></div><br id="ru_5" class="close">
+        <div id="ru_ cyclic5"></div><br id="ru_6" class="close">
+        <div id="ru_ cyclic6"></div><br id="ru_7" class="close">
       </div>
     </div>
-    <!-- /Экран "Циклический дрейф" -->
 
-    <!-- Экран "Углублённый дрейф" -->
-    <div id="DeepDeriveScreen" class="close">
-      <div class="table-cell">
-        <div id="forward" class="text-center close"></div>
-        <div id="left" class="text-center close"></div>
-        <div id="right" class="text-center close"></div>
-        <div id="stop" class="text-center close"></div>
-        <div id="transport" class="text-center close"></div>
-        <div id="north" class="text-center close"></div>
-        <div id="south" class="text-center close"></div>
-        <div id="west" class="text-center close"></div>
-        <div id="east" class="text-center close"></div>
-        <div id="street" class="text-center close"></div>
+    <div class="deep-derive-screen">
+      <div class="deep-derive-screen__title-of-screen">УГЛУБЛЁННЫЙ ДРЕЙФ</div>
+      <div class="deep-derive-screen__command">
+        <div id="forward" class=" "></div>
+        <div id="left" class=" "></div>
+        <div id="right" class=" "></div>
+        <div id="stop" class=" "></div>
+        <div id="transport" class=" "></div>
+        <div id="north" class=" "></div>
+        <div id="south" class=" "></div>
+        <div id="west" class=" "></div>
+        <div id="east" class=" "></div>
+        <div id="street" class=" "></div>
+      </div>
+      <button class="deep-derive-screen__action-button" type="button">
+        <p>ДАЛЬШЕ</p>
+      </button>
+    </div>
+
+    <div class="generator-screen">
+      <div class="generator-screen__title-of-screen">ГЕНЕРАТОР ВРЕМЕНИ</div>
+      <div class="generator-screen__command">
+        <p>НАЧНИ ДРЕЙФ В</p>
+        <p id="display_ru"></p>
       </div>
     </div>
-    <!-- /Экран "Углублённый дрейф" -->
 
-    <!-- Экран "Генератор времени" -->
-    <div id="GeneratorScreen" class="close en" style="position: absolute">
-      <div class="table-cell">
-        <p class="text-center">START DÉRIVE IN</p>
-        <p id="display_en" class="text-center"></p>
+    <div class="manual-screen">
+      <div class="manual-screen__title-of-screen">СПРАВКА</div>
+      <div class="manual-screen__text">
+        <br>
+        <br>
+        <p>Под психогеографией понимают изучение влияния территориального окружения, чаще всего урбанистического, на
+          поведение, эмоции и чувства человека, а
+          также изучение незнакомых территорий в рамках городского пространства.</p>
+  
+        <br>
+        <p>Человек, выходя из дома на улицу, всегда имеет конкретный мотив, который его
+          направляет. Если нет мотива, то человек может так и не побывать в различных частях города за
+          ненадобностью. В рамках современного восприятия, свобода практикуется как замкнутый круг, в котором кружит
+          человек: каждый день, одним и тем
+          же путём, человек движется от дома на работу (учёбу), а потом возвращается
+          домой. Он, как правило, не осознаёт, что он может выйти из дома и пойти
+          в любом направлении. Таким образом, куда бы человек не пошёл, улица представляется туннелем между двумя
+          помещениями, который желательно поскорее преодолеть.</p>
+  
+        <br>
+        <p>Если уличная деятельность (граффити, стрит-арт и прочие практики) — это непосредственное <i>преобразование</i>
+          улицы, то психогеография это изменение её <i>восприятия</i> конкретным субъектом.</p>
+  
+        <br>
+        <p>Основной техникой изучения является дрейф — немотивированное перемещение по городу, при котором человек
+          воспринимает знакомую и надоевшую местность заново.
+          Дрейф может быть алгоритмическим и неалгоритмическим. То есть, дрейф может
+          производиться по заранее заданному алгоритму, который представляет собой
+          совокупность действий (заданий), которые надо выполнить или повторять, а может направляться сугубо с точки зрения
+          своих чувственных ощущений, определяющих направление движения (городское фланирование). В рамках этой программы
+          реализуется, можно сказать, алгоритмический дрейф,
+          только алгоритм задаётся не человеком по его усмотрению, а программой, являющейся, по отношению к нему, внешней
+          независимой силой. То есть, реализуется передача своей субъектности программе.</p>
       </div>
     </div>
-    <div id="GeneratorScreen" class="close ru" style="position: absolute">
-      <div class="table-cell">
-        <p class="text-center">НАЧНИ ДРЕЙФ В</p>
-        <p id="display_ru" class="text-center"></p>
-      </div>
-    </div>
-    <!-- Экран "Генератор времени" -->
-
-    <!-- Экран "Справка" -->
-    <div id="ManualScreen" class="close en">
-      <br>
-      <br>
-      <p>Psychogeography refers to the study of the influence of the territorial environment, often urban, on a person's
-        behaviour, emotions and feelings, and
-        also the study of unfamiliar areas within urban space.</p>
-
-      <br>
-      <p>A person, when leaving home on the street, always has a specific motive, which he
-        directs. If there is no motive, a person may never visit different parts of the city for
-        useless. Within the framework of modern perception, freedom is practiced as a vicious circle in which a person
-        turns around: every day, by one and the same theme
-        in the same way, a person moves from home to work (school), and then comes back
-        home. He doesn't usually realize that he can go out of the house
-        in any direction. Thus, wherever a person goes, the street appears to be a tunnel between two rooms, which is
-        desirable to overcome as soon as possible.
-      </p>
-
-      <br>
-      <p>If street activity (graffiti, street art and other practices) is a direct <i>transformation</i> of the street,
-        then psychogeography is a change in its <i>perception</i> by a concrete subject.</p>
-
-      <br>
-      <p>The main technique of study is dérive ("drift") — unmotivated movement around the city, in which a person
-        is perceiving the familiar and tired terrain anew.
-        The drift can be algorithmic and non-algorithmic. That is, drift can
-        to be performed according to a predetermined algorithm, which is
-        a set of actions (tasks) that need to be performed or repeated, or may be directed solely in terms of
-        their sensual sensations that determine the direction of movement (urban planning). Within the limits of this
-        program, it is possible to tell, the algorithmic drift is realised, it is possible to tell,
-        only the algorithm is defined not by a person at his discretion, but by a program which is an external independent
-        force in relation to him. That is, the transfer of one's own subjectivity to the program is realized.</p>
-    </div>
-    <div id="ManualScreen" class="close ru">
-      <br>
-      <br>
-      <p>Под психогеографией понимают изучение влияния территориального окружения, чаще всего урбанистического, на
-        поведение, эмоции и чувства человека, а
-        также изучение незнакомых территорий в рамках городского пространства.</p>
-
-      <br>
-      <p>Человек, выходя из дома на улицу, всегда имеет конкретный мотив, который его
-        направляет. Если нет мотива, то человек может так и не побывать в различных частях города за
-        ненадобностью. В рамках современного восприятия, свобода практикуется как замкнутый круг, в котором кружит
-        человек: каждый день, одним и тем
-        же путём, человек движется от дома на работу (учёбу), а потом возвращается
-        домой. Он, как правило, не осознаёт, что он может выйти из дома и пойти
-        в любом направлении. Таким образом, куда бы человек не пошёл, улица представляется туннелем между двумя
-        помещениями, который желательно поскорее преодолеть.</p>
-
-      <br>
-      <p>Если уличная деятельность (граффити, стрит-арт и прочие практики) — это непосредственное <i>преобразование</i>
-        улицы, то психогеография это изменение её <i>восприятия</i> конкретным субъектом.</p>
-
-      <br>
-      <p>Основной техникой изучения является дрейф — немотивированное перемещение по городу, при котором человек
-        воспринимает знакомую и надоевшую местность заново.
-        Дрейф может быть алгоритмическим и неалгоритмическим. То есть, дрейф может
-        производиться по заранее заданному алгоритму, который представляет собой
-        совокупность действий (заданий), которые надо выполнить или повторять, а может направляться сугубо с точки зрения
-        своих чувственных ощущений, определяющих направление движения (городское фланирование). В рамках этой программы
-        реализуется, можно сказать, алгоритмический дрейф,
-        только алгоритм задаётся не человеком по его усмотрению, а программой, являющейся, по отношению к нему, внешней
-        независимой силой. То есть, реализуется передача своей субъектности программе.</p>
-    </div>
-    <!-- /Экран "Справка" -->
 
   </div>
+
   <!-- /Экраны -->
-
-  <!-- Нижняя управляющая кнопка -->
-  <footer>
-
-    <!-- Кнопка на начальном экране -->
-    <button id="AnnotationButton" class="blackbutton en" onclick="AnnotationScreenFunction();" type="button">
-      <p id="begin" class="text-center">START</p>
-    </button>
-    <button id="AnnotationButton" class="blackbutton ru" onclick="AnnotationScreenFunction();" type="button">
-      <p id="begin" class="text-center">НАЧАТЬ ДРЕЙФ</p>
-    </button>
-    <!-- /Кнопка на начальном экране -->
-
-    <!-- Кнопка на простом дрейфе -->
-    <button id="SimpleDeriveButtonFooter" class="blackbutton close en" onclick="SimpleDeriveScreenFunction();"
-      type="button">
-      <p id="further" class="text-center">NEXT</p>
-    </button>
-    <button id="SimpleDeriveButtonFooter" class="blackbutton close ru" onclick="SimpleDeriveScreenFunction();"
-      type="button">
-      <p id="further" class="text-center">ДАЛЬШЕ</p>
-    </button>
-    <!-- /Кнопка на простом дрейфе -->
-
-    <!-- Кнопка на углублённом дрейфе -->
-    <button id="DeepDeriveButtonFooter" class="blackbutton close en" onclick="DeepDeriveScreenFunction();"
-      type="button">
-      <p id="further" class="text-center">NEXT</p>
-    </button>
-    <button id="DeepDeriveButtonFooter" class="blackbutton close ru" onclick="DeepDeriveScreenFunction();"
-      type="button">
-      <p id="further" class="text-center">ДАЛЬШЕ</p>
-    </button>
-    <!-- /Кнопка на углублённом дрейфе -->
-
-  </footer>
-  <!-- /Нижняя управляющая кнопка -->
 
 </body>
 
