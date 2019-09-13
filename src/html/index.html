@@ -5,23 +5,23 @@
 
   <title>Dérive</title>
 
-  <link rel="shortcut icon" href="favicons/favicon.ico" type="image/vnd.microsoft.icon">
-  <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
-  <link rel="manifest" href="favicons/manifest.json">
-  <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#000000">
+  <link rel="shortcut icon" href="images/favicons/favicon.ico" type="image/vnd.microsoft.icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/favicons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicons/favicon-16x16.png">
+  <link rel="manifest" href="images/favicons/manifest.json">
+  <link rel="mask-icon" href="images/favicons/safari-pinned-tab.svg" color="#000000">
 
-  <link rel="stylesheet" href="style.css" type="text/css">
-  <link rel="stylesheet" href="breakpoints.css" type="text/css" media="only screen and (max-width:1024px)">
-  <link rel="stylesheet" href="hamburgers.css" type="text/css" media="only screen and (max-width:1024px)">
+  <link rel="stylesheet" href="css/style.css" type="text/css">
+  <link rel="stylesheet" href="css/breakpoints.css" type="text/css" media="only screen and (max-width:1024px)">
+  <link rel="stylesheet" href="css/hamburgers.css" type="text/css" media="only screen and (max-width:1024px)">
 
   <meta http-equiv="Content-Type" content="text/html;  charset=utf-8">
   <meta name="keywords" content="Max Alyokhin, Макс Алёхин, дрейф, психогеография, dérive, derive, drift, Ги Дебор, Guy Debord, Кюс, Kiuss, арт-группа Кюс, ситуационизм, леттризм, урбанизм, urbanism, flâneur">
   <meta name="description" content="Веб-приложение для дрейфа.">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <meta name="msapplication-TileColor" content="#ffffff">
-  <meta name="msapplication-TileImage" content="favicons/mstile-144x144.png">
+  <meta name="msapplication-TileImage" content="images/favicons/mstile-144x144.png">
   <meta name="theme-color" content="#ffffff">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Dérive">
@@ -29,19 +29,20 @@
   <meta property="og:title" content="Веб-приложение для дрейфа.">
   <meta property="og:description" content="Здесь представлен небольшой набор методов для реализации своих психогеографических интенций.">
   <meta property="og:locale" content="ru_RU">
-  <meta property="og:image" content="favicons/og.png">
+  <meta property="og:image" content="images/favicons/og.png">
   <meta property="og:image:width" content="968">
   <meta property="og:image:height" content="504">
 
-  <script type="text/javascript" src="jquery-1.9.1.js"></script>
-  <script type="text/javascript" src="jquery.easing-1.3.pack.js"></script>
-  <script type="text/javascript" src="jquery.transit.min.js"></script>
-  <script type="text/javascript" src="screen-manager.js"></script>
+  <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+  <script type="text/javascript" src="js/jquery.easing-1.3.pack.js"></script>
+  <script type="text/javascript" src="js/jquery.transit.min.js"></script>
+  <script type="text/javascript" src="js/screen-manager.js"></script>
 
 </head>
 
 <body>
 
+  <!-- Заглушка для десктопов -->
   <table class="cover_page">
     <tbody>
       <tr>
@@ -55,7 +56,9 @@
       </tr>
     </tbody>
   </table>
+  <!-- /Заглушка для десктопов -->
 
+  <!-- Экран выбора языка -->
   <table id="language_select" style="position: fixed; z-index:10; background-color: white;">
     <tbody>
       <tr>
@@ -66,16 +69,21 @@
       </tr>
     </tbody>
   </table>
+  <!-- /Экран выбора языка -->
 
+  <!-- Меню -->
   <header>
     <nav>
-      <!--mobile-menu-->
+      
+      <!-- Иконка гамбургер -->
       <button id="HamburgerButton" onclick="MobileMenu();" class="close hamburger hamburger--collapse " type="button">
         <span class="hamburger-box">
           <span class="hamburger-inner"></span>
         </span>
       </button>
+      <!-- /Иконка гамбургер -->
 
+      <!-- Пункты меню -->
       <div id="menu" class="table en">
         <div class="table-cell">
           <ul id="mobile" class="close">
@@ -138,13 +146,19 @@
           </ul>
         </div>
       </div>
-      <!--/mobile-menu-->
+      <!-- /Пункты меню -->
+      
+      <!-- Заглушка основного контента -->
       <div id="menu-hider"></div>
+
     </nav>
   </header>
+  <!-- /Меню -->
 
+  <!-- Экраны -->
   <div class="container">
 
+    <!-- Заголовок экрана -->
     <div id="TitleOfScreen" class="en" style="position: absolute">
       <p id="SimpleDeriveScreenName" class="text-center close">SIMPLE DÉRIVE</p>
       <p id="CycleDeriveScreenName" class="text-center close">CYCLIC DÉRIVE</p>
@@ -159,7 +173,9 @@
       <p id="GeneratorScreenName" class="text-center close">ГЕНЕРАТОР ВРЕМЕНИ</p>
       <p id="ManualScreenName" class="text-center close">СПРАВКА</p>
     </div>
+    <!-- /Заголовок экрана -->
 
+    <!-- Экран приветствия -->
     <div id="AnnotationScreen" class="en" style="position: absolute">
       <p class="text-center" style="padding-top:4px;">Attention!</p>
       <br>
@@ -208,7 +224,9 @@
       <br>
       <br>
     </div>
+    <!-- /Экран приветствия -->
 
+    <!-- Экран "Простой дрейф" -->
     <div id="SimpleDeriveScreen" class="close en" style="position: absolute">
       <div class="table-cell">
         <p id="forward" class="text-center close">FORWARD</p>
@@ -216,144 +234,160 @@
         <p id="right" class="text-center close">RIGHT</p>
       </div>
     </div>
-    <div id="SimpleDeriveScreen" class="close ru" style="position: absolute""><div class=" table-cell">
-      <p id="forward" class="text-center close">ВПЕРЁД</p>
-      <p id="left" class="text-center close">ВЛЕВО</p>
-      <p id="right" class="text-center close">ВПРАВО</p>
+    <div id="SimpleDeriveScreen" class="close ru" style="position: absolute">
+      <div class=" table-cell">
+        <p id="forward" class="text-center close">ВПЕРЁД</p>
+        <p id="left" class="text-center close">ВЛЕВО</p>
+        <p id="right" class="text-center close">ВПРАВО</p>
+      </div>
     </div>
-  </div>
+    <!-- /Экран "Простой дрейф" -->
+  
+    <!-- Экран "Циклический дрейф" -->
+    <div id="CycleDeriveScreen" class="close en" style="position: absolute">
+      <div class="table-cell">
+        <p class="text-center">REPEAT THIS COMMANDS<br>IN A LOOP:</p>
+        <br>
+        <div id="en_cycle0" class="text-center"></div><br id="en_1" class="close">
+        <div id="en_cycle1" class="text-center"></div><br id="en_2" class="close">
+        <div id="en_cycle2" class="text-center"></div><br id="en_3" class="close">
+        <div id="en_cycle3" class="text-center"></div><br id="en_4" class="close">
+        <div id="en_cycle4" class="text-center"></div><br id="en_5" class="close">
+        <div id="en_cycle5" class="text-center"></div><br id="en_6" class="close">
+        <div id="en_cycle6" class="text-center"></div><br id="en_7" class="close">
+      </div>
+    </div>
+    <div id="CycleDeriveScreen" class="close ru" style="position: absolute">
+      <div class="table-cell">
+        <p class="text-center">ПОВТОРЯЙ ПО КРУГУ <br>СЛЕДУЮЩИЕ КОМАНДЫ:</p>
+        <br>
+        <div id="ru_cycle0" class="text-center"></div><br id="ru_1" class="close">
+        <div id="ru_cycle1" class="text-center"></div><br id="ru_2" class="close">
+        <div id="ru_cycle2" class="text-center"></div><br id="ru_3" class="close">
+        <div id="ru_cycle3" class="text-center"></div><br id="ru_4" class="close">
+        <div id="ru_cycle4" class="text-center"></div><br id="ru_5" class="close">
+        <div id="ru_cycle5" class="text-center"></div><br id="ru_6" class="close">
+        <div id="ru_cycle6" class="text-center"></div><br id="ru_7" class="close">
+      </div>
+    </div>
+    <!-- /Экран "Циклический дрейф" -->
 
-  <div id="CycleDeriveScreen" class="close en" style="position: absolute">
-    <div class="table-cell">
-      <p class="text-center">REPEAT THIS COMMANDS<br>IN A LOOP:</p>
+    <!-- Экран "Углублённый дрейф" -->
+    <div id="DeepDeriveScreen" class="close">
+      <div class="table-cell">
+        <div id="forward" class="text-center close"></div>
+        <div id="left" class="text-center close"></div>
+        <div id="right" class="text-center close"></div>
+        <div id="stop" class="text-center close"></div>
+        <div id="transport" class="text-center close"></div>
+        <div id="north" class="text-center close"></div>
+        <div id="south" class="text-center close"></div>
+        <div id="west" class="text-center close"></div>
+        <div id="east" class="text-center close"></div>
+        <div id="street" class="text-center close"></div>
+      </div>
+    </div>
+    <!-- /Экран "Углублённый дрейф" -->
+
+    <!-- Экран "Генератор времени" -->
+    <div id="GeneratorScreen" class="close en" style="position: absolute">
+      <div class="table-cell">
+        <p class="text-center">START DÉRIVE IN</p>
+        <p id="display_en" class="text-center"></p>
+      </div>
+    </div>
+    <div id="GeneratorScreen" class="close ru" style="position: absolute">
+      <div class="table-cell">
+        <p class="text-center">НАЧНИ ДРЕЙФ В</p>
+        <p id="display_ru" class="text-center"></p>
+      </div>
+    </div>
+    <!-- Экран "Генератор времени" -->
+
+    <!-- Экран "Справка" -->
+    <div id="ManualScreen" class="close en">
       <br>
-      <div id="en_cycle0" class="text-center"></div><br id="en_1" class="close">
-      <div id="en_cycle1" class="text-center"></div><br id="en_2" class="close">
-      <div id="en_cycle2" class="text-center"></div><br id="en_3" class="close">
-      <div id="en_cycle3" class="text-center"></div><br id="en_4" class="close">
-      <div id="en_cycle4" class="text-center"></div><br id="en_5" class="close">
-      <div id="en_cycle5" class="text-center"></div><br id="en_6" class="close">
-      <div id="en_cycle6" class="text-center"></div><br id="en_7" class="close">
-    </div>
-  </div>
-  <div id="CycleDeriveScreen" class="close ru" style="position: absolute">
-    <div class="table-cell">
-      <p class="text-center">ПОВТОРЯЙ ПО КРУГУ <br>СЛЕДУЮЩИЕ КОМАНДЫ:</p>
       <br>
-      <div id="ru_cycle0" class="text-center"></div><br id="ru_1" class="close">
-      <div id="ru_cycle1" class="text-center"></div><br id="ru_2" class="close">
-      <div id="ru_cycle2" class="text-center"></div><br id="ru_3" class="close">
-      <div id="ru_cycle3" class="text-center"></div><br id="ru_4" class="close">
-      <div id="ru_cycle4" class="text-center"></div><br id="ru_5" class="close">
-      <div id="ru_cycle5" class="text-center"></div><br id="ru_6" class="close">
-      <div id="ru_cycle6" class="text-center"></div><br id="ru_7" class="close">
+      <p>Psychogeography refers to the study of the influence of the territorial environment, often urban, on a person's
+        behaviour, emotions and feelings, and
+        also the study of unfamiliar areas within urban space.</p>
+
+      <br>
+      <p>A person, when leaving home on the street, always has a specific motive, which he
+        directs. If there is no motive, a person may never visit different parts of the city for
+        useless. Within the framework of modern perception, freedom is practiced as a vicious circle in which a person
+        turns around: every day, by one and the same theme
+        in the same way, a person moves from home to work (school), and then comes back
+        home. He doesn't usually realize that he can go out of the house
+        in any direction. Thus, wherever a person goes, the street appears to be a tunnel between two rooms, which is
+        desirable to overcome as soon as possible.
+      </p>
+
+      <br>
+      <p>If street activity (graffiti, street art and other practices) is a direct <i>transformation</i> of the street,
+        then psychogeography is a change in its <i>perception</i> by a concrete subject.</p>
+
+      <br>
+      <p>The main technique of study is dérive ("drift") — unmotivated movement around the city, in which a person
+        is perceiving the familiar and tired terrain anew.
+        The drift can be algorithmic and non-algorithmic. That is, drift can
+        to be performed according to a predetermined algorithm, which is
+        a set of actions (tasks) that need to be performed or repeated, or may be directed solely in terms of
+        their sensual sensations that determine the direction of movement (urban planning). Within the limits of this
+        program, it is possible to tell, the algorithmic drift is realised, it is possible to tell,
+        only the algorithm is defined not by a person at his discretion, but by a program which is an external independent
+        force in relation to him. That is, the transfer of one's own subjectivity to the program is realized.</p>
     </div>
-  </div>
+    <div id="ManualScreen" class="close ru">
+      <br>
+      <br>
+      <p>Под психогеографией понимают изучение влияния территориального окружения, чаще всего урбанистического, на
+        поведение, эмоции и чувства человека, а
+        также изучение незнакомых территорий в рамках городского пространства.</p>
 
-  <div id="DeepDeriveScreen" class="close">
-    <div class="table-cell">
-      <div id="forward" class="text-center close"></div>
-      <div id="left" class="text-center close"></div>
-      <div id="right" class="text-center close"></div>
-      <div id="stop" class="text-center close"></div>
-      <div id="transport" class="text-center close"></div>
-      <div id="north" class="text-center close"></div>
-      <div id="south" class="text-center close"></div>
-      <div id="west" class="text-center close"></div>
-      <div id="east" class="text-center close"></div>
-      <div id="street" class="text-center close"></div>
+      <br>
+      <p>Человек, выходя из дома на улицу, всегда имеет конкретный мотив, который его
+        направляет. Если нет мотива, то человек может так и не побывать в различных частях города за
+        ненадобностью. В рамках современного восприятия, свобода практикуется как замкнутый круг, в котором кружит
+        человек: каждый день, одним и тем
+        же путём, человек движется от дома на работу (учёбу), а потом возвращается
+        домой. Он, как правило, не осознаёт, что он может выйти из дома и пойти
+        в любом направлении. Таким образом, куда бы человек не пошёл, улица представляется туннелем между двумя
+        помещениями, который желательно поскорее преодолеть.</p>
+
+      <br>
+      <p>Если уличная деятельность (граффити, стрит-арт и прочие практики) — это непосредственное <i>преобразование</i>
+        улицы, то психогеография это изменение её <i>восприятия</i> конкретным субъектом.</p>
+
+      <br>
+      <p>Основной техникой изучения является дрейф — немотивированное перемещение по городу, при котором человек
+        воспринимает знакомую и надоевшую местность заново.
+        Дрейф может быть алгоритмическим и неалгоритмическим. То есть, дрейф может
+        производиться по заранее заданному алгоритму, который представляет собой
+        совокупность действий (заданий), которые надо выполнить или повторять, а может направляться сугубо с точки зрения
+        своих чувственных ощущений, определяющих направление движения (городское фланирование). В рамках этой программы
+        реализуется, можно сказать, алгоритмический дрейф,
+        только алгоритм задаётся не человеком по его усмотрению, а программой, являющейся, по отношению к нему, внешней
+        независимой силой. То есть, реализуется передача своей субъектности программе.</p>
     </div>
-  </div>
-
-  <div id="GeneratorScreen" class="close en" style="position: absolute">
-    <div class="table-cell">
-      <p class="text-center">START DÉRIVE IN</p>
-      <p id="display_en" class="text-center"></p>
-    </div>
-  </div>
-  <div id="GeneratorScreen" class="close ru" style="position: absolute">
-    <div class="table-cell">
-      <p class="text-center">НАЧНИ ДРЕЙФ В</p>
-      <p id="display_ru" class="text-center"></p>
-    </div>
-  </div>
-
-  <div id="ManualScreen" class="close en">
-    <br>
-    <br>
-    <p>Psychogeography refers to the study of the influence of the territorial environment, often urban, on a person's
-      behaviour, emotions and feelings, and
-      also the study of unfamiliar areas within urban space.</p>
-
-    <br>
-    <p>A person, when leaving home on the street, always has a specific motive, which he
-      directs. If there is no motive, a person may never visit different parts of the city for
-      useless. Within the framework of modern perception, freedom is practiced as a vicious circle in which a person
-      turns around: every day, by one and the same theme
-      in the same way, a person moves from home to work (school), and then comes back
-      home. He doesn't usually realize that he can go out of the house
-      in any direction. Thus, wherever a person goes, the street appears to be a tunnel between two rooms, which is
-      desirable to overcome as soon as possible.
-    </p>
-
-    <br>
-    <p>If street activity (graffiti, street art and other practices) is a direct <i>transformation</i> of the street,
-      then psychogeography is a change in its <i>perception</i> by a concrete subject.</p>
-
-    <br>
-    <p>The main technique of study is dérive ("drift") — unmotivated movement around the city, in which a person
-      is perceiving the familiar and tired terrain anew.
-      The drift can be algorithmic and non-algorithmic. That is, drift can
-      to be performed according to a predetermined algorithm, which is
-      a set of actions (tasks) that need to be performed or repeated, or may be directed solely in terms of
-      their sensual sensations that determine the direction of movement (urban planning). Within the limits of this
-      program, it is possible to tell, the algorithmic drift is realised, it is possible to tell,
-      only the algorithm is defined not by a person at his discretion, but by a program which is an external independent
-      force in relation to him. That is, the transfer of one's own subjectivity to the program is realized.</p>
-  </div>
-  <div id="ManualScreen" class="close ru">
-    <br>
-    <br>
-    <p>Под психогеографией понимают изучение влияния территориального окружения, чаще всего урбанистического, на
-      поведение, эмоции и чувства человека, а
-      также изучение незнакомых территорий в рамках городского пространства.</p>
-
-    <br>
-    <p>Человек, выходя из дома на улицу, всегда имеет конкретный мотив, который его
-      направляет. Если нет мотива, то человек может так и не побывать в различных частях города за
-      ненадобностью. В рамках современного восприятия, свобода практикуется как замкнутый круг, в котором кружит
-      человек: каждый день, одним и тем
-      же путём, человек движется от дома на работу (учёбу), а потом возвращается
-      домой. Он, как правило, не осознаёт, что он может выйти из дома и пойти
-      в любом направлении. Таким образом, куда бы человек не пошёл, улица представляется туннелем между двумя
-      помещениями, который желательно поскорее преодолеть.</p>
-
-    <br>
-    <p>Если уличная деятельность (граффити, стрит-арт и прочие практики) — это непосредственное <i>преобразование</i>
-      улицы, то психогеография это изменение её <i>восприятия</i> конкретным субъектом.</p>
-
-    <br>
-    <p>Основной техникой изучения является дрейф — немотивированное перемещение по городу, при котором человек
-      воспринимает знакомую и надоевшую местность заново.
-      Дрейф может быть алгоритмическим и неалгоритмическим. То есть, дрейф может
-      производиться по заранее заданному алгоритму, который представляет собой
-      совокупность действий (заданий), которые надо выполнить или повторять, а может направляться сугубо с точки зрения
-      своих чувственных ощущений, определяющих направление движения (городское фланирование). В рамках этой программы
-      реализуется, можно сказать, алгоритмический дрейф,
-      только алгоритм задаётся не человеком по его усмотрению, а программой, являющейся, по отношению к нему, внешней
-      независимой силой. То есть, реализуется передача своей субъектности программе.</p>
-  </div>
+    <!-- /Экран "Справка" -->
 
   </div>
+  <!-- /Экраны -->
 
+  <!-- Нижняя управляющая кнопка -->
   <footer>
+
+    <!-- Кнопка на начальном экране -->
     <button id="AnnotationButton" class="blackbutton en" onclick="AnnotationScreenFunction();" type="button">
       <p id="begin" class="text-center">START</p>
     </button>
     <button id="AnnotationButton" class="blackbutton ru" onclick="AnnotationScreenFunction();" type="button">
       <p id="begin" class="text-center">НАЧАТЬ ДРЕЙФ</p>
     </button>
+    <!-- /Кнопка на начальном экране -->
 
+    <!-- Кнопка на простом дрейфе -->
     <button id="SimpleDeriveButtonFooter" class="blackbutton close en" onclick="SimpleDeriveScreenFunction();"
       type="button">
       <p id="further" class="text-center">NEXT</p>
@@ -362,7 +396,9 @@
       type="button">
       <p id="further" class="text-center">ДАЛЬШЕ</p>
     </button>
+    <!-- /Кнопка на простом дрейфе -->
 
+    <!-- Кнопка на углублённом дрейфе -->
     <button id="DeepDeriveButtonFooter" class="blackbutton close en" onclick="DeepDeriveScreenFunction();"
       type="button">
       <p id="further" class="text-center">NEXT</p>
@@ -371,7 +407,10 @@
       type="button">
       <p id="further" class="text-center">ДАЛЬШЕ</p>
     </button>
+    <!-- /Кнопка на углублённом дрейфе -->
+
   </footer>
+  <!-- /Нижняя управляющая кнопка -->
 
 </body>
 
