@@ -1,59 +1,69 @@
-@mixin action-button
- 	position: fixed
-	z-index: 2
-	bottom: 25px
+// Каждый экран состоит из заголовка, контента (текст или команда) и кнопки действия
 
-@mixin text
-	padding: 25px
-  
+@import "menu"
+@import "var"
+
 @mixin title-of-screen
   position: absolute
   width: 100%
   margin-top: 27px
-  transition: all 600ms cubic-bezier(0.455, 0.03, 0.515, 0.955)
+
+@mixin text
 
 @mixin command
   display: flex
-	justify-content: center
-	flex-direction: column
-	align-items: center
+  justify-content: center
+  flex-direction: column
+  align-items: center
 
-  .annotation-screen
-		&__text
-      @include text
-		&__action-button
-      @include action-button
+@mixin action-button
+  z-index: 2
+  bottom: 25px
 
-	.simple-derive-screen
-		&__title-of-screen
-      @include title-of-screen
-		&__command
-      @include command
-		&__action-button
-      @include action-button
+.annotation-screen
+  padding: 25px
+  @include default-of-screen
+  &__text
+    @include text
+  &__action-button
+    @include button
+    @include action-button
 
-	.cycle-derive-screen
-		&__title-of-screen
-      @include title-of-screen
-		&__command
-      @include command
+.simple-derive-screen
+  @include default-of-screen
+  &__title-of-screen
+    @include title-of-screen
+  &__command
+    @include command
+  &__action-button
+    @include action-button
 
-	.deep-derive-screen
-		&__title-of-screen
-      @include title-of-screen
-		&__command
-      @include command
-		&__action-button
-      @include action-button
+.cyclic-derive-screen
+  @include default-of-screen
+  &__title-of-screen
+    @include title-of-screen
+  &__command
+    @include command
 
-	.generator-screen
-		&__title-of-screen
-      @include title-of-screen
-		&__command
-      @include command
-	
-	.manual-screen
-		&__title-of-screen
-      @include title-of-screen
-		&__text
-      @include text
+.deep-derive-screen
+  @include default-of-screen
+  &__title-of-screen
+    @include title-of-screen
+  &__command
+    @include command
+  &__action-button
+    @include action-button
+
+.generator-screen
+  @include default-of-screen
+  &__title-of-screen
+    @include title-of-screen
+  &__command
+    @include command
+
+.manual-screen
+  @include default-of-screen
+  &__title-of-screen
+    @include title-of-screen
+  &__text
+    @include text

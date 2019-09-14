@@ -30,9 +30,9 @@
   <meta property="og:image:width" content="968">
   <meta property="og:image:height" content="504">
 
-  <script src="js/jquery-1.9.1.js"></script>
+  <script src="js/jquery-3.4.1.min.js"></script>
   <script src="js/screen-manager.js"></script>
-
+  
 </head>
 
 <body>
@@ -59,7 +59,7 @@
 
   <!-- Меню -->
 
-  <header>
+  <header class="header">
     <nav>
       
       <!-- Иконка гамбургер -->
@@ -138,8 +138,6 @@
       
       <!-- Заглушка основного контента -->
 
-      <div class="menu-hider"></div>
-
     </nav>
   </header>
 
@@ -154,7 +152,7 @@
         <div class="annotation-screen__text">
         <p class="center">Attention!</p>
         <br>
-        <p>This small application in no way claims to be a disclosure of such a concept as "drift", but rather a small
+        <p>This small application in no way claims to be a disclosure of such a concept as "drift" ("dérive"), but rather a small
           collection of methods and a source of external independent force that guides your traffic regardless of your
           subjective ideas about specific parts of the city (area). The supreme task is disorientation in your own city.
         </p>
@@ -168,11 +166,8 @@
         <br>
         <p>If you are stuck in a dead end, you turn 180 degrees and go to the next command.</p>
         <br>
-        <p>In a cyclic drift the algorithm can give out "loops" - such sequence of commands when it is necessary to walk
-          in a circle. In this case, you can restart the drift.</p>
-        <br>
-        <br>
-        <br>
+        <p>In a cyclic dérive the algorithm can give out "loops" — such sequence of commands when it is necessary to walk
+          in a circle. In this case, you can restart the dérive.</p>
         <br>
         </div>
         <button class="annotation-screen__action-button" type="button">
@@ -307,9 +302,6 @@
         <p>В циклическом дрейфе алгоритм может выдавать "петли" — такую последовательность команд, когда придётся ходить
           по кругу. В таком случае можно перезапустить дрейф.</p>
         <br>
-        <br>
-        <br>
-        <br>
       </div>
       <button class="annotation-screen__action-button" type="button">
         <p>НАЧАТЬ ДРЕЙФ</p>
@@ -328,9 +320,9 @@
       </button>
     </div>
 
-    <div class=" cyclic-derive-screen">
-      <div class=" cyclic-derive-screen__title-of-screen">ЦИКЛИЧЕСКИЙ ДРЕЙФ</div>
-      <div class=" cyclic-derive-screen__command">
+    <div class="cyclic-derive-screen">
+      <div class="cyclic-derive-screen__title-of-screen">ЦИКЛИЧЕСКИЙ ДРЕЙФ</div>
+      <div class="cyclic-derive-screen__command">
         <p>ПОВТОРЯЙ ПО КРУГУ<br>СЛЕДУЮЩИЕ КОМАНДЫ:</p>
         <br>
         <div id="ru_ cyclic0"></div><br id="ru_1" class="close">
@@ -409,6 +401,8 @@
   </div>
 
   <!-- /Экраны -->
+
+
 
 </body>
 

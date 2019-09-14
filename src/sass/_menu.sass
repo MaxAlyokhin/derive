@@ -1,38 +1,39 @@
+@import "hamburger"
+@import "var"
+
 header
   position: fixed
-  z-index: 2
+  @include default-of-screen
 
 header, nav 
   height: 100vh
   width: 100vw
 
-.menu-hider
-  height: 100vh
-  width: 100vw
-  background-color: $grey
-  opacity: 0
-
-ul, li
-  flex-direction: column
-  justify-content: center
-  box-sizing: border-box
-  height: 400px
-  list-style-type: none
-  align-items: center
-  width: 100%
-  margin: 0
-  padding: 0
-
 .menu
+  display: none
+  height: inherit
+  width: inherit
   &__list
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    padding: 25px
+    height: inherit
+    width: inherit
+    &:last-child
+      padding-bottom: 0
 
 .list
   &__item
-
+    list-style-type: none
+    width: 100%
+    padding-bottom: 25px
+  
 .item
   &__simple-derive-button,
   &__cyclic-derive-button,
   &__deep-derive-button,
-  &__generator-derive-button,
-  &__manual-derive-button,
+  &__generator-button,
+  &__manual-button,
     @include button
