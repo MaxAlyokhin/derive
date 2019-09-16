@@ -1,27 +1,24 @@
-// Режимы
-// RegimeManualScreen = 0;
-// RegimeGeneratorScreen = 0;
-// RegimeCycleDeriveScreen = 0;
-// RegimeSimpleDeriveScreen = 0;
-// RegimeDeepDeriveScreen = 0;
-
 // Счётчик
-// click = 0;
-
+var click = 1;
 // Для часов
-// var intervalID;
+var intervalID;
+
+// Управление UI
 
 $( document ).ready(function(){
 
-// Изначально все элементы интерфейса скрыты (display: none, opacity: 0). Управление осуществляется переключением классов .active и, через задержку, .visible.
+// Изначально все элементы интерфейса скрыты (display: none, opacity: 0). 
+// Управление осуществляется переключением классов .active и, через задержку, .visible.
 
-// Экран выбора языка / Экран приветствия
+// Экран выбора языка / Экран приветствия -----------------------------------------------
 
 	$( '.lang__en' ).on('click', function(){ 
 		// Скрываем экран выбора языка
 		$('.lang').addClass('hidden'); setTimeout(function () { $('.lang').addClass('disactive'); }, 500);
 		// Показываем блоки на выбранном языке, навсегда выключая противоположный
-		$('.ru').addClass('checked'); 
+		$('.ru').addClass('checked');
+		// Даём возможность скроллить
+		$('body').removeClass('overflow-hidden');
 		// Показываем экран приветствия
 		$('.annotation-screen').addClass('active'); setTimeout(function () { $('.annotation-screen').addClass('visible'); }, 500);
 	})
@@ -31,378 +28,323 @@ $( document ).ready(function(){
 		$('.lang').addClass('hidden'); setTimeout(function () { $('.lang').addClass('disactive'); }, 500);
 		// Показываем блоки на выбранном языке, навсегда выключая противоположный
 		$('.en').addClass('checked'); 
+		// Даём возможность скроллить
+		$('body').removeClass('overflow-hidden');
 		// Показываем экран приветствия
 		$('.annotation-screen').addClass('active'); setTimeout(function () { $('.annotation-screen').addClass('visible'); }, 500);
 	})
 
-// Экран приветствия / Экран меню
+// Экран приветствия / Экран меню -------------------------------------------------------
 
 	$('.annotation-screen__action-button').on('click', function(){
 		// Скрываем экран приветствия
 		$('.annotation-screen').removeClass('visible'); setTimeout(function () { $('.annotation-screen').removeClass('active'); }, 500);
 		// Показываем меню
-		$('.menu').addClass('active'); setTimeout(function () { $('.menu').addClass('visible'); }, 500);
+		$('.menu').addClass('active'); 
+		setTimeout(function () { 
+			$('.menu').addClass('visible');
+			// Убираем скролл
+			$('body').addClass('overflow-hidden');
+			$('html').scrollTop(0);
+		}, 500);
 	})
 
-// Экран "Простой дрейф"
+// Управление иконкой-гамбургером -------------------------------------------------------
 
-	$('.item__simple-derive-button').on('click', function(){
-		// Скрываем меню
-		$('.menu').removeClass('visible'); setTimeout(function () { $('.menu').removeClass('active'); }, 500);
-		//Показываем экран "Простой дрейф"
-		$('.simple-derive-screen').addClass('active'); setTimeout(function () { $('.simple-derive-screen').addClass('visible'); }, 500);
-		// Показываем гамбургер
-		$('.hamburger').removeClass('disactive'); setTimeout(function () { $('.hamburger').removeClass('hidden'); }, 500);
-	})
+$('.hamburger').on('click', function(){
+	// Запускаем анимацию
+	$(this).toggleClass('hamburger_active');
+	// Скрываем скролл
+	$('body').toggleClass('overflow-hidden');
+	// Переключаем меню
+	$('.container').toggleClass('hidden'); 
+	if (click) {
+		$('.menu').toggleClass('active'); setTimeout(function () { $('.menu').toggleClass('visible'); }, 300);
+		click = 0;
+	}
+	else {
+		$('.menu').toggleClass('visible'); setTimeout(function () { $('.menu').toggleClass('active'); }, 1000);
+		click = 1;	
+	}
 	
-// Экран "Циклический дрейф"
-
-	$('.item__cyclic-derive-button').on('click', function(){
-		// Скрываем меню
-		$('.menu').removeClass('visible'); setTimeout(function () { $('.menu').removeClass('active'); }, 500);
-		//Показываем экран "Циклический дрейф"
-		$('.cyclic-derive-screen').addClass('active'); setTimeout(function () { $('.cyclic-derive-screen').addClass('visible'); }, 500);
-		// Показываем гамбургер
-		$('.hamburger').removeClass('disactive'); setTimeout(function () { $('.hamburger').removeClass('hidden'); }, 500);
-	})
-
-// Экран "Углублённый дрейф"
-
-	$('.item__deep-derive-button').on('click', function(){
-		// Скрываем меню
-		$('.menu').removeClass('visible'); setTimeout(function () { $('.menu').removeClass('active'); }, 500);
-		//Показываем экран "Углублённый дрейф"
-		$('.deep-derive-screen').addClass('active'); setTimeout(function () { $('.deep-derive-screen').addClass('visible'); }, 500);
-		// Показываем гамбургер
-		$('.hamburger').removeClass('disactive'); setTimeout(function () { $('.hamburger').removeClass('hidden'); }, 500);
-	})
-
-// Экран "Генератор времени"
-
-	$('.item__generator-button').on('click', function(){
-		// Скрываем меню
-		$('.menu').removeClass('visible'); setTimeout(function () { $('.menu').removeClass('active'); }, 500);
-		//Показываем экран "Генератор времени"
-		$('.generator-screen').addClass('active'); setTimeout(function () { $('.generator-screen').addClass('visible'); }, 500);
-		// Показываем гамбургер
-		$('.hamburger').removeClass('disactive'); setTimeout(function () { $('.hamburger').removeClass('hidden'); }, 500);
-	})
-
-// Экран "Справка"
-
-	$('.item__manual-button').on('click', function(){
-		// Скрываем меню
-		$('.menu').removeClass('visible'); setTimeout(function () { $('.menu').removeClass('active'); }, 500);
-		//Показываем экран "Справка"
-		$('.manual-screen').addClass('active'); setTimeout(function () { $('.manual-screen').addClass('visible'); }, 500);
-		// Показываем гамбургер
-		$('.hamburger').removeClass('disactive'); setTimeout(function () { $('.hamburger').removeClass('hidden'); }, 500);
-	})
-
-// Управление иконкой-гамбургером
-	$('.hamburger').on('click', function(){
-		// Запускаем анимацию
-		$(this).toggleClass('hamburger_active');
-		// Показываем меню
-		$('.menu').toggleClass('active'); setTimeout(function () { $('.menu').toggleClass('visible'); }, 500);
-		// Скрываем экраны
-	})
-
-// Управление кнопками действия
-
 })
 
+// Экран "Простой дрейф" ----------------------------------------------------------------
 
+	$('.item__simple-derive-button').on('click', function(){
+		Reset();
+		click = 1;
+		// Скрываем меню
+		$('.menu').removeClass('visible'); 
+		// Показываем гамбургер
+		$('.hamburger').removeClass('disactive').toggleClass('hamburger_active');
+		//Показываем экран "Генератор времени"
+		$('.container').removeClass('hidden');
+		$('.simple-derive-screen').addClass('active-for-derive-screen');
 
+		// Задержки
+		setTimeout(function () { 
+			$('.menu').removeClass('active'); 
+			$('.simple-derive-screen').addClass('visible');
+			$('.hamburger').removeClass('hidden');
+			// Вызываем функцию
+			SimpleDeriveScreenFunction();
+		}, 500);	
+	})
 
-// lang__en.on("click", function(){
-// 	header.addClass('active');
-// 	en.addClass('active');
-// 	lang1.addClass("disactive");
-// })
+	// По нажатию на action-кнопку запустить функцию
+	$('.simple-derive-screen__action-button').on('click', function(){
+		SimpleDeriveScreenFunction();
+	})
+	
+// Экран "Циклический дрейф" ------------------------------------------------------------
 
-// lang_change.on("click", function(){
-//   header.addClass("active")
-// })
+	$('.item__cyclic-derive-button').on('click', function(){
+		Reset();
+		click = 1;
+		// Скрываем меню
+		$('.menu').removeClass('visible'); 
+		// Показываем гамбургер
+		$('.hamburger').removeClass('disactive').toggleClass('hamburger_active');
+		//Показываем экран "Генератор времени"
+		$('.container').removeClass('hidden');
+		$('.cyclic-derive-screen').addClass('active-for-derive-screen');
 
-// $('.lang__ru').on("click", function(){
-// 	$('.header').addClass('active');
-// 	$('.ru').addClass('active');
-// 	$('.lang').addClass("disactive");
-// })
+		// Задержки
+		setTimeout(function () { 
+			$('.menu').removeClass('active'); 
+			$('.cyclic-derive-screen').addClass('visible');
+			$('.hamburger').removeClass('hidden');
+			// Вызываем функцию
+			CyclicDeriveScreenFunction();
+		}, 500);	
+	})
 
+	// По нажатию на action-кнопку запустить функцию
+	$('.cyclic-derive-screen__action-button').on('click', function(){
+		CyclicDeriveScreenFunction();
+	})
 
-// function en() {
+// Экран "Углублённый дрейф" ------------------------------------------------------------
 
-// 	$('.header').addClass('active');
-// 	$('.ru').addClass('active');
-// 	$('.lang').addClass("disactive");
+	$('.item__deep-derive-button').on('click', function(){
+		Reset();
+		click = 1;
+		// Скрываем меню
+		$('.menu').removeClass('visible'); 
+		// Показываем гамбургер
+		$('.hamburger').removeClass('disactive').toggleClass('hamburger_active');
+		//Показываем экран "Генератор времени"
+		$('.container').removeClass('hidden');
+		$('.deep-derive-screen').addClass('active-for-derive-screen');
 
-// }
+		// Задержки
+		setTimeout(function () { 
+			$('.menu').removeClass('active'); 
+			$('.deep-derive-screen').addClass('visible');
+			$('.hamburger').removeClass('hidden');
+			// Вызываем функцию
+			DeepDeriveScreenFunction();
+		}, 500);	
+	})
 
+	// По нажатию на action-кнопку запустить функцию
+	$('.deep-derive-screen__action-button').on('click', function(){
+		DeepDeriveScreenFunction();
+	})
 
-// function ru() {
+// Экран "Генератор времени" ------------------------------------------------------------
 
-// 	RegimeLanguage = 0; // Устанавливаем режим
-// 	$('.en').addClass('close_lang').removeClass('table');
-// 	$('.lang').transition({ opacity: 0 }, 400, 'cubic-bezier(0.175, 0.885, 0.32, 1.275)');
+	$('.item__generator-button').on('click', function(){
+		Reset();
+		click = 1;
+		// Скрываем меню
+		$('.menu').removeClass('visible'); 
+		// Показываем гамбургер
+		$('.hamburger').removeClass('disactive').toggleClass('hamburger_active');
+		//Показываем экран "Генератор времени"
+		$('.container').removeClass('hidden');
+		$('.generator-screen').addClass('active');
 
-// 	setTimeout(function () {
-// 		$('.lang').addClass('close');
-// 	}, 400);
+		// Задержки
+		setTimeout(function () { 
+			$('.menu').removeClass('active'); 
+			$('.generator-screen').addClass('visible');
+			$('.hamburger').removeClass('hidden');
+			// Вызываем функцию
+			GeneratorScreenFunction();
+		}, 500);	
+	})
 
-// }
+// Экран "Справка" ----------------------------------------------------------------------
 
-// Управление иконкой-гамбургером
-// function MobileMenu() {
+	$('.item__manual-button').on('click', function(){
+		Reset();
+		click = 1;
+		// Даём возможность скроллить
+		$('body').removeClass('overflow-hidden');
+		// Скрываем меню
+		$('.menu').removeClass('visible'); 
+		// Показываем гамбургер
+		$('.hamburger').removeClass('disactive').toggleClass('hamburger_active');
+		//Показываем экран "Справка"
+		$('.container').removeClass('hidden');
+		$('.manual-screen').addClass('active'); 
 
-// 	$('button#HamburgerButton').removeClass('close').transition({ opacity: 1 }, 500, 'cubic-bezier(0.6, 0.04, 0.98, 0.335)');
+		// Задержки
+		setTimeout(function () { 
+			$('.menu').removeClass('active'); 
+			$('.manual-screen').addClass('visible');
+			$('.hamburger').removeClass('hidden');
+		}, 500);	
+	})
+})
 
-// 	if (click) {
+// Функции ------------------------------------------------------------------------------
 
-// 		$('button#HamburgerButton').addClass('is-active');
-// 		$('header, nav').addClass('height100');
-// 		$('div#menu-hider').transition({ opacity: 1 }, 400, 'cubic-bezier(0.175, 0.885, 0.32, 1.275)');
-// 		$('footer').transition({ opacity: 0 }, 400, 'cubic-bezier(0.455, 0.03, 0.515, 0.955)');
-// 		$('ul#mobile').removeClass('close').addClass('open');
-// 		$('li#mobile').addClass('open');
+// Сброс всех открытых ранее экранов
 
-// 		setTimeout(function () {
-// 			$('ul#mobile').transition({ scale: 1, opacity: 1 }, 1000, 'cubic-bezier(0.075, 0.82, 0.165, 1)');
-// 			$('footer').addClass('close');
-// 		}, 400);
-// 		click = 0;
-
-// 	}
-
-// 	else {
-
-// 		$('button#HamburgerButton').removeClass('is-active');
-// 		$('ul#mobile').transition({ scale: 0.9, opacity: 0 }, 700, 'cubic-bezier(0.6, -0.28, 0.735, 0.045)');
-
-// 		setTimeout(close, 700);
-// 		function close() {
-
-// 			$('div#menu-hider').transition({ opacity: 0 }, 500, 'cubic-bezier(0.6, -0.28, 0.735, 0.045)');
-
-// 			setTimeout(function () {
-
-// 				$('button#HamburgerButton').removeClass('is-active');
-// 				click = 1;
-// 				$('header, nav').removeClass('height100');
-// 				$('ul#mobile').removeClass('open').addClass('close');
-// 				$('li#mobile').removeClass('open');
-
-// 				if (RegimeManualScreen || RegimeGeneratorScreen || RegimeCycleDeriveScreen) { 
-// 					$('footer').addClass('close').transition({ opacity: 0 }, 500, '0.455, 0.03, 0.515, 0.955)'); 
-// 				}
-// 				else {
-// 					$('footer').removeClass('close').transition({ opacity: 1 }, 500, '0.455, 0.03, 0.515, 0.955)');
-// 					$('SimpleDeriveButtonFooter').removeClass('close').addClass('open');
-// 					$('DeepDeriveButtonFooter').removeClass('open').addClass('close');
-// 				}
-// 			}, 500);
-// 		}
-// 	}
-// }
-
-// Управление экраном приветствия
-// function AnnotationScreenFunction() {
-// 	$('div#AnnotationScreen').transition({ opacity: 0 }, 500, 'cubic-bezier(0.175, 0.885, 0.32, 1.275)');                 
-
-// 	setTimeout(function () {
-// 		$('div#AnnotationScreen').addClass('close');
-// 		$('#AnnotationButton.en').addClass('close');              	
-// 		$('#AnnotationButton.ru').addClass('close');
-// 	}, 500);
-
-// 	$('header, nav').addClass('height100');                                            
-// 	$('div#menu-hider').transition({ opacity: 1 }, 400, 'cubic-bezier(0.175, 0.885, 0.32, 1.275)');                    
-// 	$('footer').transition({ opacity: 0 }, 400, 'cubic-bezier(0.455, 0.03, 0.515, 0.955)');                           			   
-// 	$('ul#mobile').removeClass('close').addClass('open');         
-// 	$('li#mobile').addClass('open'); 
-// 	$('ul#mobile').transition({ scale: 0.9, opacity: 0 });
-// 	setTimeout(function () { $('ul#mobile').transition({ scale: 1, opacity: 1 }, 1000, 'cubic-bezier(0.075, 0.82, 0.165, 1)') }, 400);                                                         
-// }
+function Reset() {
+	$('.simple-derive-screen, .cyclic-derive-screen, .deep-derive-screen, .generator-screen, .manual-screen').removeClass('active visible active-for-derive-screen'); 
+}
 
 // Управление экраном "Простой дрейф"
-// max = 3;
-// min = 0;
 
-// function SimpleDeriveScreenFunction() {
-	                                  
-// 	RegimeManualScreen = 0;               
-// 	RegimeGeneratorScreen = 0;                
-// 	RegimeCycleDeriveScreen = 0;                 
-// 	RegimeDeepDeriveScreen = 0;                
+	// Переменные для вычисления рандома
+	var max = 3;
+	var min = 0;
 
-// 	clearInterval(intervalID);                    
-// 	click = 0;
-// 	MobileMenu();
+	function SimpleDeriveScreenFunction() {                                        
 
-	          
-// 	$('p#CycleDeriveScreenName').removeClass('open_title').transition({ opacity: 0 });                                       
-// 	$('div#CycleDeriveScreen').addClass('close').removeClass('table').transition({ opacity: 0 });                                      
-// 	$('p#DeepDeriveScreenName').removeClass('open_title').transition({ opacity: 0 });                               
-// 	$('div#DeepDeriveScreen').addClass('close').removeClass('table').transition({ opacity: 0 });                                 
-// 	$('button#DeepDeriveButtonFooter').addClass('close').transition({ opacity: 0 });
-// 	$('p#GeneratorScreenName').removeClass('open_title').transition({ opacity: 0 });                            
-// 	$('div#GeneratorScreen').addClass('close').removeClass('table').transition({ opacity: 0 });                           
-// 	$('p#ManualScreenName').removeClass('open_title').transition({ opacity: 0 });                         
-// 	$('div#ManualScreen').addClass('close').transition({ opacity: 0 });                        
-// 	$('p#forward').transition({ opacity: 0 }, 1000, 'cubic-bezier(0.175, 0.885, 0.32, 1.275)');
-// 	$('p#left').transition({ opacity: 0 }, 1000, 'cubic-bezier(0.175, 0.885, 0.32, 1.275)');
-// 	$('p#right').transition({ opacity: 0 }, 1000, 'cubic-bezier(0.175, 0.885, 0.32, 1.275)');
+		// Очищаем на всякий случай таймер из Углублённого дрейфа
+		clearInterval(intervalID);  
 
-// 	if (RegimeSimpleDeriveScreen == 0) {
-// 		ShowSimpleDeriveScreen();
-// 	}
+		// Генерим номер команды
+		var r;
+		r = Math.floor(Math.random() * (max - min)) + min;
 
-// 	function ShowSimpleDeriveScreen() {
+		// Всё убираем
+		$('.forward').removeClass('visible');
+		$('.left').removeClass('visible');
+		$('.right').removeClass('visible');
+		// Описание функции выбора варианта
+		function NextCommand() {
+			switch (r) {
+				case (0):
+					$('.forward').addClass('visible');
+					break;
 
+				case (1):
+					$('.left').addClass('visible');
+					break;
 
-// 		$('p#SimpleDeriveScreenName').addClass('open_title').transition({ opacity: 1 }, 500, 'cubic-bezier(0.6, 0.04, 0.98, 0.335)');                              
-// 		$('div#SimpleDeriveScreen').removeClass('close').addClass('table').transition({ opacity: 1 }, 500, 'cubic-bezier(0.6, 0.04, 0.98, 0.335)');        
-// 		$('button#SimpleDeriveButtonFooter').removeClass('close').transition({ opacity: 1 }, 500, 'cubic-bezier(0.6, 0.04, 0.98, 0.335)');                
-// 		RegimeSimpleDeriveScreen = 1;
-// 	}
-	    
-// 	var r;
-// 	r = Math.floor(Math.random() * (max - min)) + min;
-
-// 	setTimeout(NextCommand, 1000);
-
-// 	function NextCommand() {
-// 		switch (r) {
-
-// 			case (0):
-// 				$('p#forward').removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
-// 				$('p#left').removeClass('open_title').addClass('close');
-// 				$('p#right').removeClass('open_title').addClass('close');
-// 				break;
-
-// 			case (1):
-// 				$('p#left').removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
-// 				$('p#forward').removeClass('open_title').addClass('close');
-// 				$('p#right').removeClass('open_title').addClass('close');
-// 				break;
-
-// 			case (2):
-// 				$('p#right').removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
-// 				$('p#left').removeClass('open_title').addClass('close');
-// 				$('p#forward').removeClass('open_title').addClass('close');
-// 				break;
-
-// 		}
-// 	}
-// }
+				case (2):
+					$('.right').addClass('visible');
+					break;
+			}
+		}
+		// Вызываем её с задержкой
+		setTimeout(NextCommand, 1000);
+	}
 
 // Управление экраном "Циклический дрейф"
-// function CycleDeriveScreenFunction() {
-// 	RegimeManualScreen = 0;                
-// 	RegimeGeneratorScreen = 0;                
-// 	RegimeSimpleDeriveScreen = 0;               
-// 	RegimeDeepDeriveScreen = 0;                 
-// 	RegimeCycleDeriveScreen = 1;
-// 	click = 0;
-// 	MobileMenu();
-// 	clearInterval(intervalID);                    
 
-// 	$('p#SimpleDeriveScreenName').removeClass('open_title').transition({ opacity: 0 });                                   
-// 	$('div#SimpleDeriveScreen').addClass('close').removeClass('table').transition({ opacity: 0 });                                  
-// 	$('p#DeepDeriveScreenName').removeClass('open_title').transition({ opacity: 0 });                                   
-// 	$('div#DeepDeriveScreen').addClass('close').removeClass('table').transition({ opacity: 0 });                                 
-// 	$('p#GeneratorScreenName').removeClass('open_title').transition({ opacity: 0 });                              
-// 	$('div#GeneratorScreen').addClass('close').removeClass('table').transition({ opacity: 0 });                             
-// 	$('p#ManualScreenName').removeClass('open_title').transition({ opacity: 0 });                         
-// 	$('div#ManualScreen').addClass('close');                        
+	function CyclicDeriveScreenFunction() {
+		
+		// Очищаем на всякий случай таймер из Углублённого дрейфа
+		clearInterval(intervalID);                     
 
-// 	$('p#CycleDeriveScreenName').addClass('open_title').transition({ opacity: 1 }, 500, 'cubic-bezier(0.6, 0.04, 0.98, 0.335)');                                       
-// 	$('div#CycleDeriveScreen').removeClass('close').addClass('table').transition({ opacity: 1 }, 500, 'cubic-bezier(0.6, 0.04, 0.98, 0.335)');                                      
-	                                                          
-// 	$('div#cycle1').addClass('close').transition({ opacity: 0 });
-// 	$('div#cycle2').addClass('close').transition({ opacity: 0 });
-// 	$('div#cycle3').addClass('close').transition({ opacity: 0 });
-// 	$('div#cycle4').addClass('close').transition({ opacity: 0 });
-// 	$('div#cycle5').addClass('close').transition({ opacity: 0 });
-// 	$('div#cycle6').addClass('close').transition({ opacity: 0 });
+		$('.SimpleDeriveScreenName').removeClass('open_title').transition({ opacity: 0 });                                   
+		$('div#SimpleDeriveScreen').addClass('close').removeClass('table').transition({ opacity: 0 });                                  
+		$('.DeepDeriveScreenName').removeClass('open_title').transition({ opacity: 0 });                                   
+		$('div#DeepDeriveScreen').addClass('close').removeClass('table').transition({ opacity: 0 });                                 
+		$('.GeneratorScreenName').removeClass('open_title').transition({ opacity: 0 });                              
+		$('div#GeneratorScreen').addClass('close').removeClass('table').transition({ opacity: 0 });                             
+		$('.ManualScreenName').removeClass('open_title').transition({ opacity: 0 });                         
+		$('div#ManualScreen').addClass('close');                        
 
-// 	var action_value;                    
-// 	var action;                    
-// 	var max_value = 8;
-// 	var min_value = 2;
-// 	var i;
+		$('.CycleDeriveScreenName').addClass('open_title').transition({ opacity: 1 }, 500, 'cubic-bezier(0.6, 0.04, 0.98, 0.335)');                                       
+		$('div#CycleDeriveScreen').removeClass('close').addClass('table').transition({ opacity: 1 }, 500, 'cubic-bezier(0.6, 0.04, 0.98, 0.335)');                                      
+																															
+		$('div#cycle1').addClass('close').transition({ opacity: 0 });
+		$('div#cycle2').addClass('close').transition({ opacity: 0 });
+		$('div#cycle3').addClass('close').transition({ opacity: 0 });
+		$('div#cycle4').addClass('close').transition({ opacity: 0 });
+		$('div#cycle5').addClass('close').transition({ opacity: 0 });
+		$('div#cycle6').addClass('close').transition({ opacity: 0 });
 
-// 	action_value = Math.floor(Math.random() * (max_value - min_value)) + min_value;                
+		var action_value;                    
+		var action;                    
+		var max_value = 8;
+		var min_value = 2;
+		var i;
 
-// 	if (RegimeLanguage) {
-// 		for (i = 0; i < action_value; i++) {
-// 			action = Math.floor(Math.random() * (max - min)) + min;               
-// 			switch (action) {
+		// Генерим случайное число
+		action_value = Math.floor(Math.random() * (max_value - min_value)) + min_value;                
+		if (RegimeLanguage) {
+			for (i = 0; i < action_value; i++) {
+				action = Math.floor(Math.random() * (max - min)) + min;               
+				switch (action) {
 
-// 				case (0):
-// 					$('#en_cycle' + i).html('LEFT').removeClass('close').transition({ opacity: 1 }, 500, 'cubic-bezier(0.6, 0.04, 0.98, 0.335)');
-// 					$('#en_' + i).removeClass('close');
-// 					break;
+					case (0):
+						$('#en_cycle' + i).html('LEFT').removeClass('close').transition({ opacity: 1 }, 500, 'cubic-bezier(0.6, 0.04, 0.98, 0.335)');
+						$('#en_' + i).removeClass('close');
+						break;
 
-// 				case (1):
-// 					$('#en_cycle' + i).html('RIGHT').removeClass('close').transition({ opacity: 1 }, 500, 'cubic-bezier(0.6, 0.04, 0.98, 0.335)');
-// 					$('#en_' + i).removeClass('close');
-// 					break;
+					case (1):
+						$('#en_cycle' + i).html('RIGHT').removeClass('close').transition({ opacity: 1 }, 500, 'cubic-bezier(0.6, 0.04, 0.98, 0.335)');
+						$('#en_' + i).removeClass('close');
+						break;
 
-// 				case (2):
-// 					$('#en_cycle' + i).html('FORWARD').removeClass('close').transition({ opacity: 1 }, 500, 'cubic-bezier(0.6, 0.04, 0.98, 0.335)');
-// 					$('#en_' + i).removeClass('close');
-// 					break;
+					case (2):
+						$('#en_cycle' + i).html('FORWARD').removeClass('close').transition({ opacity: 1 }, 500, 'cubic-bezier(0.6, 0.04, 0.98, 0.335)');
+						$('#en_' + i).removeClass('close');
+						break;
 
-// 			}
-// 		}
-// 	}
+				}
+			}
+		}
 
-// 	else {
-// 		for (i = 0; i < action_value; i++) {
-// 			action = Math.floor(Math.random() * (max - min)) + min;               
-// 			switch (action) {
+		else {
+			for (i = 0; i < action_value; i++) {
+				action = Math.floor(Math.random() * (max - min)) + min;               
+				switch (action) {
 
-// 				case (0):
-// 					$('#ru_cycle' + i).html('ВЛЕВО').removeClass('close').transition({ opacity: 1 }, 500, 'cubic-bezier(0.6, 0.04, 0.98, 0.335)');
-// 					$('#ru_' + i).removeClass('close');
-// 					break;
+					case (0):
+						$('#ru_cycle' + i).html('ВЛЕВО').removeClass('close').transition({ opacity: 1 }, 500, 'cubic-bezier(0.6, 0.04, 0.98, 0.335)');
+						$('#ru_' + i).removeClass('close');
+						break;
 
-// 				case (1):
-// 					$('#ru_cycle' + i).html('ВПРАВО').removeClass('close').transition({ opacity: 1 }, 500, 'cubic-bezier(0.6, 0.04, 0.98, 0.335)');
-// 					$('#ru_' + i).removeClass('close');
-// 					break;
+					case (1):
+						$('#ru_cycle' + i).html('ВПРАВО').removeClass('close').transition({ opacity: 1 }, 500, 'cubic-bezier(0.6, 0.04, 0.98, 0.335)');
+						$('#ru_' + i).removeClass('close');
+						break;
 
-// 				case (2):
-// 					$('#ru_cycle' + i).html('ПРЯМО').removeClass('close').transition({ opacity: 1 }, 500, 'cubic-bezier(0.6, 0.04, 0.98, 0.335)');
-// 					$('#ru_' + i).removeClass('close');
-// 					break;
+					case (2):
+						$('#ru_cycle' + i).html('ПРЯМО').removeClass('close').transition({ opacity: 1 }, 500, 'cubic-bezier(0.6, 0.04, 0.98, 0.335)');
+						$('#ru_' + i).removeClass('close');
+						break;
 
-// 			}
-// 		}
-// 	}
-// }
+				}
+			}
+		}
+	}
 
 // Управление экраном "Углублённый дрейф"
 // function DeepDeriveScreenFunction() {
 	                   
-// 	RegimeManualScreen = 0;                
-// 	RegimeGeneratorScreen = 0;                
-// 	RegimeCycleDeriveScreen = 0;                 
-// 	RegimeSimpleDeriveScreen = 0;                 
-// 	click = 0;
-// 	MobileMenu();
-// 	clearInterval(intervalID);                    
+// Очищаем таймер
+clearInterval(intervalID); 
+                   
 
-// 	$('p#SimpleDeriveScreenName').removeClass('open_title').transition({ opacity: 0 });                                   
+// 	$('.SimpleDeriveScreenName').removeClass('open_title').transition({ opacity: 0 });                                   
 // 	$('div#SimpleDeriveScreen').addClass('close').removeClass('table').transition({ opacity: 0 });                                  
 // 	$('button#SimpleDeriveButtonFooter').addClass('close').transition({ opacity: 0 });              
-// 	$('p#CycleDeriveScreenName').removeClass('open_title').transition({ opacity: 0 });                                       
+// 	$('.CycleDeriveScreenName').removeClass('open_title').transition({ opacity: 0 });                                       
 // 	$('div#CycleDeriveScreen').addClass('close').removeClass('table').transition({ opacity: 0 });                                      
-// 	$('p#GeneratorScreenName').removeClass('open_title').transition({ opacity: 0 });                              
+// 	$('.GeneratorScreenName').removeClass('open_title').transition({ opacity: 0 });                              
 // 	$('div#GeneratorScreen').addClass('close').removeClass('table');                             
-// 	$('p#ManualScreenName').removeClass('open_title').transition({ opacity: 0 });                         
+// 	$('.ManualScreenName').removeClass('open_title').transition({ opacity: 0 });                         
 // 	$('div#ManualScreen').addClass('close');                        
             
 // 	$('div#forward').transition({ opacity: 0 }, 1000, 'cubic-bezier(0.175, 0.885, 0.32, 1.275)');
@@ -421,7 +363,7 @@ $( document ).ready(function(){
 // 	}
 
 // 	function ShowDeepDeriveScreen() {
-// 		$('p#DeepDeriveScreenName').addClass('open_title').transition({ opacity: 1 }, 500, 'cubic-bezier(0.6, 0.04, 0.98, 0.335)');                             
+// 		$('.DeepDeriveScreenName').addClass('open_title').transition({ opacity: 1 }, 500, 'cubic-bezier(0.6, 0.04, 0.98, 0.335)');                             
 // 		$('div#DeepDeriveScreen').removeClass('close').addClass('table').transition({ opacity: 1 }, 500, 'cubic-bezier(0.6, 0.04, 0.98, 0.335)');                             
 // 		$('button#DeepDeriveButtonFooter').removeClass('close').transition({ opacity: 1 }, 500, 'cubic-bezier(0.6, 0.04, 0.98, 0.335)');                
 // 		RegimeDeepDeriveScreen = 1;
@@ -821,72 +763,33 @@ $( document ).ready(function(){
 // }
 
 // Управление экраном "Генератор времени"
-// max_generator_hour = 24;
-// min_generator_hour = 0;
-// max_generator_minute = 60;
-// min_generator_minute = 0;
 
-// function GeneratorScreenFunction() {
-// 	RegimeManualScreen = 0;                
-// 	RegimeCycleDeriveScreen = 0;                
-// 	RegimeSimpleDeriveScreen = 0;                
-// 	RegimeDeepDeriveScreen = 0;                
-// 	RegimeGeneratorScreen = 1;
-// 	click = 0;
-// 	MobileMenu();
-// 	clearInterval(intervalID);                    
+max_generator_hour = 24;
+min_generator_hour = 0;
+max_generator_minute = 60;
+min_generator_minute = 0;
 
-// 	$('p#SimpleDeriveScreenName').removeClass('open_title').transition({ opacity: 0 });                                   
-// 	$('div#SimpleDeriveScreen').removeClass('table').addClass('close').transition({ opacity: 0 });                                  
-// 	$('p#CycleDeriveScreenName').removeClass('open_title').transition({ opacity: 0 });                                       
-// 	$('div#CycleDeriveScreen').removeClass('table').addClass('close').transition({ opacity: 0 });                                      
-// 	$('p#DeepDeriveScreenName').removeClass('open_title').transition({ opacity: 0 });                                  
-// 	$('div#DeepDeriveScreen').removeClass('table').addClass('close').transition({ opacity: 0 });                              
-// 	$('p#ManualScreenName').removeClass('open_title').transition({ opacity: 0 });                         
-// 	$('div#ManualScreen').addClass('close');                        
-	   
-// 	$('p#GeneratorScreenName').addClass('open_title').transition({ opacity: 1 }, 500, 'cubic-bezier(0.6, 0.04, 0.98, 0.335)');                              
-// 	$('div#GeneratorScreen').removeClass('close').addClass('table').transition({ opacity: 1 }, 2500, 'cubic-bezier(0.6, -0.28, 0.735, 0.045)');                             
+function GeneratorScreenFunction() {
 
-// 	var hour;
-// 	var minute;
-// 	var points = ' : ';
-// 	var zero = '0';
+	// Очищаем на всякий случай таймер из Углублённого дрейфа 
+	clearInterval(intervalID);                    
 
-// 	hour = Math.floor(Math.random() * (max_generator_hour - min_generator_hour)) + min_generator_hour;
-// 	minute = Math.floor(Math.random() * (max_generator_minute - min_generator_minute)) + min_generator_minute;
+	// Из этого будем складывать строку
+	var hour;
+	var minute;
+	var points = ' : ';
+	var zero = '0';
 
-// 	if (minute < 10) {
-// 		$('#display_en').html(hour + points + zero + minute);
-// 		$('#display_ru').html(hour + points + zero + minute);
-// 	}
-// 	else {
-// 		$('#display_en').html(hour + points + minute);
-// 		$('#display_ru').html(hour + points + minute);
-// 	}
+	// Генерим часы и минуты
+	hour = Math.floor(Math.random() * (max_generator_hour - min_generator_hour)) + min_generator_hour;
+	minute = Math.floor(Math.random() * (max_generator_minute - min_generator_minute)) + min_generator_minute;
 
-// }
+	// Если меньше 10 минут, то вставляем спереди ноль
+	if (minute < 10) {
+		$('.generator-screen__command_time').html(hour + points + zero + minute);
+	}
+	else {
+		$('.generator-screen__command_time').html(hour + points + minute);
+	}
 
-// Управление экраном "Справка"
-// function ManualScreenFunction() {
-// 	RegimeGeneratorScreen = 0;               
-// 	RegimeCycleDeriveScreen = 0;                 
-// 	RegimeSimpleDeriveScreen = 0;                 
-// 	RegimeDeepDeriveScreen = 0;                
-// 	RegimeManualScreen = 1;
-// 	click = 0;
-// 	MobileMenu();
-
-// 	$('p#SimpleDeriveScreenName').removeClass('open_title').transition({ opacity: 0 });                                   
-// 	$('div#SimpleDeriveScreen').removeClass('table').addClass('close').transition({ opacity: 0 });                                  
-// 	$('p#DeepDeriveScreenName').removeClass('open_title').transition({ opacity: 0 });                                 
-// 	$('div#DeepDeriveScreen').removeClass('table').addClass('close').transition({ opacity: 0 });                                 
-// 	$('p#CycleDeriveScreenName').removeClass('open_title').transition({ opacity: 0 });                                       
-// 	$('div#CycleDeriveScreen').removeClass('table').addClass('close').transition({ opacity: 0 });                                      
-// 	$('p#GeneratorScreenName').removeClass('open_title').transition({ opacity: 0 });                              
-// 	$('div#GeneratorScreen').removeClass('table').addClass('close').transition({ opacity: 0 });                             
-	     
-// 	$('p#ManualScreenName').addClass('open_title').transition({ opacity: 1 }, 500, 'cubic-bezier(0.6, 0.04, 0.98, 0.335)');                   
-// 	$('div#ManualScreen').removeClass('close').transition({ opacity: 1 }, 500, 'cubic-bezier(0.6, 0.04, 0.98, 0.335)');                  
-
-// }		
+}

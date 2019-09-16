@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <meta name="msapplication-TileColor" content="#ffffff">
   <meta name="msapplication-TileImage" content="images/favicons/mstile-144x144.png">
-  <meta name="theme-color" content="#ffffff">
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Dérive">
   <meta property="og:url" content="http://derive.stranno.su/">
@@ -29,13 +29,21 @@
   <meta property="og:image" content="images/favicons/og.png">
   <meta property="og:image:width" content="968">
   <meta property="og:image:height" content="504">
+  <!-- Окрашивание UI браузеров -->
+  <!-- Chrome, Firefox OS and Opera -->
+  <meta name="theme-color" content="#f3f3f3">
+  <!-- Windows Phone -->
+  <meta name="msapplication-navbutton-color" content="#f3f3f3">
+  <!-- iOS Safari -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="#f3f3f3">
 
   <script src="js/jquery-3.4.1.min.js"></script>
   <script src="js/screen-manager.js"></script>
   
 </head>
 
-<body>
+<body class="overflow-hidden">
 
   <!-- Заглушка для десктопов -->
 
@@ -51,7 +59,7 @@
   <!-- Экран выбора языка -->
 
   <div class="lang">
-    <p class="lang__en">English</p>
+    <p class="lang__en">English</p><br>
     <p class="lang__ru">Русский</p>
   </div>
 
@@ -59,18 +67,15 @@
 
   <!-- Меню -->
 
-  <header class="header">
-    <nav>
-      
-      <!-- Иконка гамбургер -->
+    <!-- Иконка гамбургер -->
 
-      <button class="hamburger disactive hidden">
-        <span></span>
+      <button class="hamburger hamburger_active disactive hidden">
+          <span></span>
       </button>
 
-      <!-- /Иконка гамбургер -->
+    <!-- /Иконка гамбургер -->
 
-      <!-- Пункты меню -->
+    <!-- Пункты меню -->
 
       <div class="menu en">
         <ul class="menu__list">
@@ -132,19 +137,14 @@
         </ul>
       </div>
 
-      <!-- /Пункты меню -->
-      
-      <!-- Заглушка основного контента -->
-
-    </nav>
-  </header>
+    <!-- /Пункты меню -->
 
   <!-- /Меню -->
 
   <!-- Экраны -->
-
+  
   <div class="container en">
-
+    
       <!-- Экран приветствия -->
       <div class="annotation-screen">
         <div class="annotation-screen__text">
@@ -178,9 +178,9 @@
       <div class="simple-derive-screen">
         <div class="simple-derive-screen__title-of-screen">SIMPLE DÉRIVE</div>
         <div class="simple-derive-screen__command">
-          <p id="forward">FORWARD</p>
-          <p id="left">LEFT</p>
-          <p id="right">RIGHT</p>
+          <p class="forward">FORWARD</p>
+          <p class="left">LEFT</p>
+          <p class="right">RIGHT</p>
         </div>
         <button class="simple-derive-screen__action-button" type="button">
           <p>NEXT</p>
@@ -229,15 +229,16 @@
       <!-- Экран "Генератор времени" -->
       <div class="generator-screen">
         <div class="generator-screen__title-of-screen">TIME GENERATOR</div>
-        <div class="generator-screen_command">
+        <div class="generator-screen__command">
           <p>START DÉRIVE IN</p>
-          <p id="display_en"></p>
+          <p class="generator-screen__command_time"></p>
         </div>
       </div>
       <!-- Экран "Генератор времени" -->
-  
+      
       <!-- Экран "Справка" -->
       <div class="manual-screen">
+          
           <div class="manual-screen__title-of-screen">SHEETTINGS</div>
         <div class="manual-screen__text">
           <br>
@@ -355,7 +356,7 @@
       <div class="generator-screen__title-of-screen">ГЕНЕРАТОР ВРЕМЕНИ</div>
       <div class="generator-screen__command">
         <p>НАЧНИ ДРЕЙФ В</p>
-        <p id="display_ru"></p>
+        <p class="generator-screen__command_time"></p>
       </div>
     </div>
 

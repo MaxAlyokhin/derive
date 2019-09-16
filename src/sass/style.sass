@@ -3,16 +3,19 @@
 
 *, *:before, *:after
 	margin: 0
+	padding: 0
 	box-sizing: border-box
 	outline: none
 	transform: translate3d(0, 0, 0)
 	transition: $transition
+	color: $black
 
 body
 	font-family: $light
 	background-color: $grey
 	-webkit-font-smoothing: antialiased
 	overflow-x: hidden
+	height: 100vh
 
 .cover
 	display: flex
@@ -23,8 +26,8 @@ body
 	p
 		text-align: center
 
-// .container
-// 	display: none
+.lang, .hamburger
+	display: none
 
 @media (max-width: 1023px)
 	a
@@ -37,6 +40,9 @@ body
 
 	.cover
 		display: none
+
+	.hamburger
+		display: block
 
 	.lang
 		display: flex
@@ -54,7 +60,7 @@ body
 		display: none
 
 	.visible
-		opacity: 1
+		opacity: 1 !important
 		transform: scale(1)
 
 	.hidden

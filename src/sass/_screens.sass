@@ -4,9 +4,6 @@
 @import "var"
 
 @mixin title-of-screen
-  // position: absolute
-  // width: 100%
-  // margin-top: 25px
   text-align: center
 
 @mixin text
@@ -16,13 +13,23 @@
   justify-content: center
   flex-direction: column
   align-items: center
+  height: 100%
+  p
+    text-align: center
+    opacity: 0
+    position: absolute
 
 @mixin action-button
-  z-index: 2
-  bottom: 25px
+
+.container
+  .active-for-derive-screen
+    display: grid
+    align-content: space-between
+    justify-items: center
 
 .annotation-screen
   @include default-of-screen
+  height: 100%
   &__text
     @include text
   &__action-button
@@ -35,7 +42,9 @@
     @include title-of-screen
   &__command
     @include command
+      
   &__action-button
+    @include button
     @include action-button
 
 .cyclic-derive-screen
@@ -52,6 +61,7 @@
   &__command
     @include command
   &__action-button
+    @include button
     @include action-button
 
 .generator-screen
@@ -63,6 +73,7 @@
 
 .manual-screen
   @include default-of-screen
+  height: 100%
   &__title-of-screen
     @include title-of-screen
   &__text

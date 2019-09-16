@@ -1,20 +1,15 @@
 @import "hamburger"
 @import "var"
 
-.header
-  // position: fixed
-  // padding: 0
-
-header, nav
-  // height: 100vh
-  // width: 100vw
-
 .menu
   @include default-of-screen
   height: 100vh
   width: 100vw
   padding: 0
   position: fixed
+  transition: $transition
+  // background-color: $grey
+  z-index: 9
   &__list
     display: flex
     flex-direction: column
@@ -39,3 +34,6 @@ header, nav
   &__generator-button,
   &__manual-button,
     @include button
+
+.overflow-hidden
+  overflow: hidden

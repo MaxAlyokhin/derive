@@ -1,14 +1,15 @@
 @import "var"
 
 .hamburger
-	// display: fixed
 	width: 20px // Ширина кликабельного поля
-	height: 10px // Высота кликабельного поля
+	height: 17px // Высота кликабельного поля
 	position: absolute
 	background-color: transparent
 	border: 0
-	top: 29px // Отступ сверху
+	top: 23px // Отступ сверху
 	left: 25px // Отступ слева
+	z-index: 10
+	padding: 0
 
 .hamburger span::before,
 .hamburger span::after
@@ -26,13 +27,13 @@
 .hamburger span::after
 	content: ''
 	display: block
-	transition: 0.2s // Скорость анимации
+	transition: $transition // Скорость анимации
 
 .hamburger span::before
-	transform: translateY(-3px)
+	transform: translateY(-2px)
 
 .hamburger span::after
-	transform: translateY(3px)
+	transform: translateY(2px)
 
 // Сама анимация
 .hamburger_active span:before
