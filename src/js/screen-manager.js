@@ -20,8 +20,8 @@ $( document ).ready(function(){
 	$( '.lang__en' ).on('click', function(){ 
 		// Скрываем экран выбора языка
 		$('.lang').addClass('hidden'); setTimeout(function () { $('.lang').addClass('disactive'); }, 500);
-		// Показываем блоки на выбранном языке
-		$('.en').addClass('active'); 
+		// Показываем блоки на выбранном языке, навсегда выключая противоположный
+		$('.ru').addClass('checked'); 
 		// Показываем экран приветствия
 		$('.annotation-screen').addClass('active'); setTimeout(function () { $('.annotation-screen').addClass('visible'); }, 500);
 	})
@@ -29,8 +29,8 @@ $( document ).ready(function(){
 	$( '.lang__ru' ).on('click', function(){ 
 		// Скрываем экран выбора языка
 		$('.lang').addClass('hidden'); setTimeout(function () { $('.lang').addClass('disactive'); }, 500);
-		// Показываем блоки на выбранном языке
-		$('.ru').addClass('active'); 
+		// Показываем блоки на выбранном языке, навсегда выключая противоположный
+		$('.en').addClass('checked'); 
 		// Показываем экран приветствия
 		$('.annotation-screen').addClass('active'); setTimeout(function () { $('.annotation-screen').addClass('visible'); }, 500);
 	})
@@ -41,50 +41,72 @@ $( document ).ready(function(){
 		// Скрываем экран приветствия
 		$('.annotation-screen').removeClass('visible'); setTimeout(function () { $('.annotation-screen').removeClass('active'); }, 500);
 		// Показываем меню
-		$('.header').addClass('active'); setTimeout(function () { $('.header').addClass('visible'); }, 500);
+		$('.menu').addClass('active'); setTimeout(function () { $('.menu').addClass('visible'); }, 500);
 	})
 
 // Экран "Простой дрейф"
 
 	$('.item__simple-derive-button').on('click', function(){
 		// Скрываем меню
-
+		$('.menu').removeClass('visible'); setTimeout(function () { $('.menu').removeClass('active'); }, 500);
 		//Показываем экран "Простой дрейф"
+		$('.simple-derive-screen').addClass('active'); setTimeout(function () { $('.simple-derive-screen').addClass('visible'); }, 500);
+		// Показываем гамбургер
+		$('.hamburger').removeClass('disactive'); setTimeout(function () { $('.hamburger').removeClass('hidden'); }, 500);
 	})
 	
 // Экран "Циклический дрейф"
 
-	$('.item__simple-derive-button').on('click', function(){
+	$('.item__cyclic-derive-button').on('click', function(){
 		// Скрываем меню
-
-		//Показываем экран "Простой дрейф"
+		$('.menu').removeClass('visible'); setTimeout(function () { $('.menu').removeClass('active'); }, 500);
+		//Показываем экран "Циклический дрейф"
+		$('.cyclic-derive-screen').addClass('active'); setTimeout(function () { $('.cyclic-derive-screen').addClass('visible'); }, 500);
+		// Показываем гамбургер
+		$('.hamburger').removeClass('disactive'); setTimeout(function () { $('.hamburger').removeClass('hidden'); }, 500);
 	})
 
 // Экран "Углублённый дрейф"
 
-	$('.item__simple-derive-button').on('click', function(){
+	$('.item__deep-derive-button').on('click', function(){
 		// Скрываем меню
-
-		//Показываем экран "Простой дрейф"
+		$('.menu').removeClass('visible'); setTimeout(function () { $('.menu').removeClass('active'); }, 500);
+		//Показываем экран "Углублённый дрейф"
+		$('.deep-derive-screen').addClass('active'); setTimeout(function () { $('.deep-derive-screen').addClass('visible'); }, 500);
+		// Показываем гамбургер
+		$('.hamburger').removeClass('disactive'); setTimeout(function () { $('.hamburger').removeClass('hidden'); }, 500);
 	})
 
 // Экран "Генератор времени"
 
-	$('.item__simple-derive-button').on('click', function(){
+	$('.item__generator-button').on('click', function(){
 		// Скрываем меню
-
-		//Показываем экран "Простой дрейф"
+		$('.menu').removeClass('visible'); setTimeout(function () { $('.menu').removeClass('active'); }, 500);
+		//Показываем экран "Генератор времени"
+		$('.generator-screen').addClass('active'); setTimeout(function () { $('.generator-screen').addClass('visible'); }, 500);
+		// Показываем гамбургер
+		$('.hamburger').removeClass('disactive'); setTimeout(function () { $('.hamburger').removeClass('hidden'); }, 500);
 	})
 
 // Экран "Справка"
 
-	$('.item__simple-derive-button').on('click', function(){
+	$('.item__manual-button').on('click', function(){
 		// Скрываем меню
-
-		//Показываем экран "Простой дрейф"
+		$('.menu').removeClass('visible'); setTimeout(function () { $('.menu').removeClass('active'); }, 500);
+		//Показываем экран "Справка"
+		$('.manual-screen').addClass('active'); setTimeout(function () { $('.manual-screen').addClass('visible'); }, 500);
+		// Показываем гамбургер
+		$('.hamburger').removeClass('disactive'); setTimeout(function () { $('.hamburger').removeClass('hidden'); }, 500);
 	})
 
 // Управление иконкой-гамбургером
+	$('.hamburger').on('click', function(){
+		// Запускаем анимацию
+		$(this).toggleClass('hamburger_active');
+		// Показываем меню
+		$('.menu').toggleClass('active'); setTimeout(function () { $('.menu').toggleClass('visible'); }, 500);
+		// Скрываем экраны
+	})
 
 // Управление кнопками действия
 

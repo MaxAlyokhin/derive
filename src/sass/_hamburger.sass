@@ -1,8 +1,42 @@
+@import "var"
+
 .hamburger
-		position: fixed
-		outline: 0
-		border: 0 // Убираем жёлтую линию при клике на изображение
-		z-index: 10 // Ставим кнопку на самом верху
-		opacity: 0
-		height: 71px
-		z-index: 10
+	// display: fixed
+	width: 20px // Ширина кликабельного поля
+	height: 10px // Высота кликабельного поля
+	position: absolute
+	background-color: transparent
+	border: 0
+	top: 29px // Отступ сверху
+	left: 25px // Отступ слева
+
+.hamburger span::before,
+.hamburger span::after
+	// Центрируем
+	position: absolute
+	top: 50%
+	margin-top: -1px
+	left: 50%
+	margin-left: -10px
+	width: 20px
+	height: 1px
+	background-color: $black // Цвет
+
+.hamburger span::before,
+.hamburger span::after
+	content: ''
+	display: block
+	transition: 0.2s // Скорость анимации
+
+.hamburger span::before
+	transform: translateY(-3px)
+
+.hamburger span::after
+	transform: translateY(3px)
+
+// Сама анимация
+.hamburger_active span:before
+	transform: rotate(-45deg)
+
+.hamburger_active span:after
+	transform: rotate(45deg)
