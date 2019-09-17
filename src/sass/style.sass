@@ -1,0 +1,80 @@
+@import "var"
+@import "screens"
+
+*, *:before, *:after
+	margin: 0
+	padding: 0
+	box-sizing: border-box
+	outline: none
+	transform: translate3d(0, 0, 0)
+	transition: $transition
+	color: $black
+
+body
+	font-family: $light
+	background-color: $grey
+	-webkit-font-smoothing: antialiased
+	overflow-x: hidden
+	height: 100%
+
+.container, html
+	height: 100%
+
+.cover
+	display: flex
+	justify-content: center
+	flex-direction: column
+	align-items: center
+	height: 100%
+	p
+		text-align: center
+
+.lang, .hamburger
+	display: none
+
+@media (max-width: 1023px)
+	a
+		text-decoration: none
+		color: $black
+		font-weight: normal
+
+	p
+		text-align: justify
+
+	.cover
+		display: none
+
+	.hamburger
+		display: block
+
+	.lang
+		display: flex
+		justify-content: center
+		flex-direction: column
+		align-items: center
+		height: 100%
+		p
+			text-align: center
+
+	.active
+		display: block
+
+	.disactive
+		display: none
+
+	.visible
+		opacity: 1 !important
+		transform: scale(1)
+
+	.hidden
+		opacity: 0
+		transform: scale(0.95)
+
+	.checked
+		display: none !important
+
+	.center
+		text-align: center
+
+	button:active
+		transform: scale(0.95)

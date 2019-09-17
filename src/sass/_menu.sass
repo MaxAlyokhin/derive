@@ -1,0 +1,39 @@
+@import "hamburger"
+@import "var"
+
+.menu
+  @include default-of-screen
+  height: 100%
+  width: 100vw
+  padding: 0
+  position: fixed
+  transition: $transition
+  // background-color: $grey
+  z-index: 9
+  &__list
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    padding: 25px
+    height: inherit
+    width: inherit
+    &:last-child
+      padding-bottom: 0
+
+.list
+  &__item
+    list-style-type: none
+    width: 100%
+    padding-bottom: 25px
+
+.item
+  &__simple-derive-button,
+  &__cyclic-derive-button,
+  &__deep-derive-button,
+  &__generator-button,
+  &__manual-button,
+    @include button
+
+.overflow-hidden
+  overflow: hidden

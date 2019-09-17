@@ -1,0 +1,87 @@
+// Каждый экран состоит из заголовка, контента (текст или команда) и кнопки действия
+
+@import "menu"
+@import "var"
+
+@mixin title-of-screen
+  text-align: center
+
+@mixin text
+
+@mixin command
+  display: flex
+  justify-content: center
+  flex-direction: column
+  align-items: center
+  height: 100%
+  p
+    text-align: center
+    opacity: 0
+    position: absolute
+    width: calc(100vw - 50px)
+
+@mixin action-button
+   
+
+.container
+  .active-grid
+    display: grid
+    align-content: space-between
+    justify-items: center
+
+.down
+  transition: all 2.0s cubic-bezier(0.68, -0.55, 0.265, 1.55)
+  transform: scale(0.95) translateY(100px) !important
+
+.annotation-screen
+  @include default-of-screen
+  height: 100%
+  &__text
+    @include text
+  &__action-button
+    @include button
+    margin-bottom: 25px
+
+.simple-derive-screen
+  @include default-of-screen
+  &__title-of-screen
+    @include title-of-screen
+  &__command
+    @include command 
+  &__action-button
+    @include button
+    @include action-button
+
+.cyclic-derive-screen
+  @include default-of-screen
+  &__title-of-screen
+    @include title-of-screen
+  &__command
+    @include command
+    text-align: center
+
+.deep-derive-screen
+  @include default-of-screen
+  &__title-of-screen
+    @include title-of-screen
+  &__command
+    @include command
+  &__action-button
+    @include button
+    @include action-button
+    
+.generator-screen
+  @include default-of-screen
+  &__title-of-screen
+    @include title-of-screen
+  &__command
+    @include command
+
+.manual-screen
+  @include default-of-screen
+  height: 100%
+  &__title-of-screen
+    @include title-of-screen
+  &__text
+    @include text
+    margin-bottom: 25px
