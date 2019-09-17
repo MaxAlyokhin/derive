@@ -2,6 +2,8 @@
 var click = 1;
 // Для часов
 var intervalID;
+// Для циклического дрейфа
+var RegimeLanguage;
 
 // Управление UI
 
@@ -13,6 +15,7 @@ $( document ).ready(function(){
 // Экран выбора языка / Экран приветствия -----------------------------------------------
 
 	$( '.lang__en' ).on('click', function(){ 
+		RegimeLanguage = 1;
 		// Скрываем экран выбора языка
 		$('.lang').addClass('hidden'); setTimeout(function () { $('.lang').addClass('disactive'); }, 500);
 		// Показываем блоки на выбранном языке, навсегда выключая противоположный
@@ -24,6 +27,7 @@ $( document ).ready(function(){
 	})
 
 	$( '.lang__ru' ).on('click', function(){ 
+		RegimeLanguage = 0;
 		// Скрываем экран выбора языка
 		$('.lang').addClass('hidden'); setTimeout(function () { $('.lang').addClass('disactive'); }, 500);
 		// Показываем блоки на выбранном языке, навсегда выключая противоположный
@@ -80,7 +84,7 @@ $('.hamburger').on('click', function(){
 		$('.hamburger').removeClass('disactive').toggleClass('hamburger_active');
 		//Показываем экран "Генератор времени"
 		$('.container').removeClass('hidden');
-		$('.simple-derive-screen').addClass('active-for-derive-screen');
+		$('.simple-derive-screen').addClass('active-grid');
 
 		// Задержки
 		setTimeout(function () { 
@@ -108,7 +112,7 @@ $('.hamburger').on('click', function(){
 		$('.hamburger').removeClass('disactive').toggleClass('hamburger_active');
 		//Показываем экран "Генератор времени"
 		$('.container').removeClass('hidden');
-		$('.cyclic-derive-screen').addClass('active-for-derive-screen');
+		$('.cyclic-derive-screen').addClass('active');
 
 		// Задержки
 		setTimeout(function () { 
@@ -136,7 +140,7 @@ $('.hamburger').on('click', function(){
 		$('.hamburger').removeClass('disactive').toggleClass('hamburger_active');
 		//Показываем экран "Генератор времени"
 		$('.container').removeClass('hidden');
-		$('.deep-derive-screen').addClass('active-for-derive-screen');
+		$('.deep-derive-screen').addClass('active-grid');
 
 		// Задержки
 		setTimeout(function () { 
@@ -149,9 +153,7 @@ $('.hamburger').on('click', function(){
 	})
 
 	// По нажатию на action-кнопку запустить функцию
-	$('.deep-derive-screen__action-button').on('click', function(){
-		DeepDeriveScreenFunction();
-	})
+	$('.deep-derive-screen__action-button').on('click', function(){Methods()});	
 
 // Экран "Генератор времени" ------------------------------------------------------------
 
@@ -224,9 +226,8 @@ function Reset() {
 		r = Math.floor(Math.random() * (max - min)) + min;
 
 		// Всё убираем
-		$('.forward').removeClass('visible');
-		$('.left').removeClass('visible');
-		$('.right').removeClass('visible');
+		$('.forward, .left, .right').removeClass('visible');
+
 		// Описание функции выбора варианта
 		function NextCommand() {
 			switch (r) {
@@ -252,34 +253,15 @@ function Reset() {
 	function CyclicDeriveScreenFunction() {
 		
 		// Очищаем на всякий случай таймер из Углублённого дрейфа
-		clearInterval(intervalID);                     
-
-		$('.SimpleDeriveScreenName').removeClass('open_title').transition({ opacity: 0 });                                   
-		$('div#SimpleDeriveScreen').addClass('close').removeClass('table').transition({ opacity: 0 });                                  
-		$('.DeepDeriveScreenName').removeClass('open_title').transition({ opacity: 0 });                                   
-		$('div#DeepDeriveScreen').addClass('close').removeClass('table').transition({ opacity: 0 });                                 
-		$('.GeneratorScreenName').removeClass('open_title').transition({ opacity: 0 });                              
-		$('div#GeneratorScreen').addClass('close').removeClass('table').transition({ opacity: 0 });                             
-		$('.ManualScreenName').removeClass('open_title').transition({ opacity: 0 });                         
-		$('div#ManualScreen').addClass('close');                        
-
-		$('.CycleDeriveScreenName').addClass('open_title').transition({ opacity: 1 }, 500, 'cubic-bezier(0.6, 0.04, 0.98, 0.335)');                                       
-		$('div#CycleDeriveScreen').removeClass('close').addClass('table').transition({ opacity: 1 }, 500, 'cubic-bezier(0.6, 0.04, 0.98, 0.335)');                                      
-																															
-		$('div#cycle1').addClass('close').transition({ opacity: 0 });
-		$('div#cycle2').addClass('close').transition({ opacity: 0 });
-		$('div#cycle3').addClass('close').transition({ opacity: 0 });
-		$('div#cycle4').addClass('close').transition({ opacity: 0 });
-		$('div#cycle5').addClass('close').transition({ opacity: 0 });
-		$('div#cycle6').addClass('close').transition({ opacity: 0 });
-
-		var action_value;                    
-		var action;                    
+		clearInterval(intervalID);                                                         
+																													
+		var action_value; // Количество команд в цикле                                 
 		var max_value = 8;
 		var min_value = 2;
+		var action;  // Переменная для хранения номера case 
 		var i;
 
-		// Генерим случайное число
+		// Генерим случайное число для количества команд
 		action_value = Math.floor(Math.random() * (max_value - min_value)) + min_value;                
 		if (RegimeLanguage) {
 			for (i = 0; i < action_value; i++) {
@@ -287,18 +269,15 @@ function Reset() {
 				switch (action) {
 
 					case (0):
-						$('#en_cycle' + i).html('LEFT').removeClass('close').transition({ opacity: 1 }, 500, 'cubic-bezier(0.6, 0.04, 0.98, 0.335)');
-						$('#en_' + i).removeClass('close');
+						$('.en-cycle-command' + i).html('LEFT').removeClass('disactive hidden');
 						break;
 
 					case (1):
-						$('#en_cycle' + i).html('RIGHT').removeClass('close').transition({ opacity: 1 }, 500, 'cubic-bezier(0.6, 0.04, 0.98, 0.335)');
-						$('#en_' + i).removeClass('close');
+						$('.en-cycle-command' + i).html('RIGHT').removeClass('disactive hidden');
 						break;
 
 					case (2):
-						$('#en_cycle' + i).html('FORWARD').removeClass('close').transition({ opacity: 1 }, 500, 'cubic-bezier(0.6, 0.04, 0.98, 0.335)');
-						$('#en_' + i).removeClass('close');
+						$('.en-cycle-command' + i).html('FORWARD').removeClass('disactive hidden');
 						break;
 
 				}
@@ -311,18 +290,15 @@ function Reset() {
 				switch (action) {
 
 					case (0):
-						$('#ru_cycle' + i).html('ВЛЕВО').removeClass('close').transition({ opacity: 1 }, 500, 'cubic-bezier(0.6, 0.04, 0.98, 0.335)');
-						$('#ru_' + i).removeClass('close');
+						$('.ru-cycle-command' + i).html('ВЛЕВО').removeClass('disactive hidden');
 						break;
 
 					case (1):
-						$('#ru_cycle' + i).html('ВПРАВО').removeClass('close').transition({ opacity: 1 }, 500, 'cubic-bezier(0.6, 0.04, 0.98, 0.335)');
-						$('#ru_' + i).removeClass('close');
+						$('.ru-cycle-command' + i).html('ВПРАВО').removeClass('disactive hidden');
 						break;
 
 					case (2):
-						$('#ru_cycle' + i).html('ПРЯМО').removeClass('close').transition({ opacity: 1 }, 500, 'cubic-bezier(0.6, 0.04, 0.98, 0.335)');
-						$('#ru_' + i).removeClass('close');
+						$('.ru-cycle-command' + i).html('ПРЯМО').removeClass('disactive hidden');
 						break;
 
 				}
@@ -331,436 +307,407 @@ function Reset() {
 	}
 
 // Управление экраном "Углублённый дрейф"
-// function DeepDeriveScreenFunction() {
-	                   
-// Очищаем таймер
-clearInterval(intervalID); 
-                   
 
-// 	$('.SimpleDeriveScreenName').removeClass('open_title').transition({ opacity: 0 });                                   
-// 	$('div#SimpleDeriveScreen').addClass('close').removeClass('table').transition({ opacity: 0 });                                  
-// 	$('button#SimpleDeriveButtonFooter').addClass('close').transition({ opacity: 0 });              
-// 	$('.CycleDeriveScreenName').removeClass('open_title').transition({ opacity: 0 });                                       
-// 	$('div#CycleDeriveScreen').addClass('close').removeClass('table').transition({ opacity: 0 });                                      
-// 	$('.GeneratorScreenName').removeClass('open_title').transition({ opacity: 0 });                              
-// 	$('div#GeneratorScreen').addClass('close').removeClass('table');                             
-// 	$('.ManualScreenName').removeClass('open_title').transition({ opacity: 0 });                         
-// 	$('div#ManualScreen').addClass('close');                        
-            
-// 	$('div#forward').transition({ opacity: 0 }, 1000, 'cubic-bezier(0.175, 0.885, 0.32, 1.275)');
-// 	$('div#left').transition({ opacity: 0 }, 1000, 'cubic-bezier(0.175, 0.885, 0.32, 1.275)');
-// 	$('div#right').transition({ opacity: 0 }, 1000, 'cubic-bezier(0.175, 0.885, 0.32, 1.275)');
-// 	$('div#stop').transition({ opacity: 0 }, 1000, 'cubic-bezier(0.175, 0.885, 0.32, 1.275)');
-// 	$('div#transport').transition({ opacity: 0 }, 1000, 'cubic-bezier(0.175, 0.885, 0.32, 1.275)');
-// 	$('div#north').transition({ opacity: 0 }, 1000, 'cubic-bezier(0.175, 0.885, 0.32, 1.275)');
-// 	$('div#south').transition({ opacity: 0 }, 1000, 'cubic-bezier(0.175, 0.885, 0.32, 1.275)');
-// 	$('div#west').transition({ opacity: 0 }, 1000, 'cubic-bezier(0.175, 0.885, 0.32, 1.275)');
-// 	$('div#east').transition({ opacity: 0 }, 1000, 'cubic-bezier(0.175, 0.885, 0.32, 1.275)');
-// 	$('div#street').transition({ opacity: 0 }, 1000, 'cubic-bezier(0.175, 0.885, 0.32, 1.275)');
+// Количество команд варьируется от 15 до 29
+var value_of_methods;
+var MaxMethodValue = 30;
+var MinMethodValue = 15;
+var CurrentMethodValue;
 
-// 	if (RegimeDeepDeriveScreen == 0) {
-// 		ShowDeepDeriveScreen();
-// 	}
+	function DeepDeriveScreenFunction() {
+											
+	// Очищаем таймер
+	clearInterval(intervalID);                       
 
-// 	function ShowDeepDeriveScreen() {
-// 		$('.DeepDeriveScreenName').addClass('open_title').transition({ opacity: 1 }, 500, 'cubic-bezier(0.6, 0.04, 0.98, 0.335)');                             
-// 		$('div#DeepDeriveScreen').removeClass('close').addClass('table').transition({ opacity: 1 }, 500, 'cubic-bezier(0.6, 0.04, 0.98, 0.335)');                             
-// 		$('button#DeepDeriveButtonFooter').removeClass('close').transition({ opacity: 1 }, 500, 'cubic-bezier(0.6, 0.04, 0.98, 0.335)');                
-// 		RegimeDeepDeriveScreen = 1;
-// 	}
+	// Текущий номер команды
+	CurrentMethodValue = 0;
+	// Количество команд в этом дрейфе
+	value_of_methods = Math.floor(Math.random() * (MaxMethodValue - MinMethodValue)) + MinMethodValue;
 
-// 	var method;             
-// 	var MaxMethodValue = 10;
-// 	var MinMethodValue = 0;
-// 	method = Math.floor(Math.random() * (MaxMethodValue - MinMethodValue)) + MinMethodValue;
+	Methods();
+}
 
-// 	var value_of_acts;                                      
-// 	var MaxValue = 5;
-// 	var MinValue = 2;
-// 	value_of_acts = Math.floor(Math.random() * (MaxValue - MinValue)) + MinValue;
+//Генератор команд
 
-// 	setTimeout(Methods, 1000);                                                    
+// Переменные для номера команды (11 методов)
+var method;
+var MaxMethodNumber = 10;
+var MinMethodNumber = 0;
+// Сколько кварталов идти
+var value_of_acts;
+var MaxValue = 5;
+var MinValue = 2;
 
-// 	function Methods() {
+//По клику на action-кнопку выполнить
+function Methods() {
 
-// 		if (RegimeLanguage) {
-// 			switch (method) {
+	//Скрываем все команды
+	$('#forward, #left, #right, #stop, #transport, #north, #south, #west, #east, #street, #home').removeClass('visible');
+	$('.deep-derive-screen__action-button').removeClass('disactive hidden down');
 
-// 				case (0):
-// 					$('div#forward').html('FORWARD').removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
-// 					$('div#left').removeClass('open_title').addClass('close');
-// 					$('div#right').removeClass('open_title').addClass('close');
-// 					$('#stop').removeClass('open_title').addClass('close');
-// 					$('#transport').removeClass('open_title').addClass('close');
-// 					$('#north').removeClass('open_title').addClass('close');
-// 					$('#south').removeClass('open_title').addClass('close');
-// 					$('#west').removeClass('open_title').addClass('close');
-// 					$('#east').removeClass('open_title').addClass('close');
-// 					$('#street').removeClass('open_title').addClass('close');
-// 					break;
+	//Вычисляем новые рандомы
+	method = Math.floor(Math.random() * (MaxMethodNumber - MinMethodNumber)) + MinMethodNumber;
+	console.log(method);
+	value_of_acts = Math.floor(Math.random() * (MaxValue - MinValue)) + MinValue;
 
-// 				case (1):
-// 					$('div#forward').removeClass('open_title').addClass('close');
-// 					$('div#left').html('LEFT').removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
-// 					$('div#right').removeClass('open_title').addClass('close');
-// 					$('#stop').removeClass('open_title').addClass('close');
-// 					$('#transport').removeClass('open_title').addClass('close');
-// 					$('#north').removeClass('open_title').addClass('close');
-// 					$('#south').removeClass('open_title').addClass('close');
-// 					$('#west').removeClass('open_title').addClass('close');
-// 					$('#east').removeClass('open_title').addClass('close');
-// 					$('#street').removeClass('open_title').addClass('close');
-// 					break;
+	//Показываем следующую команду
+	setTimeout(ShowMethod, 1000);
+	function ShowMethod() {
+		//В зависимости от выбранного языка
+		//На английском
+		if (RegimeLanguage) {			
 
-// 				case (2):
-// 					$('div#forward').removeClass('open_title').addClass('close');
-// 					$('div#left').removeClass('open_title').addClass('close');
-// 					$('div#right').html('RIGHT').removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
-// 					$('#stop').removeClass('open_title').addClass('close');
-// 					$('#transport').removeClass('open_title').addClass('close');
-// 					$('#north').removeClass('open_title').addClass('close');
-// 					$('#south').removeClass('open_title').addClass('close');
-// 					$('#west').removeClass('open_title').addClass('close');
-// 					$('#east').removeClass('open_title').addClass('close');
-// 					$('#street').removeClass('open_title').addClass('close');
-// 					break;
+			//По каждому нажатию на ДАЛЬШЕ прибавляем 1 и проверяем, не закончился ли дрейф
+			CurrentMethodValue++;
+			if (CurrentMethodValue == value_of_methods) {
+				// 0 скрыть все команды и кнопку
+				$('#forward, #left, #right, #stop, #transport, #north, #south, #west, #east, #street, #home').removeClass('visible');
+				$('.deep-derive-screen__action-button').addClass('hidden down'); 
+				// 1 выдать команду "домой"
+				$('#home').html('THE DRIFT IS OVER. GO HOME.').addClass('visible');
+			}
+			// Если дрейф не кончился, то показываем следующую команду
+			else {
+				switch (method) {
 
-// 				case (3):
-// 					timer = 60;                                              
-// 					TimerFunction();                 
+					// Метод "прямо"
+					case (0):
+						$('#forward').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>FORWARD').addClass('visible');
+						break;
 
-// 					$('div#forward').removeClass('open_title').addClass('close');
-// 					$('div#left').removeClass('open_title').addClass('close');
-// 					$('div#right').removeClass('open_title').addClass('close');
-// 					$('#stop').html('STOP<br>' + timer).removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
-// 					$('#transport').removeClass('open_title').addClass('close');
-// 					$('#north').removeClass('open_title').addClass('close');
-// 					$('#south').removeClass('open_title').addClass('close');
-// 					$('#west').removeClass('open_title').addClass('close');
-// 					$('#east').removeClass('open_title').addClass('close');
-// 					$('#street').removeClass('open_title').addClass('close');
+					// Метод "влево"
+					case (1):
+						$('#left').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>LEFT').addClass('visible');
+						break;
 
-// 					function TimerFunction() {
+					// Метод "вправо"
+					case (2):
+						$('#right').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>RIGHT').addClass('visible');
+						break;
 
-// 						intervalID = setInterval(function () {
+					// Метод "стоп"
+					case (3):
+						// Количество секунд паузы
+						var timer = 60;
+						// Запускаем функцию отсчёта секунд
+						TimerFunction();
+						// Показываем команду
+						$('#stop').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>STOP<br>' + timer).addClass('visible');
 
-// 							$('#stop').html('STOP<br>' + timer);
-// 							$('button#DeepDeriveButtonFooter').transition({ opacity: 0 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');              
-// 							setTimeout(function () { 
-// 								$('button#DeepDeriveButtonFooter').addClass('close') }, 1000);
-// 							if (timer == 0) {
-// 								clearInterval(intervalID);                    
-// 								SoundOfEnd();
-// 								function SoundOfEnd() {
-// 									var audio = new Audio();                
-// 									audio.src = 'sound_of_end.mp3';                         
-// 									audio.play();                          
-// 									$('button#DeepDeriveButtonFooter').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');                
-// 									setTimeout(function () { $('button#DeepDeriveButtonFooter').removeClass('close') }, 1000);
-// 								}
-// 								DeepDeriveScreenFunction();
-// 							}
-// 							timer = timer - 1;
+						function TimerFunction() {
 
-// 						}, 1000);
-// 					}
-// 					break;
+							// Каждую секунду делаем:
+							intervalID = setInterval(function () {
 
-// 				case (4):
-                           
-// 					var date = new Date();              
-// 					var hours = date.getHours();               
-// 					if (hours >= 22 || hours <= 8) {
-// 						DeepDeriveScreenFunction();
-// 						break;
-// 					}
+								// Обновляем строку с новым значением времени
+								$('#stop').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>STOP<br>' + timer);
 
-// 					var transport_number;                          
-// 					var transport_number_min = 0;
-// 					var transport_number_max = 10;
-// 					var transport_stop_value;                              
-// 					var transport_stop_value_min = 5;
-// 					var transport_stop_value_max = 11;
+								// Скрываем action-кнопку
+								$('.deep-derive-screen__action-button').addClass('hidden down');
 
-// 					transport_number = Math.floor(Math.random() * (transport_number_max - transport_number_min)) + transport_number_min;
-// 					transport_stop_value = Math.floor(Math.random() * (transport_stop_value_max - transport_stop_value_min)) + transport_stop_value_min;
+								// Если таймер подошёл к концу, обнуляем интервал и воспроизводим звук
+								if (timer == 0) {
+									clearInterval(intervalID);
+									SoundOfEnd();
+									function SoundOfEnd() {
+										var audio = new Audio();
+										audio.src = '../sound_of_end.mp3';
+										audio.play();
+										// Показываем кнопку
+										$('.deep-derive-screen__action-button').removeClass('hidden down');
+									}
+									// Переходим к следующему методу
+									Methods();
+								}
 
-// 					$('div#forward').removeClass('open_title').addClass('close');
-// 					$('div#left').removeClass('open_title').addClass('close');
-// 					$('div#right').removeClass('open_title').addClass('close');
-// 					$('#stop').removeClass('open_title').addClass('close');
-// 					$('#transport').html('GET ON A PUBLIC TRANSPORT THAT CONTAINS A NUMBER OF ROUTE ' + transport_number + ' AND GO ' + transport_stop_value + ' STOPS').removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
-// 					$('#north').removeClass('open_title').addClass('close');
-// 					$('#south').removeClass('open_title').addClass('close');
-// 					$('#west').removeClass('open_title').addClass('close');
-// 					$('#east').removeClass('open_title').addClass('close');
-// 					$('#street').removeClass('open_title').addClass('close');
-// 					break;
+								// Делаем на секунду меньше
+								timer = timer - 1;
 
-// 				case (5):
-// 					$('div#forward').removeClass('open_title').addClass('close');
-// 					$('div#left').removeClass('open_title').addClass('close');
-// 					$('div#right').removeClass('open_title').addClass('close');
-// 					$('#stop').removeClass('open_title').addClass('close');
-// 					$('#transport').removeClass('open_title').addClass('close');
-// 					$('#north').html('GO TO THE NORTH ' + value_of_acts + ' QUARTALS').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
-// 					$('#south').removeClass('open_title').addClass('close');
-// 					$('#west').removeClass('open_title').addClass('close');
-// 					$('#east').removeClass('open_title').addClass('close');
-// 					$('#street').removeClass('open_title').addClass('close');
-// 					break;
+							}, 1000);
+						}
+						break;
 
-// 				case (6):
-// 					$('div#forward').removeClass('open_title').addClass('close');
-// 					$('div#left').removeClass('open_title').addClass('close');
-// 					$('div#right').removeClass('open_title').addClass('close');
-// 					$('#stop').removeClass('open_title').addClass('close');
-// 					$('#transport').removeClass('open_title').addClass('close');
-// 					$('#north').removeClass('open_title').addClass('close');
-// 					$('#south').html('GO TO THE SOUTH ' + value_of_acts + ' QUARTALS').removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
-// 					$('#west').removeClass('open_title').addClass('close');
-// 					$('#east').removeClass('open_title').addClass('close');
-// 					$('#street').removeClass('open_title').addClass('close');
-// 					break;
+					// Метод "транспорт"
+					case (4):
 
-// 				case (7):
-// 					$('div#forward').removeClass('open_title').addClass('close');
-// 					$('div#left').removeClass('open_title').addClass('close');
-// 					$('div#right').removeClass('open_title').addClass('close');
-// 					$('#stop').removeClass('open_title').addClass('close');
-// 					$('#transport').removeClass('open_title').addClass('close');
-// 					$('#north').removeClass('open_title').addClass('close');
-// 					$('#south').removeClass('open_title').addClass('close');
-// 					$('#west').html('GO TO THE WEST ' + value_of_acts + ' QUARTALS').removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
-// 					$('#east').removeClass('open_title').addClass('close');
-// 					$('#street').removeClass('open_title').addClass('close');
-// 					break;
+						// Получаем текущее время
+						var date = new Date();
+						var hours = date.getHours();
+						// Если ночь, то транспорт не ходит, значит переходим к следующему методу
+						if (hours >= 22 || hours <= 8) {
+							Methods();
+							break;
+						}
 
-// 				case (8):
-// 					$('div#forward').removeClass('open_title').addClass('close');
-// 					$('div#left').removeClass('open_title').addClass('close');
-// 					$('div#right').removeClass('open_title').addClass('close');
-// 					$('#stop').removeClass('open_title').addClass('close');
-// 					$('#transport').removeClass('open_title').addClass('close');
-// 					$('#north').removeClass('open_title').addClass('close');
-// 					$('#south').removeClass('open_title').addClass('close');
-// 					$('#west').removeClass('open_title').addClass('close');
-// 					$('#east').html('GO TO THE EAST ' + value_of_acts + ' QUARTALS').removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
-// 					$('#street').removeClass('open_title').addClass('close');
-// 					break;
+						// Номер маршрута
+						var transport_number;
+						var transport_number_min = 0;
+						var transport_number_max = 10;
+						// Количество остановок
+						var transport_stop_value;
+						var transport_stop_value_min = 5;
+						var transport_stop_value_max = 11;
 
-// 				case (9):
-// 					var alphabet_eng = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W"];
-// 					var max_letter_eng = 23;                           
-// 					var min_letter = 0;
-// 					var letter_number_eng;
-// 					letter_number_eng = Math.floor(Math.random() * (max_letter_eng - min_letter)) + min_letter;
-// 					letter_eng = alphabet_eng[letter_number_eng];
+						// Вычисляем рандомы
+						transport_number = Math.floor(Math.random() * (transport_number_max - transport_number_min)) + transport_number_min;
+						transport_stop_value = Math.floor(Math.random() * (transport_stop_value_max - transport_stop_value_min)) + transport_stop_value_min;
 
-// 					$('div#forward').removeClass('open_title').addClass('close');
-// 					$('div#left').removeClass('open_title').addClass('close');
-// 					$('div#right').removeClass('open_title').addClass('close');
-// 					$('#stop').removeClass('open_title').addClass('close');
-// 					$('#transport').removeClass('open_title').addClass('close');
-// 					$('#north').removeClass('open_title').addClass('close');
-// 					$('#south').removeClass('open_title').addClass('close');
-// 					$('#west').removeClass('open_title').addClass('close');
-// 					$('#east').removeClass('open_title').addClass('close');
-// 					$('#street').html('FIND THE NEAREST STREET THAT NAME BEGINS WITH A LETTER ' + '"' + letter_eng + '"').removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
-// 					break;
+						$('#transport').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>GET ON A PUBLIC TRANSPORT THAT CONTAINS A NUMBER OF ROUTE ' + transport_number + ' AND GO ' + transport_stop_value + ' STOPS').addClass('visible');
+						break;
 
-// 			}
-// 		}
+					// Метод "на север"
+					case (5):
+						$('#north').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>GO TO THE NORTH ' + value_of_acts + ' QUARTALS').addClass('visible');
+						break;
 
-// 		else {
-// 			switch (method) {
+					// Метод "на юг"
+					case (6):
+						$('#south').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>GO TO THE SOUTH ' + value_of_acts + ' QUARTALS').addClass('visible');
+						break;
 
-// 				case (0):
-// 					$('div#forward').html('ПРЯМО').removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
-// 					$('div#left').removeClass('open_title').addClass('close');
-// 					$('div#right').removeClass('open_title').addClass('close');
-// 					$('#stop').removeClass('open_title').addClass('close');
-// 					$('#transport').removeClass('open_title').addClass('close');
-// 					$('#north').removeClass('open_title').addClass('close');
-// 					$('#south').removeClass('open_title').addClass('close');
-// 					$('#west').removeClass('open_title').addClass('close');
-// 					$('#east').removeClass('open_title').addClass('close');
-// 					$('#street').removeClass('open_title').addClass('close');
-// 					break;
+					// Метод "на запад"
+					case (7):
+						$('#west').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>GO TO THE WEST ' + value_of_acts + ' QUARTALS').addClass('visible');
+						break;
 
-// 				case (1):
-// 					$('div#forward').removeClass('open_title').addClass('close');
-// 					$('div#left').html('ВЛЕВО').removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
-// 					$('div#right').removeClass('open_title').addClass('close');
-// 					$('#stop').removeClass('open_title').addClass('close');
-// 					$('#transport').removeClass('open_title').addClass('close');
-// 					$('#north').removeClass('open_title').addClass('close');
-// 					$('#south').removeClass('open_title').addClass('close');
-// 					$('#west').removeClass('open_title').addClass('close');
-// 					$('#east').removeClass('open_title').addClass('close');
-// 					$('#street').removeClass('open_title').addClass('close');
-// 					break;
+					// Метод "на восток"
+					case (8):
+						$('#east').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>GO TO THE EAST ' + value_of_acts + ' QUARTALS').addClass('visible');
+						break;
 
-// 				case (2):
-// 					$('div#forward').removeClass('open_title').addClass('close');
-// 					$('div#left').removeClass('open_title').addClass('close');
-// 					$('div#right').html('ВПРАВО').removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
-// 					$('#stop').removeClass('open_title').addClass('close');
-// 					$('#transport').removeClass('open_title').addClass('close');
-// 					$('#north').removeClass('open_title').addClass('close');
-// 					$('#south').removeClass('open_title').addClass('close');
-// 					$('#west').removeClass('open_title').addClass('close');
-// 					$('#east').removeClass('open_title').addClass('close');
-// 					$('#street').removeClass('open_title').addClass('close');
-// 					break;
+					// Метод "найди улицу"
+					case (9):
+						var alphabet_eng = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W"];
+						var max_letter_eng = 23;
+						var min_letter = 0;
+						var letter_number_eng;
 
-// 				case (3):
-// 					timer = 60;                                              
-// 					TimerFunction();                 
+						letter_number_eng = Math.floor(Math.random() * (max_letter_eng - min_letter)) + min_letter;
+						letter_eng = alphabet_eng[letter_number_eng];
 
-// 					$('div#forward').removeClass('open_title').addClass('close');
-// 					$('div#left').removeClass('open_title').addClass('close');
-// 					$('div#right').removeClass('open_title').addClass('close');
-// 					$('#stop').html('СТОП<br>' + timer).removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
-// 					$('#transport').removeClass('open_title').addClass('close');
-// 					$('#north').removeClass('open_title').addClass('close');
-// 					$('#south').removeClass('open_title').addClass('close');
-// 					$('#west').removeClass('open_title').addClass('close');
-// 					$('#east').removeClass('open_title').addClass('close');
-// 					$('#street').removeClass('open_title').addClass('close');
+						$('#street').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>FIND THE NEAREST STREET THAT NAME BEGINS WITH A LETTER ' + '"' + letter_eng + '"').addClass('visible');
+						break;
 
-// 					function TimerFunction() {
+				}
+			}
+		}
 
-// 						intervalID = setInterval(function () {
+		//На русском
+		// else {
 
-// 							$('#stop').html('СТОП<br>' + timer);
-// 							$('button#DeepDeriveButtonFooter').transition({ opacity: 0 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');              
-// 							setTimeout(function () { $('button#DeepDeriveButtonFooter').addClass('close') }, 1000);
-// 							if (timer == 0) {
-// 								clearInterval(intervalID);                    
-// 								SoundOfEnd();
-// 								function SoundOfEnd() {
-// 									var audio = new Audio();             
-// 									audio.src = 'sound_of_end.mp3';                         
-// 									audio.play();                          
-// 									$('button#DeepDeriveButtonFooter').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');                
-// 									setTimeout(function () { $('button#DeepDeriveButtonFooter').removeClass('close') }, 1000);
-// 								}
-// 								DeepDeriveScreenFunction();
-// 							}
-// 							timer = timer - 1;
+		// 	//По каждому нажатию на ДАЛЬШЕ прибавляем 1 и проверяем
+		// 	CurrentMethodValue++;
+		// 	if (CurrentMethodValue == value_of_methods) {
+		// 		// 0 скрыть все команды
+		// 		$('div#forward').removeClass('open_title').addClass('close');
+		// 		$('div#left').removeClass('open_title').addClass('close');
+		// 		$('div#right').removeClass('open_title').addClass('close');
+		// 		$('#stop').removeClass('open_title').addClass('close');
+		// 		$('#transport').removeClass('open_title').addClass('close');
+		// 		$('#north').removeClass('open_title').addClass('close');
+		// 		$('#south').removeClass('open_title').addClass('close');
+		// 		$('#west').removeClass('open_title').addClass('close');
+		// 		$('#east').removeClass('open_title').addClass('close');
+		// 		$('#street').removeClass('open_title').addClass('close');
+		// 		// 1 выдать команду "домой"
+		// 		$('div#home').html('ДРЕЙФ ОКОНЧЕН. ИДИ ДОМОЙ.').removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
+		// 		// 2 скрыть нижнюю кнопку
+		// 		$('button#DeepDeriveButtonFooter').transition({ opacity: 0 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
+		// 	}
 
-// 						}, 1000);
-// 					}
-// 					break;
+		// 	else {
+		// 		switch (method) {
 
-// 				case (4):
-                
-// 					var date = new Date();              
-// 					var hours = date.getHours();               
-// 					if (hours >= 22 || hours <= 8) {
-// 						DeepDeriveScreenFunction();
-// 						break;
-// 					}
+		// 			case (0):
+		// 				$('div#forward').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>ПРЯМО').removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
+		// 				$('div#left').removeClass('open_title').addClass('close');
+		// 				$('div#right').removeClass('open_title').addClass('close');
+		// 				$('#stop').removeClass('open_title').addClass('close');
+		// 				$('#transport').removeClass('open_title').addClass('close');
+		// 				$('#north').removeClass('open_title').addClass('close');
+		// 				$('#south').removeClass('open_title').addClass('close');
+		// 				$('#west').removeClass('open_title').addClass('close');
+		// 				$('#east').removeClass('open_title').addClass('close');
+		// 				$('#street').removeClass('open_title').addClass('close');
+		// 				break;
 
-// 					var transport_number;                          
-// 					var transport_number_min = 0;
-// 					var transport_number_max = 10;
-// 					var transport_stop_value;                              
-// 					var transport_stop_value_min = 5;
-// 					var transport_stop_value_max = 11;
+		// 			case (1):
+		// 				$('div#forward').removeClass('open_title').addClass('close');
+		// 				$('div#left').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>ВЛЕВО').removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
+		// 				$('div#right').removeClass('open_title').addClass('close');
+		// 				$('#stop').removeClass('open_title').addClass('close');
+		// 				$('#transport').removeClass('open_title').addClass('close');
+		// 				$('#north').removeClass('open_title').addClass('close');
+		// 				$('#south').removeClass('open_title').addClass('close');
+		// 				$('#west').removeClass('open_title').addClass('close');
+		// 				$('#east').removeClass('open_title').addClass('close');
+		// 				$('#street').removeClass('open_title').addClass('close');
+		// 				break;
 
-// 					transport_number = Math.floor(Math.random() * (transport_number_max - transport_number_min)) + transport_number_min;
-// 					transport_stop_value = Math.floor(Math.random() * (transport_stop_value_max - transport_stop_value_min)) + transport_stop_value_min;
+		// 			case (2):
+		// 				$('div#forward').removeClass('open_title').addClass('close');
+		// 				$('div#left').removeClass('open_title').addClass('close');
+		// 				$('div#right').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>ВПРАВО').removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
+		// 				$('#stop').removeClass('open_title').addClass('close');
+		// 				$('#transport').removeClass('open_title').addClass('close');
+		// 				$('#north').removeClass('open_title').addClass('close');
+		// 				$('#south').removeClass('open_title').addClass('close');
+		// 				$('#west').removeClass('open_title').addClass('close');
+		// 				$('#east').removeClass('open_title').addClass('close');
+		// 				$('#street').removeClass('open_title').addClass('close');
+		// 				break;
 
-// 					$('div#forward').removeClass('open_title').addClass('close');
-// 					$('div#left').removeClass('open_title').addClass('close');
-// 					$('div#right').removeClass('open_title').addClass('close');
-// 					$('#stop').removeClass('open_title').addClass('close');
-// 					$('#transport').html('СЯДЬ НА ОБЩЕСТВЕННЫЙ ТРАНСПОРТ, НОМЕР КОТОРОГО СОДЕРЖИТ ЦИФРУ ' + transport_number + ' И ПРОЕДЬ ' + transport_stop_value + ' ОСТАНОВОК').removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
-// 					$('#north').removeClass('open_title').addClass('close');
-// 					$('#south').removeClass('open_title').addClass('close');
-// 					$('#west').removeClass('open_title').addClass('close');
-// 					$('#east').removeClass('open_title').addClass('close');
-// 					$('#street').removeClass('open_title').addClass('close');
-// 					break;
+		// 			case (3):
+		// 				timer = 60;
+		// 				TimerFunction();
 
-// 				case (5):
-// 					$('div#forward').removeClass('open_title').addClass('close');
-// 					$('div#left').removeClass('open_title').addClass('close');
-// 					$('div#right').removeClass('open_title').addClass('close');
-// 					$('#stop').removeClass('open_title').addClass('close');
-// 					$('#transport').removeClass('open_title').addClass('close');
-// 					$('#north').html('ИДИ НА СЕВЕР ' + value_of_acts + ' КВАРТАЛА').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
-// 					$('#south').removeClass('open_title').addClass('close');
-// 					$('#west').removeClass('open_title').addClass('close');
-// 					$('#east').removeClass('open_title').addClass('close');
-// 					$('#street').removeClass('open_title').addClass('close');
-// 					break;
+		// 				$('div#forward').removeClass('open_title').addClass('close');
+		// 				$('div#left').removeClass('open_title').addClass('close');
+		// 				$('div#right').removeClass('open_title').addClass('close');
+		// 				$('#stop').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>СТОП<br>' + timer).removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
+		// 				$('#transport').removeClass('open_title').addClass('close');
+		// 				$('#north').removeClass('open_title').addClass('close');
+		// 				$('#south').removeClass('open_title').addClass('close');
+		// 				$('#west').removeClass('open_title').addClass('close');
+		// 				$('#east').removeClass('open_title').addClass('close');
+		// 				$('#street').removeClass('open_title').addClass('close');
 
-// 				case (6):
-// 					$('div#forward').removeClass('open_title').addClass('close');
-// 					$('div#left').removeClass('open_title').addClass('close');
-// 					$('div#right').removeClass('open_title').addClass('close');
-// 					$('#stop').removeClass('open_title').addClass('close');
-// 					$('#transport').removeClass('open_title').addClass('close');
-// 					$('#north').removeClass('open_title').addClass('close');
-// 					$('#south').html('ИДИ НА ЮГ ' + value_of_acts + ' КВАРТАЛА').removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
-// 					$('#west').removeClass('open_title').addClass('close');
-// 					$('#east').removeClass('open_title').addClass('close');
-// 					$('#street').removeClass('open_title').addClass('close');
-// 					break;
+		// 				function TimerFunction() {
 
-// 				case (7):
-// 					$('div#forward').removeClass('open_title').addClass('close');
-// 					$('div#left').removeClass('open_title').addClass('close');
-// 					$('div#right').removeClass('open_title').addClass('close');
-// 					$('#stop').removeClass('open_title').addClass('close');
-// 					$('#transport').removeClass('open_title').addClass('close');
-// 					$('#north').removeClass('open_title').addClass('close');
-// 					$('#south').removeClass('open_title').addClass('close');
-// 					$('#west').html('ИДИ НА ЗАПАД ' + value_of_acts + ' КВАРТАЛА').removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
-// 					$('#east').removeClass('open_title').addClass('close');
-// 					$('#street').removeClass('open_title').addClass('close');
-// 					break;
+		// 					intervalID = setInterval(function () {
 
-// 				case (8):
-// 					$('div#forward').removeClass('open_title').addClass('close');
-// 					$('div#left').removeClass('open_title').addClass('close');
-// 					$('div#right').removeClass('open_title').addClass('close');
-// 					$('#stop').removeClass('open_title').addClass('close');
-// 					$('#transport').removeClass('open_title').addClass('close');
-// 					$('#north').removeClass('open_title').addClass('close');
-// 					$('#south').removeClass('open_title').addClass('close');
-// 					$('#west').removeClass('open_title').addClass('close');
-// 					$('#east').html('ИДИ НА ВОСТОК ' + value_of_acts + ' КВАРТАЛА').removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
-// 					$('#street').removeClass('open_title').addClass('close');
-// 					break;
+		// 						$('#stop').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>СТОП<br>' + timer);
+		// 						$('button#DeepDeriveButtonFooter').transition({ opacity: 0 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
+		// 						setTimeout(function () { $('button#DeepDeriveButtonFooter').addClass('close') }, 1000);
+		// 						//По окончанию работы таймера
+		// 						if (timer == 0) {
+		// 							//Перестать считать
+		// 							clearInterval(intervalID);
+		// 							//Воспроизвести звук
+		// 							SoundOfEnd();
+		// 							function SoundOfEnd() {
+		// 								var audio = new Audio();
+		// 								audio.src = 'sound_of_end.mp3';
+		// 								audio.play();
+		// 								$('button#DeepDeriveButtonFooter').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
+		// 								setTimeout(function () { $('button#DeepDeriveButtonFooter').removeClass('close') }, 1000);
+		// 							}
+		// 							//Запустить следующую команду
+		// 							Methods();
+		// 						}
+		// 						timer = timer - 1;
 
-// 				case (9):
-// 					var alphabet = ["А", "Б", "В", "Г", "Д", "Е", "И", "К", "Л", "М", "П", "Р", "С", "Т", "Ф", "Ш", "Я"];            
-// 					var max_letter = 17;                           
-// 					var min_letter = 0;
-// 					var letter_number;                      
-// 					letter_number = Math.floor(Math.random() * (max_letter - min_letter)) + min_letter;
-// 					letter = alphabet[letter_number];
+		// 					}, 1000);
+		// 				}
+		// 				break;
 
-// 					$('div#forward').removeClass('open_title').addClass('close');
-// 					$('div#left').removeClass('open_title').addClass('close');
-// 					$('div#right').removeClass('open_title').addClass('close');
-// 					$('#stop').removeClass('open_title').addClass('close');
-// 					$('#transport').removeClass('open_title').addClass('close');
-// 					$('#north').removeClass('open_title').addClass('close');
-// 					$('#south').removeClass('open_title').addClass('close');
-// 					$('#west').removeClass('open_title').addClass('close');
-// 					$('#east').removeClass('open_title').addClass('close');
-// 					$('#street').html('НАЙДИ БЛИЖАЙШУЮ УЛИЦУ, НАЗВАНИЕ КОТОРОЙ НАЧИНАЕТСЯ НА БУКВУ ' + '"' + letter + '"').removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
-// 					break;
+		// 			case (4):
 
-// 			}
-// 		}
-// 	}
-// }
+		// 				var date = new Date();
+		// 				var hours = date.getHours();
+		// 				if (hours >= 22 || hours <= 8) {
+		// 					Methods();
+		// 					break;
+		// 				}
+
+		// 				var transport_number;
+		// 				var transport_number_min = 0;
+		// 				var transport_number_max = 10;
+		// 				var transport_stop_value;
+		// 				var transport_stop_value_min = 5;
+		// 				var transport_stop_value_max = 11;
+
+		// 				transport_number = Math.floor(Math.random() * (transport_number_max - transport_number_min)) + transport_number_min;
+		// 				transport_stop_value = Math.floor(Math.random() * (transport_stop_value_max - transport_stop_value_min)) + transport_stop_value_min;
+
+		// 				$('div#forward').removeClass('open_title').addClass('close');
+		// 				$('div#left').removeClass('open_title').addClass('close');
+		// 				$('div#right').removeClass('open_title').addClass('close');
+		// 				$('#stop').removeClass('open_title').addClass('close');
+		// 				$('#transport').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>СЯДЬ НА ОБЩЕСТВЕННЫЙ ТРАНСПОРТ, НОМЕР КОТОРОГО СОДЕРЖИТ ЦИФРУ ' + transport_number + ' И ПРОЕДЬ ' + transport_stop_value + ' ОСТАНОВОК').removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
+		// 				$('#north').removeClass('open_title').addClass('close');
+		// 				$('#south').removeClass('open_title').addClass('close');
+		// 				$('#west').removeClass('open_title').addClass('close');
+		// 				$('#east').removeClass('open_title').addClass('close');
+		// 				$('#street').removeClass('open_title').addClass('close');
+		// 				break;
+
+		// 			case (5):
+		// 				$('div#forward').removeClass('open_title').addClass('close');
+		// 				$('div#left').removeClass('open_title').addClass('close');
+		// 				$('div#right').removeClass('open_title').addClass('close');
+		// 				$('#stop').removeClass('open_title').addClass('close');
+		// 				$('#transport').removeClass('open_title').addClass('close');
+		// 				$('#north').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>ИДИ НА СЕВЕР ' + value_of_acts + ' КВАРТАЛА').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
+		// 				$('#south').removeClass('open_title').addClass('close');
+		// 				$('#west').removeClass('open_title').addClass('close');
+		// 				$('#east').removeClass('open_title').addClass('close');
+		// 				$('#street').removeClass('open_title').addClass('close');
+		// 				break;
+
+		// 			case (6):
+		// 				$('div#forward').removeClass('open_title').addClass('close');
+		// 				$('div#left').removeClass('open_title').addClass('close');
+		// 				$('div#right').removeClass('open_title').addClass('close');
+		// 				$('#stop').removeClass('open_title').addClass('close');
+		// 				$('#transport').removeClass('open_title').addClass('close');
+		// 				$('#north').removeClass('open_title').addClass('close');
+		// 				$('#south').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>ИДИ НА ЮГ ' + value_of_acts + ' КВАРТАЛА').removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
+		// 				$('#west').removeClass('open_title').addClass('close');
+		// 				$('#east').removeClass('open_title').addClass('close');
+		// 				$('#street').removeClass('open_title').addClass('close');
+		// 				break;
+
+		// 			case (7):
+		// 				$('div#forward').removeClass('open_title').addClass('close');
+		// 				$('div#left').removeClass('open_title').addClass('close');
+		// 				$('div#right').removeClass('open_title').addClass('close');
+		// 				$('#stop').removeClass('open_title').addClass('close');
+		// 				$('#transport').removeClass('open_title').addClass('close');
+		// 				$('#north').removeClass('open_title').addClass('close');
+		// 				$('#south').removeClass('open_title').addClass('close');
+		// 				$('#west').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>ИДИ НА ЗАПАД ' + value_of_acts + ' КВАРТАЛА').removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
+		// 				$('#east').removeClass('open_title').addClass('close');
+		// 				$('#street').removeClass('open_title').addClass('close');
+		// 				break;
+
+		// 			case (8):
+		// 				$('div#forward').removeClass('open_title').addClass('close');
+		// 				$('div#left').removeClass('open_title').addClass('close');
+		// 				$('div#right').removeClass('open_title').addClass('close');
+		// 				$('#stop').removeClass('open_title').addClass('close');
+		// 				$('#transport').removeClass('open_title').addClass('close');
+		// 				$('#north').removeClass('open_title').addClass('close');
+		// 				$('#south').removeClass('open_title').addClass('close');
+		// 				$('#west').removeClass('open_title').addClass('close');
+		// 				$('#east').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>ИДИ НА ВОСТОК ' + value_of_acts + ' КВАРТАЛА').removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
+		// 				$('#street').removeClass('open_title').addClass('close');
+		// 				break;
+
+		// 			case (9):
+		// 				var alphabet = ["А", "Б", "В", "Г", "Д", "Е", "И", "К", "Л", "М", "П", "Р", "С", "Т", "Ф", "Ш", "Я"];
+		// 				var max_letter = 17;
+		// 				var min_letter = 0;
+		// 				var letter_number;
+		// 				letter_number = Math.floor(Math.random() * (max_letter - min_letter)) + min_letter;
+		// 				letter = alphabet[letter_number];
+
+		// 				$('div#forward').removeClass('open_title').addClass('close');
+		// 				$('div#left').removeClass('open_title').addClass('close');
+		// 				$('div#right').removeClass('open_title').addClass('close');
+		// 				$('#stop').removeClass('open_title').addClass('close');
+		// 				$('#transport').removeClass('open_title').addClass('close');
+		// 				$('#north').removeClass('open_title').addClass('close');
+		// 				$('#south').removeClass('open_title').addClass('close');
+		// 				$('#west').removeClass('open_title').addClass('close');
+		// 				$('#east').removeClass('open_title').addClass('close');
+		// 				$('#street').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>НАЙДИ БЛИЖАЙШУЮ УЛИЦУ, НАЗВАНИЕ КОТОРОЙ НАЧИНАЕТСЯ НА БУКВУ ' + '"' + letter + '"').removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
+		// 				break;
+		// 		}
+		// 	}
+		// }
+	}
+}
 
 // Управление экраном "Генератор времени"
 

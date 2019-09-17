@@ -18,14 +18,18 @@
     text-align: center
     opacity: 0
     position: absolute
+    width: 100vw
 
 @mixin action-button
 
 .container
-  .active-for-derive-screen
+  .active-grid
     display: grid
     align-content: space-between
     justify-items: center
+
+.down
+  transform: translateY(100px)
 
 .annotation-screen
   @include default-of-screen
