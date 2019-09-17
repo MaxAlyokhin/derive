@@ -29,7 +29,7 @@
     justify-items: center
 
 .down
-  transform: translateY(100px)
+  transform: translateY(100px) !important
 
 .annotation-screen
   @include default-of-screen
@@ -45,11 +45,13 @@
   &__title-of-screen
     @include title-of-screen
   &__command
-    @include command
-      
+    @include command 
   &__action-button
     @include button
     @include action-button
+    // bottom: 25px
+    // position: absolute
+    // width: calc(100% - 50px)
 
 .cyclic-derive-screen
   @include default-of-screen
@@ -57,6 +59,7 @@
     @include title-of-screen
   &__command
     @include command
+    text-align: center
 
 .deep-derive-screen
   @include default-of-screen
@@ -67,7 +70,10 @@
   &__action-button
     @include button
     @include action-button
-
+    // bottom: 25px
+    // position: absolute
+    // width: calc(100% - 50px)
+    
 .generator-screen
   @include default-of-screen
   &__title-of-screen

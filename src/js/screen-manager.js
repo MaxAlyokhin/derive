@@ -5,7 +5,7 @@ var intervalID;
 // Для циклического дрейфа
 var RegimeLanguage;
 
-// Управление UI
+// Управление UI ------------------------------------------------------------------------
 
 $( document ).ready(function(){
 
@@ -55,23 +55,23 @@ $( document ).ready(function(){
 
 // Управление иконкой-гамбургером -------------------------------------------------------
 
-$('.hamburger').on('click', function(){
-	// Запускаем анимацию
-	$(this).toggleClass('hamburger_active');
-	// Скрываем скролл
-	$('body').toggleClass('overflow-hidden');
-	// Переключаем меню
-	$('.container').toggleClass('hidden'); 
-	if (click) {
-		$('.menu').toggleClass('active'); setTimeout(function () { $('.menu').toggleClass('visible'); }, 300);
-		click = 0;
-	}
-	else {
-		$('.menu').toggleClass('visible'); setTimeout(function () { $('.menu').toggleClass('active'); }, 1000);
-		click = 1;	
-	}
-	
-})
+	$('.hamburger').on('click', function(){
+		// Запускаем анимацию
+		$(this).toggleClass('hamburger_active');
+		// Скрываем скролл
+		$('body').toggleClass('overflow-hidden');
+		// Переключаем меню
+		$('.container').toggleClass('hidden'); 
+		if (click) {
+			$('.menu').toggleClass('active'); setTimeout(function () { $('.menu').toggleClass('visible'); }, 300);
+			click = 0;
+		}
+		else {
+			$('.menu').toggleClass('visible'); setTimeout(function () { $('.menu').toggleClass('active'); }, 1000);
+			click = 1;	
+		}
+		
+	})
 
 // Экран "Простой дрейф" ----------------------------------------------------------------
 
@@ -153,7 +153,9 @@ $('.hamburger').on('click', function(){
 	})
 
 	// По нажатию на action-кнопку запустить функцию
-	$('.deep-derive-screen__action-button').on('click', function(){Methods()});	
+	$('.deep-derive-screen__action-button').on('click', function(){
+		Methods()
+	});	
 
 // Экран "Генератор времени" ------------------------------------------------------------
 
@@ -202,15 +204,17 @@ $('.hamburger').on('click', function(){
 	})
 })
 
+
+
 // Функции ------------------------------------------------------------------------------
 
 // Сброс всех открытых ранее экранов
 
-function Reset() {
-	$('.simple-derive-screen, .cyclic-derive-screen, .deep-derive-screen, .generator-screen, .manual-screen').removeClass('active visible active-for-derive-screen'); 
-}
+	function Reset() {
+		$('.simple-derive-screen, .cyclic-derive-screen, .deep-derive-screen, .generator-screen, .manual-screen').removeClass('active visible active-grid'); 
+	}
 
-// Управление экраном "Простой дрейф"
+// Управление экраном "Простой дрейф"---------------------------------------------------
 
 	// Переменные для вычисления рандома
 	var max = 3;
@@ -248,7 +252,7 @@ function Reset() {
 		setTimeout(NextCommand, 1000);
 	}
 
-// Управление экраном "Циклический дрейф"
+// Управление экраном "Циклический дрейф"------------------------------------------------
 
 	function CyclicDeriveScreenFunction() {
 		
@@ -306,437 +310,337 @@ function Reset() {
 		}
 	}
 
-// Управление экраном "Углублённый дрейф"
+// Управление экраном "Углублённый дрейф"------------------------------------------------
 
-// Количество команд варьируется от 15 до 29
-var value_of_methods;
-var MaxMethodValue = 30;
-var MinMethodValue = 15;
-var CurrentMethodValue;
+	// Количество команд варьируется от 15 до 29
+	var value_of_methods;
+	var MaxMethodValue = 30;
+	var MinMethodValue = 15;
+	var CurrentMethodValue;
 
+	// При нажатии на кнопку меню выполняем
 	function DeepDeriveScreenFunction() {
-											
-	// Очищаем таймер
-	clearInterval(intervalID);                       
+												
+		// Очищаем таймер
+		clearInterval(intervalID);                       
 
-	// Текущий номер команды
-	CurrentMethodValue = 0;
-	// Количество команд в этом дрейфе
-	value_of_methods = Math.floor(Math.random() * (MaxMethodValue - MinMethodValue)) + MinMethodValue;
+		// Текущий номер команды
+		CurrentMethodValue = 0;
+		// Количество команд в этом дрейфе
+		value_of_methods = Math.floor(Math.random() * (MaxMethodValue - MinMethodValue)) + MinMethodValue;
 
-	Methods();
-}
+		Methods();
+	}
 
-//Генератор команд
+	//Генератор команд
 
-// Переменные для номера команды (11 методов)
-var method;
-var MaxMethodNumber = 10;
-var MinMethodNumber = 0;
-// Сколько кварталов идти
-var value_of_acts;
-var MaxValue = 5;
-var MinValue = 2;
+	// Переменные для номера команды (11 методов)
+	var method;
+	var MaxMethodNumber = 10;
+	var MinMethodNumber = 0;
+	// Сколько кварталов идти
+	var value_of_acts;
+	var MaxValue = 5;
+	var MinValue = 2;
 
-//По клику на action-кнопку выполнить
-function Methods() {
+	//По клику на action-кнопку выполнить
+	function Methods() {
 
-	//Скрываем все команды
-	$('#forward, #left, #right, #stop, #transport, #north, #south, #west, #east, #street, #home').removeClass('visible');
-	$('.deep-derive-screen__action-button').removeClass('disactive hidden down');
+		//Скрываем все команды
+		$('.forward, .left, .right, .stop, .transport, .north, .south, .west, .east, .street, .home').removeClass('visible');
+		$('.deep-derive-screen__action-button').removeClass('disactive hidden down');
 
-	//Вычисляем новые рандомы
-	method = Math.floor(Math.random() * (MaxMethodNumber - MinMethodNumber)) + MinMethodNumber;
-	console.log(method);
-	value_of_acts = Math.floor(Math.random() * (MaxValue - MinValue)) + MinValue;
+		//Вычисляем новые рандомы
+		method = Math.floor(Math.random() * (MaxMethodNumber - MinMethodNumber)) + MinMethodNumber;
+		console.log(method);
+		value_of_acts = Math.floor(Math.random() * (MaxValue - MinValue)) + MinValue;
 
-	//Показываем следующую команду
-	setTimeout(ShowMethod, 1000);
-	function ShowMethod() {
-		//В зависимости от выбранного языка
-		//На английском
-		if (RegimeLanguage) {			
+		//Показываем следующую команду
+		setTimeout(ShowMethod, 1000);
+		function ShowMethod() {
+			//В зависимости от выбранного языка
+			//На английском
+			if (RegimeLanguage) {			
 
-			//По каждому нажатию на ДАЛЬШЕ прибавляем 1 и проверяем, не закончился ли дрейф
-			CurrentMethodValue++;
-			if (CurrentMethodValue == value_of_methods) {
-				// 0 скрыть все команды и кнопку
-				$('#forward, #left, #right, #stop, #transport, #north, #south, #west, #east, #street, #home').removeClass('visible');
-				$('.deep-derive-screen__action-button').addClass('hidden down'); 
-				// 1 выдать команду "домой"
-				$('#home').html('THE DRIFT IS OVER. GO HOME.').addClass('visible');
-			}
-			// Если дрейф не кончился, то показываем следующую команду
-			else {
-				switch (method) {
+				//По каждому нажатию на ДАЛЬШЕ прибавляем 1 и проверяем, не закончился ли дрейф
+				CurrentMethodValue++;
+				if (CurrentMethodValue == value_of_methods) {
+					// 0 скрыть все команды и кнопку
+					$('.forward, .left, .right, .stop, .transport, .north, .south, .west, .east, .street, .home').removeClass('visible');
+					$('.deep-derive-screen__action-button').addClass('hidden down'); 
+					// 1 выдать команду "домой"
+					$('.home').html('THE DRIFT IS OVER. GO HOME.').addClass('visible');
+				}
+				// Если дрейф не кончился, то показываем следующую команду
+				else {
+					switch (method) {
 
-					// Метод "прямо"
-					case (0):
-						$('#forward').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>FORWARD').addClass('visible');
-						break;
-
-					// Метод "влево"
-					case (1):
-						$('#left').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>LEFT').addClass('visible');
-						break;
-
-					// Метод "вправо"
-					case (2):
-						$('#right').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>RIGHT').addClass('visible');
-						break;
-
-					// Метод "стоп"
-					case (3):
-						// Количество секунд паузы
-						var timer = 60;
-						// Запускаем функцию отсчёта секунд
-						TimerFunction();
-						// Показываем команду
-						$('#stop').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>STOP<br>' + timer).addClass('visible');
-
-						function TimerFunction() {
-
-							// Каждую секунду делаем:
-							intervalID = setInterval(function () {
-
-								// Обновляем строку с новым значением времени
-								$('#stop').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>STOP<br>' + timer);
-
-								// Скрываем action-кнопку
-								$('.deep-derive-screen__action-button').addClass('hidden down');
-
-								// Если таймер подошёл к концу, обнуляем интервал и воспроизводим звук
-								if (timer == 0) {
-									clearInterval(intervalID);
-									SoundOfEnd();
-									function SoundOfEnd() {
-										var audio = new Audio();
-										audio.src = '../sound_of_end.mp3';
-										audio.play();
-										// Показываем кнопку
-										$('.deep-derive-screen__action-button').removeClass('hidden down');
-									}
-									// Переходим к следующему методу
-									Methods();
-								}
-
-								// Делаем на секунду меньше
-								timer = timer - 1;
-
-							}, 1000);
-						}
-						break;
-
-					// Метод "транспорт"
-					case (4):
-
-						// Получаем текущее время
-						var date = new Date();
-						var hours = date.getHours();
-						// Если ночь, то транспорт не ходит, значит переходим к следующему методу
-						if (hours >= 22 || hours <= 8) {
-							Methods();
+						// Метод "прямо"
+						case (0):
+							$('.forward').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>FORWARD').addClass('visible');
 							break;
-						}
 
-						// Номер маршрута
-						var transport_number;
-						var transport_number_min = 0;
-						var transport_number_max = 10;
-						// Количество остановок
-						var transport_stop_value;
-						var transport_stop_value_min = 5;
-						var transport_stop_value_max = 11;
+						// Метод "влево"
+						case (1):
+							$('.left').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>LEFT').addClass('visible');
+							break;
 
-						// Вычисляем рандомы
-						transport_number = Math.floor(Math.random() * (transport_number_max - transport_number_min)) + transport_number_min;
-						transport_stop_value = Math.floor(Math.random() * (transport_stop_value_max - transport_stop_value_min)) + transport_stop_value_min;
+						// Метод "вправо"
+						case (2):
+							$('.right').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>RIGHT').addClass('visible');
+							break;
 
-						$('#transport').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>GET ON A PUBLIC TRANSPORT THAT CONTAINS A NUMBER OF ROUTE ' + transport_number + ' AND GO ' + transport_stop_value + ' STOPS').addClass('visible');
-						break;
+						// Метод "стоп"
+						case (3):
+							// Количество секунд паузы
+							var timer = 60;
+							// Запускаем функцию отсчёта секунд
+							TimerFunction();
+							// Показываем команду
+							$('.stop').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>STOP<br>' + timer).addClass('visible');
 
-					// Метод "на север"
-					case (5):
-						$('#north').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>GO TO THE NORTH ' + value_of_acts + ' QUARTALS').addClass('visible');
-						break;
+							function TimerFunction() {
 
-					// Метод "на юг"
-					case (6):
-						$('#south').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>GO TO THE SOUTH ' + value_of_acts + ' QUARTALS').addClass('visible');
-						break;
+								// Каждую секунду делаем:
+								intervalID = setInterval(function () {
 
-					// Метод "на запад"
-					case (7):
-						$('#west').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>GO TO THE WEST ' + value_of_acts + ' QUARTALS').addClass('visible');
-						break;
+									// Обновляем строку с новым значением времени
+									$('.stop').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>STOP<br>' + timer);
 
-					// Метод "на восток"
-					case (8):
-						$('#east').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>GO TO THE EAST ' + value_of_acts + ' QUARTALS').addClass('visible');
-						break;
+									// Скрываем action-кнопку
+									$('.deep-derive-screen__action-button').addClass('hidden down');
 
-					// Метод "найди улицу"
-					case (9):
-						var alphabet_eng = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W"];
-						var max_letter_eng = 23;
-						var min_letter = 0;
-						var letter_number_eng;
+									// Если таймер подошёл к концу, обнуляем интервал и воспроизводим звук
+									if (timer == 0) {
+										clearInterval(intervalID);
+										SoundOfEnd();
+										function SoundOfEnd() {
+											var audio = new Audio();
+											audio.src = '../sound_of_end.mp3';
+											audio.play();
+											// Показываем кнопку
+											$('.deep-derive-screen__action-button').removeClass('hidden down');
+										}
+										// Переходим к следующему методу
+										Methods();
+									}
 
-						letter_number_eng = Math.floor(Math.random() * (max_letter_eng - min_letter)) + min_letter;
-						letter_eng = alphabet_eng[letter_number_eng];
+									// Делаем на секунду меньше
+									timer = timer - 1;
 
-						$('#street').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>FIND THE NEAREST STREET THAT NAME BEGINS WITH A LETTER ' + '"' + letter_eng + '"').addClass('visible');
-						break;
+								}, 1000);
+							}
+							break;
 
+						// Метод "транспорт"
+						case (4):
+
+							// Получаем текущее время
+							var date = new Date();
+							var hours = date.getHours();
+							// Если ночь, то транспорт не ходит, значит переходим к следующему методу
+							if (hours >= 22 || hours <= 8) {
+								Methods();
+								break;
+							}
+
+							// Номер маршрута
+							var transport_number;
+							var transport_number_min = 0;
+							var transport_number_max = 10;
+							// Количество остановок
+							var transport_stop_value;
+							var transport_stop_value_min = 5;
+							var transport_stop_value_max = 11;
+
+							// Вычисляем рандомы
+							transport_number = Math.floor(Math.random() * (transport_number_max - transport_number_min)) + transport_number_min;
+							transport_stop_value = Math.floor(Math.random() * (transport_stop_value_max - transport_stop_value_min)) + transport_stop_value_min;
+
+							$('.transport').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>GET ON A PUBLIC TRANSPORT THAT CONTAINS A NUMBER OF ROUTE ' + transport_number + ' AND GO ' + transport_stop_value + ' STOPS').addClass('visible');
+							break;
+
+						// Метод "на север"
+						case (5):
+							$('.north').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>GO TO THE NORTH ' + value_of_acts + ' QUARTALS').addClass('visible');
+							break;
+
+						// Метод "на юг"
+						case (6):
+							$('.south').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>GO TO THE SOUTH ' + value_of_acts + ' QUARTALS').addClass('visible');
+							break;
+
+						// Метод "на запад"
+						case (7):
+							$('.west').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>GO TO THE WEST ' + value_of_acts + ' QUARTALS').addClass('visible');
+							break;
+
+						// Метод "на восток"
+						case (8):
+							$('.east').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>GO TO THE EAST ' + value_of_acts + ' QUARTALS').addClass('visible');
+							break;
+
+						// Метод "найди улицу"
+						case (9):
+							var alphabet_eng = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W"];
+							var max_letter_eng = 23;
+							var min_letter = 0;
+							var letter_number_eng;
+
+							letter_number_eng = Math.floor(Math.random() * (max_letter_eng - min_letter)) + min_letter;
+							letter_eng = alphabet_eng[letter_number_eng];
+
+							$('.street').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>FIND THE NEAREST STREET THAT NAME BEGINS WITH A LETTER ' + '"' + letter_eng + '"').addClass('visible');
+							break;
+
+					}
+				}
+			}
+
+			//На русском
+			else {
+
+				//По каждому нажатию на ДАЛЬШЕ прибавляем 1 и проверяем
+				CurrentMethodValue++;
+				if (CurrentMethodValue == value_of_methods) {
+					// 0 скрыть все команды
+					$('.forward, .left, .right, .stop, .transport, .north, .south, .west, .east, .street, .home').removeClass('visible');
+					$('.deep-derive-screen__action-button').addClass('hidden down');
+					// 1 выдать команду "домой"
+					$('.home').html('ДРЕЙФ ОКОНЧЕН. ИДИ ДОМОЙ.').addClass('visible');
+				}
+
+				else {
+					switch (method) {
+
+						case (0):
+							$('.forward').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>ПРЯМО').addClass('visible');
+							break;
+
+						case (1):
+							$('.left').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>ВЛЕВО').addClass('visible');
+							break;
+
+						case (2):
+							$('.right').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>ВПРАВО').addClass('visible');
+							break;
+
+						case (3):
+							timer = 60;
+							TimerFunction();
+
+							$('.stop').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>СТОП<br>' + timer).addClass('visible');
+
+							function TimerFunction() {
+
+								intervalID = setInterval(function () {
+
+									$('.stop').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>СТОП<br>' + timer);
+
+									$('.deep-derive-screen__action-button').addClass('hidden down');
+
+									//По окончанию работы таймера
+									if (timer == 0) {
+										//Перестать считать
+										clearInterval(intervalID);
+										//Воспроизвести звук
+										SoundOfEnd();
+										function SoundOfEnd() {
+											var audio = new Audio();
+											audio.src = '../sound_of_end.mp3';
+											audio.play();
+											$('.deep-derive-screen__action-button').removeClass('hidden down');
+										}
+										//Запустить следующую команду
+										Methods();
+									}
+									timer = timer - 1;
+
+								}, 1000);
+							}
+							break;
+
+						case (4):
+
+							var date = new Date();
+							var hours = date.getHours();
+							if (hours >= 22 || hours <= 8) {
+								Methods();
+								break;
+							}
+
+							var transport_number;
+							var transport_number_min = 0;
+							var transport_number_max = 10;
+							var transport_stop_value;
+							var transport_stop_value_min = 5;
+							var transport_stop_value_max = 11;
+
+							transport_number = Math.floor(Math.random() * (transport_number_max - transport_number_min)) + transport_number_min;
+							transport_stop_value = Math.floor(Math.random() * (transport_stop_value_max - transport_stop_value_min)) + transport_stop_value_min;
+
+							$('.transport').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>СЯДЬ НА ОБЩЕСТВЕННЫЙ ТРАНСПОРТ, НОМЕР КОТОРОГО СОДЕРЖИТ ЦИФРУ ' + transport_number + ' И ПРОЕДЬ ' + transport_stop_value + ' ОСТАНОВОК').addClass('visible');
+							break;
+
+						case (5):
+							$('.north').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>ИДИ НА СЕВЕР ' + value_of_acts + ' КВАРТАЛА').addClass('visible');
+							break;
+
+						case (6):
+							$('.south').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>ИДИ НА ЮГ ' + value_of_acts + ' КВАРТАЛА').addClass('visible');
+							break;
+
+						case (7):
+							$('.west').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>ИДИ НА ЗАПАД ' + value_of_acts + ' КВАРТАЛА').addClass('visible');
+							break;
+
+						case (8):
+							$('.east').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>ИДИ НА ВОСТОК ' + value_of_acts + ' КВАРТАЛА').addClass('visible');
+							break;
+
+						case (9):
+							var alphabet = ["А", "Б", "В", "Г", "Д", "Е", "И", "К", "Л", "М", "П", "Р", "С", "Т", "Ф", "Ш", "Я"];
+							var max_letter = 17;
+							var min_letter = 0;
+							var letter_number;
+							letter_number = Math.floor(Math.random() * (max_letter - min_letter)) + min_letter;
+							letter = alphabet[letter_number];
+							$('.street').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>НАЙДИ БЛИЖАЙШУЮ УЛИЦУ, НАЗВАНИЕ КОТОРОЙ НАЧИНАЕТСЯ НА БУКВУ ' + '"' + letter + '"').addClass('visible');
+							break;
+					}
 				}
 			}
 		}
-
-		//На русском
-		// else {
-
-		// 	//По каждому нажатию на ДАЛЬШЕ прибавляем 1 и проверяем
-		// 	CurrentMethodValue++;
-		// 	if (CurrentMethodValue == value_of_methods) {
-		// 		// 0 скрыть все команды
-		// 		$('div#forward').removeClass('open_title').addClass('close');
-		// 		$('div#left').removeClass('open_title').addClass('close');
-		// 		$('div#right').removeClass('open_title').addClass('close');
-		// 		$('#stop').removeClass('open_title').addClass('close');
-		// 		$('#transport').removeClass('open_title').addClass('close');
-		// 		$('#north').removeClass('open_title').addClass('close');
-		// 		$('#south').removeClass('open_title').addClass('close');
-		// 		$('#west').removeClass('open_title').addClass('close');
-		// 		$('#east').removeClass('open_title').addClass('close');
-		// 		$('#street').removeClass('open_title').addClass('close');
-		// 		// 1 выдать команду "домой"
-		// 		$('div#home').html('ДРЕЙФ ОКОНЧЕН. ИДИ ДОМОЙ.').removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
-		// 		// 2 скрыть нижнюю кнопку
-		// 		$('button#DeepDeriveButtonFooter').transition({ opacity: 0 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
-		// 	}
-
-		// 	else {
-		// 		switch (method) {
-
-		// 			case (0):
-		// 				$('div#forward').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>ПРЯМО').removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
-		// 				$('div#left').removeClass('open_title').addClass('close');
-		// 				$('div#right').removeClass('open_title').addClass('close');
-		// 				$('#stop').removeClass('open_title').addClass('close');
-		// 				$('#transport').removeClass('open_title').addClass('close');
-		// 				$('#north').removeClass('open_title').addClass('close');
-		// 				$('#south').removeClass('open_title').addClass('close');
-		// 				$('#west').removeClass('open_title').addClass('close');
-		// 				$('#east').removeClass('open_title').addClass('close');
-		// 				$('#street').removeClass('open_title').addClass('close');
-		// 				break;
-
-		// 			case (1):
-		// 				$('div#forward').removeClass('open_title').addClass('close');
-		// 				$('div#left').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>ВЛЕВО').removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
-		// 				$('div#right').removeClass('open_title').addClass('close');
-		// 				$('#stop').removeClass('open_title').addClass('close');
-		// 				$('#transport').removeClass('open_title').addClass('close');
-		// 				$('#north').removeClass('open_title').addClass('close');
-		// 				$('#south').removeClass('open_title').addClass('close');
-		// 				$('#west').removeClass('open_title').addClass('close');
-		// 				$('#east').removeClass('open_title').addClass('close');
-		// 				$('#street').removeClass('open_title').addClass('close');
-		// 				break;
-
-		// 			case (2):
-		// 				$('div#forward').removeClass('open_title').addClass('close');
-		// 				$('div#left').removeClass('open_title').addClass('close');
-		// 				$('div#right').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>ВПРАВО').removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
-		// 				$('#stop').removeClass('open_title').addClass('close');
-		// 				$('#transport').removeClass('open_title').addClass('close');
-		// 				$('#north').removeClass('open_title').addClass('close');
-		// 				$('#south').removeClass('open_title').addClass('close');
-		// 				$('#west').removeClass('open_title').addClass('close');
-		// 				$('#east').removeClass('open_title').addClass('close');
-		// 				$('#street').removeClass('open_title').addClass('close');
-		// 				break;
-
-		// 			case (3):
-		// 				timer = 60;
-		// 				TimerFunction();
-
-		// 				$('div#forward').removeClass('open_title').addClass('close');
-		// 				$('div#left').removeClass('open_title').addClass('close');
-		// 				$('div#right').removeClass('open_title').addClass('close');
-		// 				$('#stop').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>СТОП<br>' + timer).removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
-		// 				$('#transport').removeClass('open_title').addClass('close');
-		// 				$('#north').removeClass('open_title').addClass('close');
-		// 				$('#south').removeClass('open_title').addClass('close');
-		// 				$('#west').removeClass('open_title').addClass('close');
-		// 				$('#east').removeClass('open_title').addClass('close');
-		// 				$('#street').removeClass('open_title').addClass('close');
-
-		// 				function TimerFunction() {
-
-		// 					intervalID = setInterval(function () {
-
-		// 						$('#stop').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>СТОП<br>' + timer);
-		// 						$('button#DeepDeriveButtonFooter').transition({ opacity: 0 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
-		// 						setTimeout(function () { $('button#DeepDeriveButtonFooter').addClass('close') }, 1000);
-		// 						//По окончанию работы таймера
-		// 						if (timer == 0) {
-		// 							//Перестать считать
-		// 							clearInterval(intervalID);
-		// 							//Воспроизвести звук
-		// 							SoundOfEnd();
-		// 							function SoundOfEnd() {
-		// 								var audio = new Audio();
-		// 								audio.src = 'sound_of_end.mp3';
-		// 								audio.play();
-		// 								$('button#DeepDeriveButtonFooter').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
-		// 								setTimeout(function () { $('button#DeepDeriveButtonFooter').removeClass('close') }, 1000);
-		// 							}
-		// 							//Запустить следующую команду
-		// 							Methods();
-		// 						}
-		// 						timer = timer - 1;
-
-		// 					}, 1000);
-		// 				}
-		// 				break;
-
-		// 			case (4):
-
-		// 				var date = new Date();
-		// 				var hours = date.getHours();
-		// 				if (hours >= 22 || hours <= 8) {
-		// 					Methods();
-		// 					break;
-		// 				}
-
-		// 				var transport_number;
-		// 				var transport_number_min = 0;
-		// 				var transport_number_max = 10;
-		// 				var transport_stop_value;
-		// 				var transport_stop_value_min = 5;
-		// 				var transport_stop_value_max = 11;
-
-		// 				transport_number = Math.floor(Math.random() * (transport_number_max - transport_number_min)) + transport_number_min;
-		// 				transport_stop_value = Math.floor(Math.random() * (transport_stop_value_max - transport_stop_value_min)) + transport_stop_value_min;
-
-		// 				$('div#forward').removeClass('open_title').addClass('close');
-		// 				$('div#left').removeClass('open_title').addClass('close');
-		// 				$('div#right').removeClass('open_title').addClass('close');
-		// 				$('#stop').removeClass('open_title').addClass('close');
-		// 				$('#transport').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>СЯДЬ НА ОБЩЕСТВЕННЫЙ ТРАНСПОРТ, НОМЕР КОТОРОГО СОДЕРЖИТ ЦИФРУ ' + transport_number + ' И ПРОЕДЬ ' + transport_stop_value + ' ОСТАНОВОК').removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
-		// 				$('#north').removeClass('open_title').addClass('close');
-		// 				$('#south').removeClass('open_title').addClass('close');
-		// 				$('#west').removeClass('open_title').addClass('close');
-		// 				$('#east').removeClass('open_title').addClass('close');
-		// 				$('#street').removeClass('open_title').addClass('close');
-		// 				break;
-
-		// 			case (5):
-		// 				$('div#forward').removeClass('open_title').addClass('close');
-		// 				$('div#left').removeClass('open_title').addClass('close');
-		// 				$('div#right').removeClass('open_title').addClass('close');
-		// 				$('#stop').removeClass('open_title').addClass('close');
-		// 				$('#transport').removeClass('open_title').addClass('close');
-		// 				$('#north').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>ИДИ НА СЕВЕР ' + value_of_acts + ' КВАРТАЛА').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
-		// 				$('#south').removeClass('open_title').addClass('close');
-		// 				$('#west').removeClass('open_title').addClass('close');
-		// 				$('#east').removeClass('open_title').addClass('close');
-		// 				$('#street').removeClass('open_title').addClass('close');
-		// 				break;
-
-		// 			case (6):
-		// 				$('div#forward').removeClass('open_title').addClass('close');
-		// 				$('div#left').removeClass('open_title').addClass('close');
-		// 				$('div#right').removeClass('open_title').addClass('close');
-		// 				$('#stop').removeClass('open_title').addClass('close');
-		// 				$('#transport').removeClass('open_title').addClass('close');
-		// 				$('#north').removeClass('open_title').addClass('close');
-		// 				$('#south').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>ИДИ НА ЮГ ' + value_of_acts + ' КВАРТАЛА').removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
-		// 				$('#west').removeClass('open_title').addClass('close');
-		// 				$('#east').removeClass('open_title').addClass('close');
-		// 				$('#street').removeClass('open_title').addClass('close');
-		// 				break;
-
-		// 			case (7):
-		// 				$('div#forward').removeClass('open_title').addClass('close');
-		// 				$('div#left').removeClass('open_title').addClass('close');
-		// 				$('div#right').removeClass('open_title').addClass('close');
-		// 				$('#stop').removeClass('open_title').addClass('close');
-		// 				$('#transport').removeClass('open_title').addClass('close');
-		// 				$('#north').removeClass('open_title').addClass('close');
-		// 				$('#south').removeClass('open_title').addClass('close');
-		// 				$('#west').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>ИДИ НА ЗАПАД ' + value_of_acts + ' КВАРТАЛА').removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
-		// 				$('#east').removeClass('open_title').addClass('close');
-		// 				$('#street').removeClass('open_title').addClass('close');
-		// 				break;
-
-		// 			case (8):
-		// 				$('div#forward').removeClass('open_title').addClass('close');
-		// 				$('div#left').removeClass('open_title').addClass('close');
-		// 				$('div#right').removeClass('open_title').addClass('close');
-		// 				$('#stop').removeClass('open_title').addClass('close');
-		// 				$('#transport').removeClass('open_title').addClass('close');
-		// 				$('#north').removeClass('open_title').addClass('close');
-		// 				$('#south').removeClass('open_title').addClass('close');
-		// 				$('#west').removeClass('open_title').addClass('close');
-		// 				$('#east').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>ИДИ НА ВОСТОК ' + value_of_acts + ' КВАРТАЛА').removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
-		// 				$('#street').removeClass('open_title').addClass('close');
-		// 				break;
-
-		// 			case (9):
-		// 				var alphabet = ["А", "Б", "В", "Г", "Д", "Е", "И", "К", "Л", "М", "П", "Р", "С", "Т", "Ф", "Ш", "Я"];
-		// 				var max_letter = 17;
-		// 				var min_letter = 0;
-		// 				var letter_number;
-		// 				letter_number = Math.floor(Math.random() * (max_letter - min_letter)) + min_letter;
-		// 				letter = alphabet[letter_number];
-
-		// 				$('div#forward').removeClass('open_title').addClass('close');
-		// 				$('div#left').removeClass('open_title').addClass('close');
-		// 				$('div#right').removeClass('open_title').addClass('close');
-		// 				$('#stop').removeClass('open_title').addClass('close');
-		// 				$('#transport').removeClass('open_title').addClass('close');
-		// 				$('#north').removeClass('open_title').addClass('close');
-		// 				$('#south').removeClass('open_title').addClass('close');
-		// 				$('#west').removeClass('open_title').addClass('close');
-		// 				$('#east').removeClass('open_title').addClass('close');
-		// 				$('#street').html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>НАЙДИ БЛИЖАЙШУЮ УЛИЦУ, НАЗВАНИЕ КОТОРОЙ НАЧИНАЕТСЯ НА БУКВУ ' + '"' + letter + '"').removeClass('close').addClass('open_title').transition({ opacity: 1 }, 1000, 'cubic-bezier(0.645, 0.045, 0.355, 1)');
-		// 				break;
-		// 		}
-		// 	}
-		// }
-	}
-}
-
-// Управление экраном "Генератор времени"
-
-max_generator_hour = 24;
-min_generator_hour = 0;
-max_generator_minute = 60;
-min_generator_minute = 0;
-
-function GeneratorScreenFunction() {
-
-	// Очищаем на всякий случай таймер из Углублённого дрейфа 
-	clearInterval(intervalID);                    
-
-	// Из этого будем складывать строку
-	var hour;
-	var minute;
-	var points = ' : ';
-	var zero = '0';
-
-	// Генерим часы и минуты
-	hour = Math.floor(Math.random() * (max_generator_hour - min_generator_hour)) + min_generator_hour;
-	minute = Math.floor(Math.random() * (max_generator_minute - min_generator_minute)) + min_generator_minute;
-
-	// Если меньше 10 минут, то вставляем спереди ноль
-	if (minute < 10) {
-		$('.generator-screen__command_time').html(hour + points + zero + minute);
-	}
-	else {
-		$('.generator-screen__command_time').html(hour + points + minute);
 	}
 
-}
+// Управление экраном "Генератор времени"------------------------------------------------
+
+	max_generator_hour = 24;
+	min_generator_hour = 0;
+	max_generator_minute = 60;
+	min_generator_minute = 0;
+
+	function GeneratorScreenFunction() {
+
+		// Очищаем на всякий случай таймер из Углублённого дрейфа 
+		clearInterval(intervalID);                    
+
+		// Из этого будем складывать строку
+		var hour;
+		var minute;
+		var points = ' : ';
+		var zero = '0';
+
+		// Генерим часы и минуты
+		hour = Math.floor(Math.random() * (max_generator_hour - min_generator_hour)) + min_generator_hour;
+		minute = Math.floor(Math.random() * (max_generator_minute - min_generator_minute)) + min_generator_minute;
+
+		// Если меньше 10 минут, то вставляем спереди ноль
+		if (minute < 10) {
+			$('.generator-screen__command_time').html(hour + points + zero + minute);
+		}
+		else {
+			$('.generator-screen__command_time').html(hour + points + minute);
+		}
+
+	}
