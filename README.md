@@ -31,7 +31,10 @@
 
 Ядром приложения является файл screen-manager.js, использующий библиотеку jQuery. Этот код управляет единственным HTML-файлом, в котором описаны "экраны" (страницы), которые скрываются и показываются при необходимости. 
 
-Приложение выдают пользователю команды, направляя его по городу. Эти команды как правило завязаны на методе Math.random(), генерящем псевдослучайные числа, которые затем используются для формирования соответствующих команд.
+Приложение выдаёт пользователю команды, направляя его по городу. Эти команды как правило завязаны на методе Math.random(), генерящем псевдослучайные числа, которые затем используются для формирования соответствующих команд.
+
+Оценить приложение можно по ссылке:
+http://derive.stranno.su
 
  ## Web-application for psychogeographic research.
  
@@ -66,4 +69,5 @@ The kernel of the application is the screen-manager.js file that uses the jQuery
 
 The application gives commands to the user by directing him/her through the city. These commands are usually based on the Math.random() method, which generates pseudo-random numbers, which are then used to form the corresponding commands.
 
-
+You can check the application by clicking here:
+http://derive.stranno.su
