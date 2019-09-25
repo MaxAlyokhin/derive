@@ -11,7 +11,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="images/favicons/favicon-16x16.png">
   <link rel="manifest" href="images/favicons/manifest.json">
   <link rel="mask-icon" href="images/favicons/safari-pinned-tab.svg" color="#000000">
-  <link rel="stylesheet" href="css/style.css" type="text/css">
+  <link rel="stylesheet" href="css/style.min.css" type="text/css">
 
   <meta http-equiv="Content-Type" content="text/html;  charset=utf-8">
   <meta name="keywords" content="Max Alyokhin, Макс Алёхин, дрейф, психогеография, dérive, derive, drift, Ги Дебор, Guy Debord, Кюс, Kiuss, арт-группа Кюс, ситуационизм, леттризм, урбанизм, urbanism, flâneur">
@@ -38,8 +38,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="#f3f3f3">
 
-  <script src="js/jquery-3.4.1.min.js"></script>
-  <script src="js/screen-manager.js"></script>
+  <script src="js/main.min.js"></script>
   
 </head>
 
@@ -81,27 +80,27 @@
         <ul class="menu__list">
           <li class="list__item">
             <button class="item__simple-derive-button" type="button">
-              <p>SIMPLE DÉRIVE</p>
+              <span>SIMPLE DÉRIVE</span>
             </button>
           </li>
           <li class="list__item">
             <button class="item__cyclic-derive-button" type="button">
-              <p>CYCLIC DÉRIVE</p>
+              <span>CYCLIC DÉRIVE</span>
             </button>
           </li>
           <li class="list__item">
             <button class="item__deep-derive-button" type="button">
-              <p>DEEP DÉRIVE</p>
+              <span>DEEP DÉRIVE</span>
             </button>
           </li>
           <li class="list__item">
             <button class="item__generator-button" type="button">
-              <p>TIME GENERATOR</p>
+              <span>TIME GENERATOR</span>
             </button>
           </li>
           <li class="list__item">
             <button class="item__manual-button" type="button">
-              <p>SHEETTINGS</p>
+              <span>SHEETTINGS</span>
             </button>
           </li>
         </ul>
@@ -111,27 +110,27 @@
         <ul class="menu__list">
           <li class="list__item">
             <button class="item__simple-derive-button" type="button">
-              <p>ПРОСТОЙ ДРЕЙФ</p>
+              <span>ПРОСТОЙ ДРЕЙФ</span>
             </button>
           </li>
           <li class="list__item">
             <button class="item__cyclic-derive-button" type="button">
-              <p>ЦИКЛИЧЕСКИЙ ДРЕЙФ</p>
+              <span>ЦИКЛИЧЕСКИЙ ДРЕЙФ</span>
             </button>
           </li>
           <li class="list__item">
             <button class="item__deep-derive-button" type="button">
-              <p>УГЛУБЛЁННЫЙ ДРЕЙФ</p>
+              <span>УГЛУБЛЁННЫЙ ДРЕЙФ</span>
             </button>
           </li>
           <li class="list__item">
             <button class="item__generator-button" type="button">
-              <p>ГЕНЕРАТОР НАЧАЛА ДРЕЙФА</p>
+              <span>ГЕНЕРАТОР НАЧАЛА ДРЕЙФА</span>
             </button>
           </li>
           <li class="list__item">
             <button class="item__manual-button" type="button">
-              <p>СПРАВКА</p>
+              <span>СПРАВКА</span>
             </button>
           </li>
         </ul>
@@ -169,7 +168,7 @@
         <br>
         </div>
         <button class="annotation-screen__action-button" type="button">
-          <p>START</p>
+          <span>START</span>
         </button>
       </div> 
       <!-- /Экран приветствия -->
@@ -183,7 +182,7 @@
           <p class="right">RIGHT</p>
         </div>
         <button class="simple-derive-screen__action-button" type="button">
-          <p>NEXT</p>
+          <span>NEXT</span>
         </button>
       </div> 
       <!-- /Экран "Простой дрейф" -->
@@ -192,7 +191,7 @@
       <div class="cyclic-derive-screen">
         <div class="cyclic-derive-screen__title-of-screen">CYCLIC DÉRIVE</div>
         <div class=" cyclic-derive-screen__command">
-          <div>REPEAT THIS COMMANDS<br>IN A LOOP:</div>
+          <div class="center">REPEAT THIS COMMANDS<br>IN A LOOP:</div>
           <br>
           <div class="en-cycle-command0 disactive hidden"><br></div>
           <div class="en-cycle-command1 disactive hidden"><br></div>
@@ -222,7 +221,7 @@
           <p class="home"></p>
         </div>
         <button class="deep-derive-screen__action-button" type="button">
-          <p>NEXT</p>
+          <span>NEXT</span>
         </button>
       </div>
       <!-- /Экран "Углублённый дрейф" -->
@@ -303,7 +302,7 @@
         <br>
       </div>
       <button class="annotation-screen__action-button" type="button">
-        <p>НАЧАТЬ ДРЕЙФ</p>
+        <span>НАЧАТЬ ДРЕЙФ</span>
       </button>
     </div>
 
@@ -315,7 +314,7 @@
         <p class="right">ВПРАВО</p>
       </div>
       <button class="simple-derive-screen__action-button" type="button">
-        <p>ДАЛЬШЕ</p>
+        <span>ДАЛЬШЕ</span>
       </button>
     </div>
 
@@ -350,7 +349,7 @@
         <p class="home"></p>
       </div>
       <button class="deep-derive-screen__action-button" type="button">
-        <p>ДАЛЬШЕ</p>
+        <span>ДАЛЬШЕ</span>
       </button>
     </div>
 
