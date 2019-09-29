@@ -1,4 +1,4 @@
-# Derive | Дрейф
+# Дрейф
 
 ## Веб-приложение для психогеографических исследований
 
@@ -35,6 +35,8 @@
 
 Оценить приложение можно по ссылке:
 http://derive.stranno.su
+
+ # Derive
 
  ## Web-application for psychogeographic research.
  
