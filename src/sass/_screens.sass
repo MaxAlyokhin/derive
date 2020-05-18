@@ -1,7 +1,12 @@
 // Каждый экран состоит из заголовка, контента (текст или команда) и кнопки действия
 
 @mixin title-of-screen
+  font-family: work-sans-black
+  // font-family: helvetica-latin-bold
+  font-size: 27px
+  line-height: 32px
   text-align: center
+  color: #292929
 
 @mixin text
   margin-bottom: 25px
@@ -38,7 +43,7 @@
 	display: none
 	opacity: 0
 	transform: scale(0.95)
-	padding: 25px
+	padding: 11px 25px 25px 25px
 	height: 100%
 
 .container
@@ -57,22 +62,20 @@
   &__action-button
     @include button
     margin-bottom: 25px
-    
-.simple-derive-screen
-  @include default-of-screen
-  &__title-of-screen
-    @include title-of-screen
-  &__command
-    @include command 
-  &__action-button
-    @include button
 
 .cyclic-derive-screen
   @include default-of-screen
+  padding: 0
   &__title-of-screen
     @include title-of-screen
-  &__command
-    @include command
+    z-index: 10
+    position: fixed
+    right: 0
+    top: 0px
+    width: 100%
+    backdrop-filter: blur(1px)
+    height: 50px
+    padding-top: 9px
 
 .deep-derive-screen
   @include default-of-screen
@@ -96,3 +99,6 @@
     @include title-of-screen
   &__text
     @include text
+
+.title-of-screen
+  @include title-of-screen
