@@ -3,6 +3,7 @@
 @import "screens"
 @import "menu"
 @import "hamburger"
+@import "maps"
 
 *, *:before, *:after
 	margin: 0
@@ -11,6 +12,11 @@
 	outline: none
 	transform: translate3d(0, 0, 0)
 	transition: $transition
+	-webkit-backface-visibility: hidden
+	-webkit-font-smoothing: antialiased
+
+html, body, .container
+	height: 100%
 	color: $black
 
 body
@@ -18,10 +24,15 @@ body
 	background-color: $grey
 	-webkit-font-smoothing: antialiased
 	overflow-x: hidden
-	height: 100%
 
-.container, html
-	height: 100%
+.header-background
+	position: absolute
+	width: 320px
+	height: 50px
+	left: 0px
+	top: 0px
+	background: rgba(243, 243, 243, 0.8)
+	backdrop-filter: blur(10px)
 
 .cover
 	display: flex
@@ -43,6 +54,8 @@ body
 
 	p
 		text-align: justify
+		// font-size: 14px
+    	line-height: 18px
 
 	.cover
 		display: none

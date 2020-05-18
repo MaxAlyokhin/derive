@@ -11,7 +11,7 @@ const { src, dest, watch, series, parallel } = require('gulp'),
                             rimraf           = require('rimraf'), // Удаление файлов
                             order            = require("gulp-order"), // Задаёт порядок конкатенации
                             concat           = require('gulp-concat'), // Конкатенация
-                            babel            = require('gulp-babel'); // Транспайлер в ES5
+                            babel            = require('gulp-babel'), // Транспайлер в ES5
                             browserSync      = require('browser-sync'), // Сервер
                             reload           = browserSync.reload;
 
@@ -51,9 +51,9 @@ const config = {
     server: {
         baseDir: "dist"
     },
-    tunnel: true,
+    tunnel: false,
     host: 'localhost',
-    port: 8000,
+    port: 8001,
     logPrefix: "DevServer",
     open: false //Браузер автоматом не открываем
 };
@@ -69,9 +69,9 @@ function html() {
 //Сборка css
 function style() {
     return src([path.src.sass, path.src.libs_sass]) //Путь до исходных файлов в src
-        // .pipe(sourcemaps.init()) //Инициализируем sourcemaps
+        .pipe(sourcemaps.init()) //Инициализируем sourcemaps
         .pipe(sass({ //Параметры gulp-sass
-            sourceMap: false, //sourcemaps выключены
+            sourceMap: true, //sourcemaps выключены
             errLogToConsole: true, //Пишем логи
             outputStyle: 'compressed' //Минифицируем
         }))
@@ -79,7 +79,7 @@ function style() {
         .pipe(autoprefixer({
             grid: true,
             overrideBrowserslist: ['last 10 versions']})) //Добавляем вендорные префиксы, настраивается также через package.json в browserlist
-        // .pipe(sourcemaps.write()) //Прописываем sourcemaps
+        .pipe(sourcemaps.write()) //Прописываем sourcemaps
         .pipe(dest(path.dist.css)) //Вывод готового в dist
         .pipe(reload({stream: true})); //Обновляем сервер
 }
@@ -88,7 +88,7 @@ function style() {
 function js() {
     return src([path.src.js, path.src.libs_js]) //Путь до исходных файлов в src
         .pipe(rigger()) //Rigger позволяет использовать шаблоны и подключать их в документы
-        // .pipe(sourcemaps.init()) //Инициализируем sourcemaps
+        .pipe(sourcemaps.init()) //Инициализируем sourcemaps
         .pipe(babel({ // Запускаем Babel
 			presets: ['@babel/preset-env']
 		}))
@@ -99,7 +99,7 @@ function js() {
           ]))
         .pipe(concat('main.min.js'))
         .pipe(uglify()) //Минифицируем js
-        // .pipe(sourcemaps.write()) //Пишем sourcemaps
+        .pipe(sourcemaps.write()) //Пишем sourcemaps
         .pipe(dest(path.dist.js)) //Вывод готового в dist
         .pipe(reload({stream: true})); //Обновляем сервер
 }
