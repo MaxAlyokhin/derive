@@ -2,7 +2,7 @@
 
 ## Web-application for psychogeographic research.
  
- Instruments: HTML5, CSS3 (Flexbox / Grid), Sass, JS (jQuery), Gulp, VS Code, npm
+ Instruments: HTML5, CSS3 (Flexbox / Grid), Sass, JS (jQuery), Gulp, VS Code, npm, Leaflet
  
  ## What is psychogeography?
  
