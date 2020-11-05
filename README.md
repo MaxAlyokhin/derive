@@ -2,7 +2,7 @@
 
 ## Web-application for psychogeographic research.
  
- Instruments: HTML5, CSS3 (Flexbox / Grid), Sass, JS (jQuery), Gulp, VS Code, npm
+ Instruments: HTML5, CSS3 (Flexbox / Grid), Sass, JS (jQuery), Leaflet, Gulp, VS Code, npm
  
  ## What is psychogeography?
  
@@ -40,7 +40,7 @@ https://derive.stranno.su
 
 ## Веб-приложение для психогеографических исследований
 
-Инструменты: HTML5, CSS3 (Flexbox / Grid), Sass, JS (jQuery), Gulp, VS Code, npm
+Инструменты: HTML5, CSS3 (Flexbox / Grid), Sass, JS (jQuery), Leaflet, Gulp, VS Code, npm
 
 ## Что такое психогеография?
 
@@ -69,7 +69,9 @@ https://derive.stranno.su
 
 Ядром приложения является файл screen-manager.js, использующий библиотеку jQuery. Этот код управляет единственным HTML-файлом, в котором описаны "экраны" (страницы), которые скрываются и показываются при необходимости. 
 
-Приложение выдаёт пользователю команды, направляя его по городу. Эти команды, как правило, завязаны на методе Math.random(), генерящем псевдослучайные числа, которые затем используются для формирования соответствующих команд.
+Приложение реализовано как PWA и может быть установлено как нативное.
+
+Программа выдаёт пользователю команды, направляя его по городу. Эти команды, как правило, завязаны на методе Math.random(), генерящем псевдослучайные числа, которые затем используются для формирования соответствующих команд.
 
 Оценить приложение можно по ссылке:
 https://derive.stranno.su
