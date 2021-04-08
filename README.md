@@ -1,8 +1,12 @@
-# Derive
+## Web-application for psychogeography "Dérive".
 
-## Web-application for psychogeography.
+<!-- ![](https://dérive.stranno.su/design.png){ width=50% } -->
 
-https://derive.stranno.su
+<p align="center">
+  <img src="https://dérive.stranno.su/design.png" width="200">
+</p>
+
+https://dérive.stranno.su
 
 Stack: HTML5, Sass, jQuery, Leaflet, Gulp
 
