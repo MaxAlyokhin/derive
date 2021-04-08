@@ -1,9 +1,7 @@
 ## Web-application for psychogeography "Dérive".
 
-<!-- ![](https://dérive.stranno.su/design.png){ width=50% } -->
-
 <p align="center">
-  <img src="https://dérive.stranno.su/design.png" width="200">
+  <img src="https://xn--drive-bsa.stranno.su/design.png" width="200">
 </p>
 
 https://dérive.stranno.su
