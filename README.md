@@ -1,4 +1,4 @@
-## Web-application for psychogeography "Dérive".
+## Web-application for psychogeography Dérive.
 
 <p align="center">
   <img src="https://xn--drive-bsa.stranno.su/design.png" width="200">
