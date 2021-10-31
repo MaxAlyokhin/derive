@@ -154,7 +154,7 @@ exports.dev = function () {
 }
 
 //По дефолту всё собираем и запускаем сервер
-exports.default = parallel(html, style, js, image, fonts, function () {
+exports.default = parallel(html, style, js, fonts, function () {
   browserSync(config)
   watch(path.src.html, html)
   watch(path.src.sass, style)
