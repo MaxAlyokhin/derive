@@ -224,8 +224,8 @@ function Reset() {
 
 // Количество команд варьируется от 15 до 29
 var value_of_methods
-var MaxMethodValue = 30
-var MinMethodValue = 15
+var MaxMethodValue = 11
+var MinMethodValue = 10
 var CurrentMethodValue
 
 // При нажатии на кнопку меню выполняем
@@ -249,8 +249,8 @@ var MaxMethodNumber = 10
 var MinMethodNumber = 0
 // Сколько кварталов идти
 var value_of_acts
-var MaxValue = 5
-var MinValue = 2
+var MaxValue = 4
+var MinValue = 1
 
 //По клику на action-кнопку выполнить
 function Methods() {
@@ -375,21 +375,21 @@ function Methods() {
           // Метод "на север"
           case 5:
             $('.north')
-              .html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>GO TO THE NORTH ' + value_of_acts + ' QUARTALS')
+              .html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>GO TO THE NORTH ' + value_of_acts + `${value_of_acts > 1 ? ' QUARTALS' : ' QUARTAL'}`)
               .addClass('visible')
             break
 
           // Метод "на юг"
           case 6:
             $('.south')
-              .html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>GO TO THE SOUTH ' + value_of_acts + ' QUARTALS')
+              .html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>GO TO THE SOUTH ' + value_of_acts + `${value_of_acts > 1 ? ' QUARTALS' : ' QUARTAL'}`)
               .addClass('visible')
             break
 
           // Метод "на запад"
           case 7:
             $('.west')
-              .html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>GO TO THE WEST ' + value_of_acts + ' QUARTALS')
+              .html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>GO TO THE WEST ' + value_of_acts + `${value_of_acts > 1 ? ' QUARTALS' : ' QUARTAL'}`)
               .addClass('visible')
             break
 
@@ -507,19 +507,19 @@ function Methods() {
 
           case 5:
             $('.north')
-              .html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>ИДИ НА СЕВЕР ' + value_of_acts + ' КВАРТАЛА')
+              .html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>ИДИ НА СЕВЕР ' + value_of_acts + `${value_of_acts > 1 ? ' КВАРТАЛА' : ' КВАРТАЛ'}`)
               .addClass('visible')
             break
 
           case 6:
             $('.south')
-              .html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>ИДИ НА ЮГ ' + value_of_acts + ' КВАРТАЛА')
+              .html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>ИДИ НА ЮГ ' + value_of_acts + `${value_of_acts > 1 ? ' КВАРТАЛА' : ' КВАРТАЛ'}`)
               .addClass('visible')
             break
 
           case 7:
             $('.west')
-              .html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>ИДИ НА ЗАПАД ' + value_of_acts + ' КВАРТАЛА')
+              .html(CurrentMethodValue + ' / ' + value_of_methods + '<br><br>ИДИ НА ЗАПАД ' + value_of_acts + `${value_of_acts > 1 ? ' КВАРТАЛА' : ' КВАРТАЛ'}`)
               .addClass('visible')
             break
 
@@ -803,8 +803,8 @@ function mapDeriveRu() {
   let distance = 0 // Расстояние между маркерами
 
   // Диапазон значений для рандом-функции
-  let min = -0.03
-  let max = 0.03
+  let min = -0.02
+  let max = 0.02
 
   // Координаты точки Б
   let toMarkerLat
