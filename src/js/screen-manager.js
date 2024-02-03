@@ -694,8 +694,8 @@ function mapDerive() {
   let osmMap = L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     detectRetina: true,
   })
-  let stamenToner = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png', { detectRetina: true })
-  let stamenTonerLabels = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-labels/{z}/{x}/{y}.png', { detectRetina: true })
+  let stamenToner = L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}{r}.png', { detectRetina: true })
+  let stamenTonerLabels = L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner-labels/{z}/{x}/{y}{r}.png', { detectRetina: true })
 
   // Переключатель тайлов
   function mapSelect(mapType) {
@@ -718,7 +718,7 @@ function mapDerive() {
 
   function selectButton() {
     // Добавляем копирайты
-    map.attributionControl.addAttribution('<a href="https://stamen.com">Stamen Design</a> | <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>')
+    map.attributionControl.addAttribution('&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/about/" target="_blank">OpenStreetMap contributors</a>')
     document.querySelector('.leaflet-control-attribution').style.top = `${document.body.clientHeight}px`
     document.querySelector('.leaflet-pane').style.zIndex = `0`
 
@@ -862,8 +862,8 @@ function mapDeriveRu() {
   let osmMap = L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     detectRetina: true,
   })
-  let stamenToner = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png', { detectRetina: true })
-  let stamenTonerLabels = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-labels/{z}/{x}/{y}.png', { detectRetina: true })
+  let stamenToner = L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}{r}.png', { detectRetina: true })
+  let stamenTonerLabels = L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner-labels/{z}/{x}/{y}{r}.png', { detectRetina: true })
 
   // Переключатель тайлов
   function mapSelect(mapType) {
@@ -886,7 +886,7 @@ function mapDeriveRu() {
 
   function selectButton() {
     // Добавляем копирайты
-    map.attributionControl.addAttribution('<a href="https://stamen.com">Stamen Design</a> | <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>')
+    map.attributionControl.addAttribution('&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/about/" target="_blank">OpenStreetMap contributors</a>')
     document.querySelector('.leaflet-control-attribution').style.top = `${document.body.clientHeight}px`
     document.querySelector('.leaflet-pane').style.zIndex = `0`
 
